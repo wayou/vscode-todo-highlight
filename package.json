@@ -7,7 +7,7 @@
     "publisher": "wayou",
     "license": "MIT",
     "preview": true,
-    "icon": "/assets/icon.svg",
+    "icon": "assets/icon.svg",
     "homepage": "https://github.com/wayou/vscode-todo-highlight",
     "repository": {
 		"type": "git",
