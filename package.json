@@ -2,8 +2,25 @@
     "name": "vscode-todo-highlight",
     "displayName": "TODO Highlight",
     "description": "highlight TODOs,FIXMEs...",
-    "version": "0.0.1",
+    "keywords": ["todo", "fixme", "highlight"],
+    "version": "0.0.2",
     "publisher": "wayou",
+    "license": "MIT",
+    "preview": true,
+    "icon": "/assets/icon.svg",
+    "homepage": "https://github.com/wayou/vscode-todo-highlight",
+    "repository": {
+		"type": "git",
+		"url": "https://github.com/wayou/vscode-todo-highlight.git"
+	},
+    "bugs": {
+		"url": "https://github.com/wayou/vscode-todo-highlight/issues",
+		"email": "liuwayong@gmail.com"
+	},
+    "galleryBanner": {
+		"color": "#0000FF",
+		"theme": "dark"
+	},
     "engines": {
         "vscode": "^1.5.0"
     },
