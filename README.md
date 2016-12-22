@@ -8,9 +8,9 @@ Hope this extension helps you as well.
 ### Preview
 
 - with `material night` color theme:
-![](assets/material-night.png)
+![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/material-night.png)
 
 - with `material night eighties` color theme:
-![](assets/material-night-eighties.png)
+![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/material-night-eighties.png)
 
 
