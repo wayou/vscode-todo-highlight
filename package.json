@@ -2,24 +2,28 @@
     "name": "vscode-todo-highlight",
     "displayName": "TODO Highlight",
     "description": "highlight TODOs,FIXMEs...",
-    "keywords": ["todo", "fixme", "highlight"],
-    "version": "0.0.2",
+    "keywords": [
+        "todo",
+        "fixme",
+        "highlight"
+    ],
+    "version": "0.0.3",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.svg",
     "homepage": "https://github.com/wayou/vscode-todo-highlight",
     "repository": {
-		"type": "git",
-		"url": "https://github.com/wayou/vscode-todo-highlight.git"
-	},
+        "type": "git",
+        "url": "https://github.com/wayou/vscode-todo-highlight.git"
+    },
     "bugs": {
-		"url": "https://github.com/wayou/vscode-todo-highlight/issues",
-		"email": "liuwayong@gmail.com"
-	},
+        "url": "https://github.com/wayou/vscode-todo-highlight/issues",
+        "email": "liuwayong@gmail.com"
+    },
     "galleryBanner": {
-		"color": "#0000FF",
-		"theme": "dark"
-	},
+        "color": "#1A237E",
+        "theme": "dark"
+    },
     "engines": {
         "vscode": "^1.5.0"
     },
@@ -27,8 +31,8 @@
         "Other"
     ],
     "activationEvents": [
-		"*"
-	],
+        "*"
+    ],
     "main": "./extension",
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
