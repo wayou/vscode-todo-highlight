@@ -6,8 +6,8 @@ var vscode = require('vscode');
 
 var timeout = null;
 
-var TODO_PATTERN = /TODO:/g;
-var FIXME_PATTERN = /FIXME:/g;
+var TODO_PATTERN = /TODO:/gi;
+var FIXME_PATTERN = /FIXME:/gi;
 
 var TODO_STYLE = {
     overviewRulerLane: vscode.OverviewRulerLane.Right,
