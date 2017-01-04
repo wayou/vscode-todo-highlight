@@ -33,10 +33,57 @@
     "activationEvents": [
         "*"
     ],
-    "main": "./extension",
+    "main": "./src/extension",
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
+    },
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.sayHello",
+                "title": "Hello World"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "TODO Highlight",
+            "properties": {
+                "todohighlight.keywords": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "text": {
+                                        "type": "string",
+                                        "description": "the customized text to be highlighted"
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "description": "the color of the text"
+                                    },
+                                    "backgroundColor": {
+                                        "type": "string",
+                                        "description": "the background color of the text"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "description": "customize keywords and colors"
+                },
+                "todohighlight.isCaseSensitive": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "specify whether the keywords are case sensitive or not"
+                }
+            }
+        }
     },
     "devDependencies": {
         "typescript": "^2.0.3",
