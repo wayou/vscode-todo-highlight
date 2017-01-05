@@ -1,16 +1,16 @@
 {
     "name": "vscode-todo-highlight",
     "displayName": "TODO Highlight",
-    "description": "highlight TODOs,FIXMEs...",
+    "description": "highlight TODOs, FIXMEs, and any keywords, annotations...",
     "keywords": [
         "todo",
         "fixme",
         "highlight"
     ],
-    "version": "0.0.5",
+    "version": "0.1.0",
     "publisher": "wayou",
     "license": "MIT",
-    "icon": "assets/icon.svg",
+    "icon": "assets/icon.png",
     "homepage": "https://github.com/wayou/vscode-todo-highlight",
     "repository": {
         "type": "git",
@@ -81,6 +81,20 @@
                     "type": "boolean",
                     "default": true,
                     "description": "specify whether the keywords are case sensitive or not"
+                },
+                "todohighlight.defaultStyle": {
+                    "type": "object",
+                    "properties": {
+                        "color": {
+                            "type": "string",
+                            "description": "the highlight color, any valid css color value will do"
+                        },
+                        "backgroundColor": {
+                            "type": "string",
+                            "description": "background color for highlight, any valid css color value will do"
+                        }
+                    },
+                    "description": "default style for all customied keywords"
                 }
             }
         }
