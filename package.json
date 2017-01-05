@@ -7,7 +7,7 @@
         "fixme",
         "highlight"
     ],
-    "version": "0.1.0",
+    "version": "0.1.1",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -39,12 +39,6 @@
         "test": "node ./node_modules/vscode/bin/test"
     },
     "contributes": {
-        "commands": [
-            {
-                "command": "extension.sayHello",
-                "title": "Hello World"
-            }
-        ],
         "configuration": {
             "type": "object",
             "title": "TODO Highlight",
