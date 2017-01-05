@@ -14,27 +14,27 @@ To do so, <kbd>command</kbd> + <kbd>,</kbd> (Windows / Linux: File -> Preference
 following is an example of Configuration:
 
 ```js
-"todohighlight": {
-        "isCaseSensitive":false,//whether the keywords are case sensitive or not, if true, only strict matched keywords will be highlighted
-        "keywords": [
-            "BUG:",// adding customized keywords without specifying the look, default color will be applied
-            "REVIEW:", //another customized keyword
-            {
-                "text": "NOTE:", //adding customied keywords with customied look
-                "color": "#ff0000", // the highlight color, any valid css color will do
-                "backgroundColor": "yellow" // the background color for highlighted keyword, any valid css color will do
-            },
-            {
-                "text": "HACK:",
-                "color": "#000"
-            }
-            ...
-        ],
-        "defaultStyle": { //specify the default style for customied keywords
-            "color": "rgba(99,99,99,.5)",
-            "backgroundColor": "#EEE"
+{
+    "todohighlight.isCaseSensitive": false, //whether the keywords are case sensitive or not, if true, only strict matched keywords will be highlighted
+    "todohighlight.keywords": [
+        "BUG:", // adding custom keywords without specifying the look, default color will be applied
+        "REVIEW:", //another custom keyword
+        {
+            "text": "NOTE:", //adding custom keywords with custom look
+            "color": "#ff0000", // the highlight color, any valid css color will do
+            "backgroundColor": "yellow" // the background color for highlighted keyword, any valid css color will do
+        },
+        {
+            "text": "HACK:",
+            "color": "#000"
         }
+        ...
+    ],
+    "todohighlight.defaultStyle": { //specify the default style for custom keywords
+        "color": "rgba(99,99,99,.5)",
+        "backgroundColor": "#EEE"
     }
+}
 ```
 
 **All settings are optional**
