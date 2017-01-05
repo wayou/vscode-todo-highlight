@@ -23,7 +23,7 @@ function activate(context) {
     let settings = vscode.workspace.getConfiguration('todohighlight');
     let isCaseSensitive = settings.get('isCaseSensitive', true);
 
-    let keywordsData = util.getKeywords(settings.get('keywords'), isCaseSensitive);
+    let keywordsData = util.getDecorations(settings.get('keywords'), isCaseSensitive);
 
     let decorationTypes = {};
 
@@ -32,7 +32,6 @@ function activate(context) {
             v = v.toUpperCase()
         }
         let mergedStyle = Object.assign({}, keywordsData[v]);
-        mergedStyle.overviewRulerColor = mergedStyle.backgroundColor;
         decorationTypes[v] = vscode.window.createTextEditorDecorationType(mergedStyle);
     })
 
