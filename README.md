@@ -13,7 +13,7 @@ To do so, <kbd>command</kbd> + <kbd>,</kbd> (Windows / Linux: File -> Preference
 
 following is an example of Configuration:
 
-```json
+```js
 "todohighlight": {
         "isCaseSensitive":false,//whether the keywords are case sensitive or not, if true, only strict matched keywords will be highlighted
         "keywords": [
