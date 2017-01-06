@@ -1,13 +1,17 @@
 # Change Log
 
-## [0.1.0] - 2016-12-27
+## 0.2.0 - 2017-01-06
+- ruler color customizing support, see also #4
+- make user settings take effect immediately without editor reload
+
+## 0.1.0 - 2017-01-05
 - resolve #2, customizing colors support
 - resolve #3, customizing keywords support
 - case sensitive config now support in settings, see also #1
 - add MIT license
 
-## [0.0.5] - 2016-12-27
-- Caseenable case-insensitive patterns , see [PR#1](https://github.com/wayou/vscode-todo-highlight/pull/1)
+## 0.0.5 - 2016-12-27
+- caseenable case-insensitive patterns , see [PR#1](https://github.com/wayou/vscode-todo-highlight/pull/1)
 
-## [0.0.1] - 2016-12-22
-- Initial release
+## 0.0.1 - 2016-12-22
+- initial release

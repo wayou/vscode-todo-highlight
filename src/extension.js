@@ -2,8 +2,8 @@
  * vscode plugin for highlighting TODOs and FIXMEs within your code
  * 
  * TODO:
- * - [x]highlight customized text
- * - [x]support customizing colors
+ * - [x]highlight custom text
+ * - [x]support custom colors
  * - show corresponding message in status bar
  * - list all todos in command pannel
  * - add command to toggle the highlight
@@ -20,27 +20,11 @@ function activate(context) {
 
     let activeEditor = vscode.window.activeTextEditor;
 
+    let isCaseSensitive, customDefaultStyle, assembledData, decorationTypes, pattern;
+
     let settings = vscode.workspace.getConfiguration('todohighlight');
-    let isCaseSensitive = settings.get('isCaseSensitive', true);
 
-    let keywordsData = util.getKeywords(settings.get('keywords'), isCaseSensitive);
-
-    let decorationTypes = {};
-
-    Object.keys(keywordsData).forEach((v) => {
-        if (!isCaseSensitive) {
-            v = v.toUpperCase()
-        }
-        let mergedStyle = Object.assign({}, keywordsData[v]);
-        mergedStyle.overviewRulerColor = mergedStyle.backgroundColor;
-        decorationTypes[v] = vscode.window.createTextEditorDecorationType(mergedStyle);
-    })
-
-    let keywords = Object.keys(keywordsData).join('|');
-    let pattern = new RegExp(keywords, 'g');
-    if (!isCaseSensitive) {
-        pattern = new RegExp(keywords, 'gi');
-    }
+    init(settings);
 
     if (activeEditor) {
         triggerUpdateDecorations();
@@ -65,9 +49,20 @@ function activate(context) {
             return;
         }
 
+        // NOTE: LET THE USER CONFIG TAKES EFFECT ON THE FLY WITHOUT RELOAD THE VSCODE
+        // since vscode doesn't provide an api to indicate when the user settings changes,
+        // let's get the config everytime before we set the highlight.
+        // but regarding the performance, we do a check wheter there's diff between the current config and the previous one,
+        // only regenerate keywords when there's diff
+        let currentSetting = vscode.workspace.getConfiguration('todohighlight');
+
+        if (JSON.stringify(settings) != JSON.stringify(currentSetting)) {
+            settings = currentSetting;
+            init(settings);
+        }
+
         let text = activeEditor.document.getText();
-        let mathes = {};
-        let match;
+        let mathes = {}, match;
         while (match = pattern.exec(text)) {
             let startPos = activeEditor.document.positionAt(match.index);
             let endPos = activeEditor.document.positionAt(match.index + match[0].length);
@@ -91,6 +86,35 @@ function activate(context) {
             activeEditor.setDecorations(decorationTypes[v], mathes[v]);
         })
 
+    }
+
+    function init(settings) {
+        isCaseSensitive = settings.get('isCaseSensitive', true);
+        customDefaultStyle = settings.get('defaultStyle');
+        assembledData = util.getAssembledData(settings.get('keywords'), customDefaultStyle, isCaseSensitive);
+        decorationTypes = {};
+
+        Object.keys(assembledData).forEach((v) => {
+            if (!isCaseSensitive) {
+                v = v.toUpperCase()
+            }
+
+            let mergedStyle = Object.assign({}, assembledData[v]);
+
+            if (!mergedStyle.overviewRulerColor) {
+                // using backgroundColor as the default overviewRulerColor if not specified by the user setting
+                mergedStyle.overviewRulerColor = mergedStyle.backgroundColor;
+            }
+            mergedStyle.overviewRulerLane = vscode.OverviewRulerLane.Right;
+
+            decorationTypes[v] = vscode.window.createTextEditorDecorationType(mergedStyle);
+        })
+
+        let keywords = Object.keys(assembledData).join('|');
+        pattern = new RegExp(keywords, 'g');
+        if (!isCaseSensitive) {
+            pattern = new RegExp(keywords, 'gi');
+        }
     }
     function triggerUpdateDecorations() {
         timeout && clearTimeout(timeout);

@@ -7,7 +7,7 @@
         "fixme",
         "highlight"
     ],
-    "version": "0.1.1",
+    "version": "0.2.0",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -45,6 +45,7 @@
             "properties": {
                 "todohighlight.keywords": {
                     "type": "array",
+                    "description": "Customize keywords and colors. Any css color identifier is valid.",
                     "items": {
                         "anyOf": [
                             {
@@ -55,21 +56,24 @@
                                 "properties": {
                                     "text": {
                                         "type": "string",
-                                        "description": "the customized text to be highlighted"
+                                        "description": "Custom text to be highlighted"
                                     },
                                     "color": {
                                         "type": "string",
-                                        "description": "the color of the text"
+                                        "description": "The text color"
                                     },
                                     "backgroundColor": {
                                         "type": "string",
-                                        "description": "the background color of the text"
+                                        "description": "The text background color"
+                                    },
+                                    "overviewRulerColor": {
+                                        "type": "string",
+                                        "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations."
                                     }
                                 }
                             }
                         ]
-                    },
-                    "description": "customize keywords and colors"
+                    }
                 },
                 "todohighlight.isCaseSensitive": {
                     "type": "boolean",
@@ -78,17 +82,21 @@
                 },
                 "todohighlight.defaultStyle": {
                     "type": "object",
+                    "description": "default style for all customied keywords",
                     "properties": {
                         "color": {
                             "type": "string",
-                            "description": "the highlight color, any valid css color value will do"
+                            "description": "the text color"
                         },
                         "backgroundColor": {
                             "type": "string",
-                            "description": "background color for highlight, any valid css color value will do"
+                            "description": "the text background color"
+                        },
+                        "overviewRulerColor": {
+                            "type": "string",
+                            "description": "The color of the ruler mark on the scroll bar."
                         }
-                    },
-                    "description": "default style for all customied keywords"
+                    }
                 }
             }
         }

@@ -1,3 +1,4 @@
+
 Highlight `TODO`,`FIXME` or any other annotations within your code.
 
 Sometimes you will forget to review the TODOs added while coding till publish the code to production.
@@ -7,22 +8,23 @@ Hope this extension helps you as well.
 
 ### Config
 
-Once installed, you can customize by tuning your settings.
+`TODO:`,`FIXME:` are built in keywords. you can override the look by customizing the setting.
 
-To do so, <kbd>command</kbd> + <kbd>,</kbd> (Windows / Linux: File -> Preferences -> User Settings) open vscode `settings.json` file.
+To custom the keywords and other stuff, <kbd>command</kbd> + <kbd>,</kbd> (Windows / Linux: File -> Preferences -> User Settings) open vscode `settings.json` file.
 
-following is an example of Configuration:
+following is an example of configuration:
 
 ```js
 {
-    "todohighlight.isCaseSensitive": false, //whether the keywords are case sensitive or not, if true, only strict matched keywords will be highlighted
+    "todohighlight.isCaseSensitive": false, //whether the keywords are case sensitive or not
     "todohighlight.keywords": [
         "BUG:", // adding custom keywords without specifying the look, default color will be applied
         "REVIEW:", //another custom keyword
-        {
-            "text": "NOTE:", //adding custom keywords with custom look
-            "color": "#ff0000", // the highlight color, any valid css color will do
-            "backgroundColor": "yellow" // the background color for highlighted keyword, any valid css color will do
+        {  //adding custom keywords with custom look
+            "text": "NOTE:", // custom text to be highlighted
+            "color": "#ff0000", // the text color, any css color identifier is valid
+            "backgroundColor": "yellow", // the text background color
+            "overviewRulerColor": 'grey' //the color of the ruler mark on the scroll bar. use rgba() and define transparent colors to play well with other decorations.
         },
         {
             "text": "HACK:",
@@ -30,9 +32,10 @@ following is an example of Configuration:
         }
         ...
     ],
-    "todohighlight.defaultStyle": { //specify the default style for custom keywords
+    "todohighlight.defaultStyle": { //specify the default style for custom keywords, if not specified, build in default style will be applied
         "color": "rgba(99,99,99,.5)",
-        "backgroundColor": "#EEE"
+        "backgroundColor": "#EEE",
+        "overviewRulerColor": 'grey'
     }
 }
 ```
