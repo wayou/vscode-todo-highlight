@@ -24,9 +24,6 @@ function activate(context) {
 
     let settings = vscode.workspace.getConfiguration('todohighlight');
 
-    let zeroPos = activeEditor.document.positionAt(0);
-    let clearRange = [{ range: new vscode.Range(zeroPos, zeroPos) }];
-
     init(settings);
 
     if (activeEditor) {
@@ -51,6 +48,9 @@ function activate(context) {
         if (!activeEditor) {
             return;
         }
+
+        let zeroPos = activeEditor.document.positionAt(0);
+        let clearRange = [{ range: new vscode.Range(zeroPos, zeroPos) }];
 
         // NOTE: LET THE USER CONFIG TAKES EFFECT ON THE FLY WITHOUT RELOAD THE VSCODE
         // since vscode doesn't provide an api to indicate when the user settings changes,
