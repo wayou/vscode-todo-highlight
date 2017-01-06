@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.1 - 2017-01-06
+- fix #5
+
 ## 0.2.0 - 2017-01-06
 - ruler color customizing support, see also #4
 - make user settings take effect immediately without editor reload

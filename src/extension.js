@@ -24,6 +24,9 @@ function activate(context) {
 
     let settings = vscode.workspace.getConfiguration('todohighlight');
 
+    let zeroPos = activeEditor.document.positionAt(0);
+    let clearRange = [{ range: new vscode.Range(zeroPos, zeroPos) }];
+
     init(settings);
 
     if (activeEditor) {
@@ -55,7 +58,6 @@ function activate(context) {
         // but regarding the performance, we do a check wheter there's diff between the current config and the previous one,
         // only regenerate keywords when there's diff
         let currentSetting = vscode.workspace.getConfiguration('todohighlight');
-
         if (JSON.stringify(settings) != JSON.stringify(currentSetting)) {
             settings = currentSetting;
             init(settings);
@@ -79,13 +81,13 @@ function activate(context) {
             mathes[matchedValue] ? mathes[matchedValue].push(decoration) : (mathes[matchedValue] = [decoration]);
         }
 
-        Object.keys(mathes).forEach((v) => {
+        Object.keys(decorationTypes).forEach((v) => {
             if (!isCaseSensitive) {
                 v = v.toUpperCase()
             }
-            activeEditor.setDecorations(decorationTypes[v], mathes[v]);
+            let rangesOrOptions = mathes[v] || clearRange; //NOTE: fix #5
+            activeEditor.setDecorations(decorationTypes[v], rangesOrOptions);
         })
-
     }
 
     function init(settings) {
