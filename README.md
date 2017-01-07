@@ -24,7 +24,7 @@ following is an example of configuration:
             "text": "NOTE:", // custom text to be highlighted
             "color": "#ff0000", // the text color, any css color identifier is valid
             "backgroundColor": "yellow", // the text background color
-            "overviewRulerColor": 'grey' //the color of the ruler mark on the scroll bar. use rgba() and define transparent colors to play well with other decorations.
+            "overviewRulerColor": "grey" //the color of the ruler mark on the scroll bar. use rgba() and define transparent colors to play well with other decorations.
         },
         {
             "text": "HACK:",
@@ -33,9 +33,9 @@ following is an example of configuration:
         ...
     ],
     "todohighlight.defaultStyle": { //specify the default style for custom keywords, if not specified, build in default style will be applied
-        "color": "rgba(99,99,99,.5)",
-        "backgroundColor": "#EEE",
-        "overviewRulerColor": 'grey'
+        "color": "#0000ff",
+        "backgroundColor": "yellow",
+        "overviewRulerColor": "grey"
     }
 }
 ```
