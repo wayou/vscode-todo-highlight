@@ -67,5 +67,5 @@ This extension contributes the following commands to the Command palette.
 
 - `Toggle highlight` : turn on/off the highlight
 
-![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/toggle-highlight.png)
+![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/toggle-highlight.gif)
 
