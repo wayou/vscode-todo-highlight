@@ -1,6 +1,8 @@
 VSCODE-TODO-HIGHLIGHT
 ===
 
+[![Build Status](https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master)](https://travis-ci.org/wayou/vscode-todo-highlight)
+
 Highlight `TODO`,`FIXME` or any other annotations within your code.
 
 Sometimes you will forget to review the TODOs added while coding till publish the code to production.
