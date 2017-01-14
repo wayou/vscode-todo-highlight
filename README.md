@@ -16,6 +16,14 @@ So I've been long for an extension to highlight them and remind me know there're
 
 Hope this extension helps you as well.
 
+### Preview
+
+- with `material night` color theme:
+![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/material-night.png)
+
+- with `material night eighties` color theme:
+![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/material-night-eighties.png)
+
 ### Config
 
 `TODO:`,`FIXME:` are built in keywords. You can override the look by customizing the setting.
@@ -59,10 +67,5 @@ This extension contributes the following commands to the Command palette.
 
 - `Toggle highlight` : turn on/off the highlight
 
-### Preview
+![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/toggle-highlight.png)
 
-- with `material night` color theme:
-![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/material-night.png)
-
-- with `material night eighties` color theme:
-![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/material-night-eighties.png)
