@@ -13,6 +13,8 @@ before_script:
 
 script:
   - vsce package
+
+after_success:
   - git add -A .
   - git commit -m "vsix generated via travis-ci at $(date -u +'%Y-%m-%d %H:%M:%S') $TRAVIS_COMMIT"
   - git push -q -u $GH_TOKEN HEAD:master
