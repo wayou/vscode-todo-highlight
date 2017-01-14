@@ -11,8 +11,6 @@ install:
 before_script:
   - git config --global user.name 'wayou'
   - git config --global user.email 'liuwayong@gmail.com'
-
-before_script:
   - rm -f *.vsix
 
 script:
