@@ -1,10 +1,15 @@
 language: node_js
+sudo: false
 
 node_js:
   - "7.0.0"
 
 install:
   - npm install -g vsce
+
+before_script:
+- git config --global user.name 'wayou'
+- git config --global user.email 'liuwayong@gmail.com'
 
 script:
   - vsce package
