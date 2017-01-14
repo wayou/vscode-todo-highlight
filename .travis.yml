@@ -1,7 +1,6 @@
 # TODO: automatically publish http://jasonpoon.ca/2016/11/15/continuous-delivery-of-visual-studio-code-extensions/
 
 language: node_js
-sudo: false
 
 node_js:
   - "7.0.0"
@@ -13,8 +12,10 @@ before_script:
 - git config --global user.name 'wayou'
 - git config --global user.email 'liuwayong@gmail.com'
 
-script:
+before_script:
   - rm *.vsix
+
+script:
   - vsce package
 
 after_success:
