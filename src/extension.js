@@ -6,8 +6,7 @@
  * - [x]support custom colors
  * - show corresponding message in status bar
  * - list all todos in command pannel
- * - add command to toggle the highlight
- * - language servers implementation
+ * - [x]add command to toggle the highlight
  * - show new release welcome message for every updates
  */
 
@@ -16,15 +15,21 @@ var util = require('./util');
 
 function activate(context) {
 
-    let timeout = null;
+    var timeout = null;
 
-    let activeEditor = vscode.window.activeTextEditor;
+    var activeEditor = vscode.window.activeTextEditor;
 
-    let isCaseSensitive, customDefaultStyle, assembledData, decorationTypes, pattern;
+    var isCaseSensitive, customDefaultStyle, assembledData, decorationTypes, pattern;
 
-    let settings = vscode.workspace.getConfiguration('todohighlight');
+    var settings = vscode.workspace.getConfiguration('todohighlight');
 
     init(settings);
+
+    vscode.commands.registerCommand('todohighlight.toggleHighlight', function () {
+        settings.update('isEnable', !settings.get('isEnable'), true).then(function () {
+            triggerUpdateDecorations();
+        });
+    });
 
     if (activeEditor) {
         triggerUpdateDecorations();
@@ -43,50 +48,51 @@ function activate(context) {
         }
     }, null, context.subscriptions);
 
+    vscode.workspace.onDidChangeConfiguration(function (event) {
+        settings = vscode.workspace.getConfiguration('todohighlight');
+
+        //NOTE: if disabled, do not re-initialize the data or we will not be able to clear the style immediatly via 'toggle highlight' command
+        if (!settings.get('isEnable')) return;
+
+        init(settings);
+        triggerUpdateDecorations();
+    }, null, context.subscriptions);
+
     function updateDecorations() {
 
         if (!activeEditor) {
             return;
         }
 
-        let zeroPos = activeEditor.document.positionAt(0);
-        let clearRange = [{ range: new vscode.Range(zeroPos, zeroPos) }];
+        var zeroPos = activeEditor.document.positionAt(0);
+        var clearRange = [{ range: new vscode.Range(zeroPos, zeroPos) }];
 
-        // NOTE: LET THE USER CONFIG TAKES EFFECT ON THE FLY WITHOUT RELOAD THE VSCODE
-        // since vscode doesn't provide an api to indicate when the user settings changes,
-        // let's get the config everytime before we set the highlight.
-        // but regarding the performance, we do a check wheter there's diff between the current config and the previous one,
-        // only regenerate keywords when there's diff
-        let currentSetting = vscode.workspace.getConfiguration('todohighlight');
-        if (JSON.stringify(settings) != JSON.stringify(currentSetting)) {
-            settings = currentSetting;
-            init(settings);
-        }
-
-        let text = activeEditor.document.getText();
-        let mathes = {}, match;
+        var text = activeEditor.document.getText();
+        var mathes = {}, match;
         while (match = pattern.exec(text)) {
-            let startPos = activeEditor.document.positionAt(match.index);
-            let endPos = activeEditor.document.positionAt(match.index + match[0].length);
-            let decoration = {
+            var startPos = activeEditor.document.positionAt(match.index);
+            var endPos = activeEditor.document.positionAt(match.index + match[0].length);
+            var decoration = {
                 range: new vscode.Range(startPos, endPos),
                 // TODO: parse and show corresponding content in popup panel when hover
                 // hoverMessage: ``
             };
 
-            let matchedValue = match[0];
+            var matchedValue = match[0];
             if (!isCaseSensitive) {
-                matchedValue = matchedValue.toUpperCase()
+                matchedValue = matchedValue.toUpperCase();
             }
             mathes[matchedValue] ? mathes[matchedValue].push(decoration) : (mathes[matchedValue] = [decoration]);
         }
 
         Object.keys(decorationTypes).forEach((v) => {
             if (!isCaseSensitive) {
-                v = v.toUpperCase()
+                v = v.toUpperCase();
             }
-            let rangesOrOptions = mathes[v] || clearRange; //NOTE: fix #5
-            activeEditor.setDecorations(decorationTypes[v], rangesOrOptions);
+
+            let rangeOption = !(settings.get('isEnable') && mathes[v]) ? clearRange : mathes[v]; //NOTE: fix #5
+
+            activeEditor.setDecorations(decorationTypes[v], rangeOption);
         })
     }
 
@@ -94,6 +100,7 @@ function activate(context) {
         isCaseSensitive = settings.get('isCaseSensitive', true);
         customDefaultStyle = settings.get('defaultStyle');
         assembledData = util.getAssembledData(settings.get('keywords'), customDefaultStyle, isCaseSensitive);
+
         decorationTypes = {};
 
         Object.keys(assembledData).forEach((v) => {
@@ -101,7 +108,7 @@ function activate(context) {
                 v = v.toUpperCase()
             }
 
-            let mergedStyle = Object.assign({}, assembledData[v]);
+            var mergedStyle = Object.assign({}, assembledData[v]);
 
             if (!mergedStyle.overviewRulerColor) {
                 // using backgroundColor as the default overviewRulerColor if not specified by the user setting
@@ -112,12 +119,13 @@ function activate(context) {
             decorationTypes[v] = vscode.window.createTextEditorDecorationType(mergedStyle);
         })
 
-        let keywords = Object.keys(assembledData).join('|');
+        var keywords = Object.keys(assembledData).join('|');
         pattern = new RegExp(keywords, 'g');
         if (!isCaseSensitive) {
             pattern = new RegExp(keywords, 'gi');
         }
     }
+
     function triggerUpdateDecorations() {
         timeout && clearTimeout(timeout);
         timeout = setTimeout(updateDecorations, 0);

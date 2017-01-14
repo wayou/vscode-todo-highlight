@@ -1,4 +1,3 @@
-
 var DEFAULT_KEYWORDS = {
     "TODO:": {
         text: "TODO:",

@@ -5,9 +5,11 @@
     "keywords": [
         "todo",
         "fixme",
-        "highlight"
+        "highlight",
+        "keyword",
+        "annotation"
     ],
-    "version": "0.2.2",
+    "version": "0.3.0",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -39,10 +41,27 @@
         "test": "node ./node_modules/vscode/bin/test"
     },
     "contributes": {
+        "commands": [
+            {
+                "title": "Toggle highlight",
+                "category": "TODO-Highlight",
+                "command": "todohighlight.toggleHighlight"
+            }
+        ],
         "configuration": {
             "type": "object",
             "title": "TODO Highlight",
             "properties": {
+                "todohighlight.isEnable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable or disable the highlight"
+                },
+                "todohighlight.isCaseSensitive": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Specify whether the keywords are case sensitive or not"
+                },
                 "todohighlight.keywords": {
                     "type": "array",
                     "description": "Customize keywords and colors. Any css color identifier is valid.",
@@ -75,22 +94,17 @@
                         ]
                     }
                 },
-                "todohighlight.isCaseSensitive": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "specify whether the keywords are case sensitive or not"
-                },
                 "todohighlight.defaultStyle": {
                     "type": "object",
-                    "description": "default style for all customied keywords",
+                    "description": "Default style for all customied keywords",
                     "properties": {
                         "color": {
                             "type": "string",
-                            "description": "the text color"
+                            "description": "The text color"
                         },
                         "backgroundColor": {
                             "type": "string",
-                            "description": "the text background color"
+                            "description": "The text background color"
                         },
                         "overviewRulerColor": {
                             "type": "string",

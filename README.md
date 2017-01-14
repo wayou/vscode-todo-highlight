@@ -1,3 +1,7 @@
+VSCODE-TODO-HIGHLIGHT
+===
+
+[![Build Status](https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master)](https://travis-ci.org/wayou/vscode-todo-highlight)
 
 Highlight `TODO`,`FIXME` or any other annotations within your code.
 
@@ -8,7 +12,7 @@ Hope this extension helps you as well.
 
 ### Config
 
-`TODO:`,`FIXME:` are built in keywords. you can override the look by customizing the setting.
+`TODO:`,`FIXME:` are built in keywords. You can override the look by customizing the setting.
 
 To custom the keywords and other stuff, <kbd>command</kbd> + <kbd>,</kbd> (Windows / Linux: File -> Preferences -> User Settings) open vscode `settings.json` file.
 
@@ -16,6 +20,7 @@ following is an example of configuration:
 
 ```js
 {
+    "todohighlight.isEnable": true, //toggle the highlight, default is true
     "todohighlight.isCaseSensitive": false, //whether the keywords are case sensitive or not
     "todohighlight.keywords": [
         "BUG:", // adding custom keywords without specifying the look, default color will be applied
@@ -41,6 +46,12 @@ following is an example of configuration:
 ```
 
 **All settings are optional**
+
+### Commands
+
+This extension contributes the following commands to the Command palette.
+
+- `Toggle highlight` : turn on/off the highlight
 
 ### Preview
 

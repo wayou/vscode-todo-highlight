@@ -1,0 +1,13 @@
+language: node_js
+
+node_js:
+  - "7.0.0"
+
+install:
+  - npm install -g vsce
+
+script:
+  - vsce package
+  - git add -A .
+  - git commit -m "vsix generated via travis-ci at $(date -u +'%Y-%m-%d %H:%M:%S') $TRAVIS_COMMIT"
+  - git push $GH_TOKEN HEAD:master
