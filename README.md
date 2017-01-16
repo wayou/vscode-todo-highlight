@@ -33,11 +33,11 @@ following is an example of configuration:
 ```js
 {
     "todohighlight.isEnable": true, //toggle the highlight, default is true
-    "todohighlight.isCaseSensitive": false, //whether the keywords are case sensitive or not
+    "todohighlight.isCaseSensitive": true, //whether the keywords are case sensitive or not
     "todohighlight.keywords": [
         "BUG:", // adding custom keywords without specifying the look, default color will be applied
         "REVIEW:", //another custom keyword
-        {  //adding custom keywords with custom look
+        {  
             "text": "NOTE:", // custom text to be highlighted
             "color": "#ff0000", // the text color, any css color identifier is valid
             "backgroundColor": "yellow", // the text background color
