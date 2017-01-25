@@ -1,6 +1,6 @@
 /**
  * vscode plugin for highlighting TODOs and FIXMEs within your code
- *
+ * 
  * TODO:
  * - [x]highlight custom text
  * - [x]support custom colors
@@ -19,7 +19,7 @@ function activate(context) {
 
     var activeEditor = vscode.window.activeTextEditor;
 
-    var wholeWords, isCaseSensitive, customDefaultStyle, assembledData, decorationTypes, pattern;
+    var isCaseSensitive, customDefaultStyle, assembledData, decorationTypes, pattern;
 
     var settings = vscode.workspace.getConfiguration('todohighlight');
 
@@ -68,32 +68,21 @@ function activate(context) {
         var clearRange = [{ range: new vscode.Range(zeroPos, zeroPos) }];
 
         var text = activeEditor.document.getText();
-        var matches = {}, match;
+        var mathes = {}, match;
         while (match = pattern.exec(text)) {
-            var matchedValue = match[0].trim(),
-                startPos = match.index,
-                endPos = match.index + matchedValue.length;
-
-            // get rid of leading whitespaces
-            if (wholeWords) {
-                var leadingWhitespace = RegExp('\\s+').exec(match[0]);
-                if (leadingWhitespace) {
-                    startPos += leadingWhitespace[0].length;
-                    endPos += leadingWhitespace[0].length;
-                }
-            }
-
+            var startPos = activeEditor.document.positionAt(match.index);
+            var endPos = activeEditor.document.positionAt(match.index + match[0].length);
             var decoration = {
-                range: new vscode.Range(activeEditor.document.positionAt(startPos),
-                                        activeEditor.document.positionAt(endPos))
+                range: new vscode.Range(startPos, endPos),
                 // TODO: parse and show corresponding content in popup panel when hover
                 // hoverMessage: ``
             };
 
+            var matchedValue = match[0];
             if (!isCaseSensitive) {
                 matchedValue = matchedValue.toUpperCase();
             }
-            matches[matchedValue] ? matches[matchedValue].push(decoration) : (matches[matchedValue] = [decoration]);
+            mathes[matchedValue] ? mathes[matchedValue].push(decoration) : (mathes[matchedValue] = [decoration]);
         }
 
         Object.keys(decorationTypes).forEach((v) => {
@@ -101,14 +90,13 @@ function activate(context) {
                 v = v.toUpperCase();
             }
 
-            let rangeOption = !(settings.get('isEnable') && matches[v]) ? clearRange : matches[v]; //NOTE: fix #5
+            let rangeOption = !(settings.get('isEnable') && mathes[v]) ? clearRange : mathes[v]; //NOTE: fix #5
 
             activeEditor.setDecorations(decorationTypes[v], rangeOption);
         })
     }
 
     function init(settings) {
-        wholeWords = settings.get('wholeWords', true);
         isCaseSensitive = settings.get('isCaseSensitive', true);
         customDefaultStyle = settings.get('defaultStyle');
         assembledData = util.getAssembledData(settings.get('keywords'), customDefaultStyle, isCaseSensitive);
@@ -129,14 +117,9 @@ function activate(context) {
             mergedStyle.overviewRulerLane = vscode.OverviewRulerLane.Right;
 
             decorationTypes[v] = vscode.window.createTextEditorDecorationType(mergedStyle);
-        });
+        })
 
-        if (wholeWords) {
-            var keywords = '\\s+' + Object.keys(assembledData).join('\\s+|\\s+') + '\\s+';
-        } else {
-            var keywords = Object.keys(assembledData).join('|');
-        }
-
+        var keywords = Object.keys(assembledData).join('|');
         pattern = new RegExp(keywords, 'g');
         if (!isCaseSensitive) {
             pattern = new RegExp(keywords, 'gi');

@@ -1,7 +1,6 @@
 VSCODE-TODO-HIGHLIGHT
 ===
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd4af74353334b00b0f4ca28d892b52b)](https://www.codacy.com/app/wayou/vscode-todo-highlight?utm_source=github.com&utm_medium=referral&utm_content=wayou/vscode-todo-highlight&utm_campaign=badger)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master)](https://travis-ci.org/wayou/vscode-todo-highlight)
 [![Version](http://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
