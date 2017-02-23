@@ -9,7 +9,7 @@
         "keyword",
         "annotation"
     ],
-    "version": "0.3.3",
+    "version": "0.4.0",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -46,6 +46,11 @@
                 "title": "Toggle highlight",
                 "category": "TODO-Highlight",
                 "command": "todohighlight.toggleHighlight"
+            },
+            {
+                "title": "List hilighted annotations",
+                "category": "TODO-Highlight",
+                "command": "todohighlight.listAnnotations"
             }
         ],
         "configuration": {
@@ -87,7 +92,7 @@
                                     },
                                     "overviewRulerColor": {
                                         "type": "string",
-                                        "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations."
+                                        "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations"
                                     }
                                 }
                             }
@@ -108,9 +113,19 @@
                         },
                         "overviewRulerColor": {
                             "type": "string",
-                            "description": "The color of the ruler mark on the scroll bar."
+                            "description": "The color of the ruler mark on the scroll bar"
                         }
                     }
+                },
+                "todohighlight.include": {
+                    "type": "string",
+                    "default": "{**/*.js,**/*.html,**/*.php,**/*.css}",
+                    "description": "A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `**/*.*` for both permormance and avoiding binary files reason"
+                },
+                "todohighlight.exclude": {
+                    "type": "string",
+                    "default": "{**∕node_modules∕**,**∕bower_components∕**,**∕dist∕**,**/_output/**,**/*.min.*,**/*.map}",
+                    "description": "A glob pattern that defines files and folders to exclude while listing annotations"
                 }
             }
         }

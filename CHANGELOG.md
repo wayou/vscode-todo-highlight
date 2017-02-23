@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.4.0 - 2017-02-23
+- list annotations
+- show corresponding message in status bar
+
 ## 0.3.0 - 2017-01-14
 - using `onDidChangeConfiguration` API to detect configuration change and make the user settings take effect
 - adding command `Toggle highlight` to enable/disable the highlight

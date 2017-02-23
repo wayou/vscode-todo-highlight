@@ -4,24 +4,25 @@
  * TODO:
  * - [x]highlight custom text
  * - [x]support custom colors
- * - show corresponding message in status bar
- * - list all todos in command pannel
+ * - [x]show corresponding message in status bar
+ * - [x]list all todos in command pannel
  * - [x]add command to toggle the highlight
- * - show new release welcome message for every updates
+ * - [ ]cancellation support
  */
 
 var vscode = require('vscode');
 var util = require('./util');
+var window = vscode.window;
+var workspace = vscode.workspace;
 
 function activate(context) {
 
     var timeout = null;
-
-    var activeEditor = vscode.window.activeTextEditor;
-
+    var activeEditor = window.activeTextEditor;
     var isCaseSensitive, customDefaultStyle, assembledData, decorationTypes, pattern;
+    var settings = workspace.getConfiguration('todohighlight');
 
-    var settings = vscode.workspace.getConfiguration('todohighlight');
+    var tokenSource = new vscode.CancellationTokenSource();
 
     init(settings);
 
@@ -31,25 +32,38 @@ function activate(context) {
         });
     });
 
+    vscode.commands.registerCommand('todohighlight.listAnnotations', function () {
+        if (!assembledData) return;
+        var availableAnnotationTypes = Object.keys(assembledData);
+        availableAnnotationTypes.unshift('ALL');
+        util.chooseAnnotationType(availableAnnotationTypes).then(function (annotationType) {
+            if (!annotationType) return;
+            //TODO: cancel previous searching if there's any
+            // tokenSource.cancel();
+            util.searchAnnotations(annotationType, availableAnnotationTypes, util.annotationsFound, tokenSource);
+        });
+    });
+
+
     if (activeEditor) {
         triggerUpdateDecorations();
     }
 
-    vscode.window.onDidChangeActiveTextEditor(function (editor) {
+    window.onDidChangeActiveTextEditor(function (editor) {
         activeEditor = editor;
         if (editor) {
             triggerUpdateDecorations();
         }
     }, null, context.subscriptions);
 
-    vscode.workspace.onDidChangeTextDocument(function (event) {
+    workspace.onDidChangeTextDocument(function (event) {
         if (activeEditor && event.document === activeEditor.document) {
             triggerUpdateDecorations();
         }
     }, null, context.subscriptions);
 
-    vscode.workspace.onDidChangeConfiguration(function (event) {
-        settings = vscode.workspace.getConfiguration('todohighlight');
+    workspace.onDidChangeConfiguration(function (event) {
+        settings = workspace.getConfiguration('todohighlight');
 
         //NOTE: if disabled, do not re-initialize the data or we will not be able to clear the style immediatly via 'toggle highlight' command
         if (!settings.get('isEnable')) return;
@@ -73,9 +87,7 @@ function activate(context) {
             var startPos = activeEditor.document.positionAt(match.index);
             var endPos = activeEditor.document.positionAt(match.index + match[0].length);
             var decoration = {
-                range: new vscode.Range(startPos, endPos),
-                // TODO: parse and show corresponding content in popup panel when hover
-                // hoverMessage: ``
+                range: new vscode.Range(startPos, endPos)
             };
 
             var matchedValue = match[0];
@@ -101,6 +113,10 @@ function activate(context) {
         customDefaultStyle = settings.get('defaultStyle');
         assembledData = util.getAssembledData(settings.get('keywords'), customDefaultStyle, isCaseSensitive);
 
+        if (!window.statusBarItem) {
+            window.statusBarItem = util.createStatusBarItem();
+        }
+
         decorationTypes = {};
 
         Object.keys(assembledData).forEach((v) => {
@@ -116,7 +132,7 @@ function activate(context) {
             }
             mergedStyle.overviewRulerLane = vscode.OverviewRulerLane.Right;
 
-            decorationTypes[v] = vscode.window.createTextEditorDecorationType(mergedStyle);
+            decorationTypes[v] = window.createTextEditorDecorationType(mergedStyle);
         })
 
         var keywords = Object.keys(assembledData).join('|');
@@ -124,6 +140,17 @@ function activate(context) {
         if (!isCaseSensitive) {
             pattern = new RegExp(keywords, 'gi');
         }
+
+        //TODO: this feature's no full tested
+        // var searchingOnStartup = settings.get('searchingOnStartup');
+        // if (searchingOnStartup) {
+        //     setTimeout(function () {
+        //         var availableAnnotationTypes = Object.keys(assembledData);
+        //         availableAnnotationTypes.unshift('ALL');
+        //         util.searchAnnotations('ALL', availableAnnotationTypes, util.initialSearchCallback);
+        //     });
+        // }
+
     }
 
     function triggerUpdateDecorations() {
