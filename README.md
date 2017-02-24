@@ -54,7 +54,7 @@ following is an example of configuration:
         "backgroundColor": "yellow",
         "overviewRulerColor": "grey"
     },
-    "todohighlight.include": "{**/*.js,**/*.html,**/*.php,**/*.css}", //A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `**/*.*` for both permormance and avoiding binary files reason
+    "todohighlight.include": "{**/*.js,**/*.html,**/*.php,**/*.css}", //A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason
     "todohighlight.exclude": "{**∕node_modules∕**,**∕bower_components∕**,**∕dist∕**,**/_output/**,**/*.min.*,**/*.map}"//A glob pattern that defines files and folders to exclude while listing annotations
 
 }
