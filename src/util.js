@@ -107,14 +107,17 @@ function searchAnnotationInFile(file, annotations, annotationList, regexp) {
                 annotations[pathWithoutFile] = [];
             }
             var content = getContent(lineText, match);
-            var locationInfo = getLocationInfo(pathWithoutFile, lineText, line, match);
+            if (content.length > 500) {
+                content = content.substring(0, 500).trim() + '...';
+            }
+            var locationInfo = getLocationInfo(fileInUri, pathWithoutFile, lineText, line, match);
 
             var annotation = {
-                // description: locationInfo.location,
+                uri: locationInfo.uri,
                 label: content,
-                detail: locationInfo.location,
+                detail: locationInfo.relativePath,
                 lineNum: line,
-                fileName: locationInfo.fileName,
+                fileName: locationInfo.absPath,
                 startCol: locationInfo.startCol,
                 endCol: locationInfo.endCol
             };
@@ -145,38 +148,6 @@ function annotationsFound(err, annotationType, annotations, annotationList) {
 
     showOutputChannel(annotationList);
 
-    // window.showQuickPick(annotationList, {}).then(function (response) {
-    //     if (!response) return;
-    //     var nameSplit = String(response.fileName);
-    //     var file = 'file://' + nameSplit;
-    //     var fileUri = vscode.Uri.parse(file);
-    //     workspace.openTextDocument(fileUri).then(function (textDocument) {
-    //         window.showTextDocument(textDocument, vscode.ViewColumn.One).then(function (textEditor) {
-    //             var lineNum = response.lineNum;
-    //             var resultObjects = annotations[nameSplit];
-    //             var startPos;
-    //             var endPos;
-    //             for (var i = 0; i < resultObjects.length; i++) {
-    //                 var object = resultObjects[i];
-    //                 if (object.lineNum === lineNum) {
-    //                     startPos = new vscode.Position(object.lineNum, response.startCol);
-    //                     endPos = new vscode.Position(object.lineNum, response.endCol);
-    //                     break;
-    //                 }
-    //             }
-    //             var newSelection = new vscode.Selection(startPos, endPos);
-    //             window.activeTextEditor.selection = newSelection;
-    //             window.activeTextEditor.revealRange(newSelection, vscode.TextEditorRevealType.Default);
-    //         }, function (err) {
-    //             errorHandler(err);
-    //         });
-    //     }, function (err) {
-    //         errorHandler(err);
-    //     });
-    // }, function (err) {
-    //     errorHandler(err);
-    // });
-
 }
 
 function showOutputChannel(data) {
@@ -184,7 +155,13 @@ function showOutputChannel(data) {
 
     window.outputChannel.clear();
     data.forEach(function (v, i, a) {
-        window.outputChannel.appendLine(v.fileName + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1));
+        //for mac
+        // window.outputChannel.appendLine('#' + (i + 1) + '\t' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1));
+        //for windows
+        // window.outputChannel.appendLine('#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1));
+        // NOTE: try for both. THIS WORKS!!! 
+        // deu to this bug https://github.com/Microsoft/vscode/issues/586, behavior of output pannel differs from mac and windows. on mac the link should be xxxx:row:col while on windows is xxx#row. and I tried combine both to make it work on both os
+        window.outputChannel.appendLine('#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1)+ ':' + (v.lineNum + 1) + ':' + (v.startCol + 1));
         window.outputChannel.appendLine(v.label + '\n');
     });
     window.outputChannel.show();
@@ -210,7 +187,7 @@ function getContent(lineText, match) {
     return lineText.substring(lineText.indexOf(match[0]), lineText.length);
 };
 
-function getLocationInfo(pathWithoutFile, lineText, line, match) {
+function getLocationInfo(fileInUri, pathWithoutFile, lineText, line, match) {
     var rootPath = workspace.rootPath + '/';
     var outputFile = pathWithoutFile.replace(rootPath, '');
     var startCol = lineText.indexOf(match[0]);
@@ -218,8 +195,9 @@ function getLocationInfo(pathWithoutFile, lineText, line, match) {
     var location = outputFile + ' ' + (line + 1) + ':' + (startCol + 1);
 
     return {
-        fileName: pathWithoutFile,
-        location: location,
+        uri: fileInUri,
+        absPath: pathWithoutFile,
+        relativePath: location,
         startCol: startCol,
         endCol: endCol
     };

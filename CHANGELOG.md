@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.4.2 - 2017-03-01
+- fix #15 links in outputh channel not clickable on windows
+
 ## 0.4.1 - 2017-03-01
 - list annotations into the outputchannel instead of the quickpick panel, resolve #13
 - store search result into workspaceState, using the status bar item to show the result at any time
