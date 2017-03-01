@@ -20,6 +20,9 @@ function activate(context) {
     var timeout = null;
     var activeEditor = window.activeTextEditor;
     var isCaseSensitive, customDefaultStyle, assembledData, decorationTypes, pattern;
+    var outputChannel = window.createOutputChannel('TodohighLight: Annotations');
+    var workspaceState = context.workspaceState;
+
     var settings = workspace.getConfiguration('todohighlight');
 
     var tokenSource = new vscode.CancellationTokenSource();
@@ -40,8 +43,13 @@ function activate(context) {
             if (!annotationType) return;
             //TODO: cancel previous searching if there's any
             // tokenSource.cancel();
-            util.searchAnnotations(annotationType, availableAnnotationTypes, util.annotationsFound, tokenSource);
+            util.searchAnnotations(workspaceState, annotationType, availableAnnotationTypes, util.annotationsFound, tokenSource);
         });
+    });
+
+    vscode.commands.registerCommand('todohighlight.showOutputChannel', function () {
+        var annotationList = workspaceState.get('annotationList', []);
+        util.showOutputChannel(annotationList);
     });
 
 
@@ -116,6 +124,9 @@ function activate(context) {
         if (!window.statusBarItem) {
             window.statusBarItem = util.createStatusBarItem();
         }
+        if (!window.outputChannel) {
+            window.outputChannel = window.createOutputChannel('TodoHighlight: Annotations');
+        }
 
         decorationTypes = {};
 
@@ -147,7 +158,7 @@ function activate(context) {
         //     setTimeout(function () {
         //         var availableAnnotationTypes = Object.keys(assembledData);
         //         availableAnnotationTypes.unshift('ALL');
-        //         util.searchAnnotations('ALL', availableAnnotationTypes, util.initialSearchCallback);
+        //         util.searchAnnotations(searchAnnotations,'ALL', availableAnnotationTypes, util.initialSearchCallback);
         //     });
         // }
 

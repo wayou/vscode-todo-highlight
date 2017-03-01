@@ -41,12 +41,11 @@ function chooseAnnotationType(availableAnnotationTypes) {
     return window.showQuickPick(availableAnnotationTypes, {});
 }
 
-function searchAnnotations(annotationType, availableAnnotationTypes, callback, tokenSource) {
+function searchAnnotations(workspaceState, annotationType, availableAnnotationTypes, callback, tokenSource) {
 
     var settings = workspace.getConfiguration('todohighlight');
     var includePattern = settings.get('include');
     var excludePattern = settings.get('exclude');
-    console.log('exclude', excludePattern)
 
     var limitationForSearch = 5120;
     var isCaseSensitive = settings.get('isCaseSensitive');
@@ -55,7 +54,9 @@ function searchAnnotations(annotationType, availableAnnotationTypes, callback, t
     if (annotationType == 'ALL') {
         statusMsg = `searching all annotations...`;
     }
+
     setStatusMsg(statusMsg);
+
     workspace.findFiles(includePattern, excludePattern, limitationForSearch, tokenSource.token).then(function (files) {
 
         if (!files || files.length === 0) {
@@ -82,6 +83,7 @@ function searchAnnotations(annotationType, availableAnnotationTypes, callback, t
                 searchAnnotationInFile(file, annotations, annotationList, regexp);
                 times++;
                 if (times === files.length) {
+                    workspaceState.update('annotationList', annotationList)
                     callback(null, annotationType, annotations, annotationList);
                 }
             }, function (err) {
@@ -141,38 +143,51 @@ function annotationsFound(err, annotationType, annotations, annotationList) {
         return;
     }
 
-    window.showQuickPick(annotationList, {}).then(function (response) {
-        if (!response) return;
-        var nameSplit = String(response.fileName);
-        var file = 'file://' + nameSplit;
-        var fileUri = vscode.Uri.parse(file);
-        workspace.openTextDocument(fileUri).then(function (textDocument) {
-            window.showTextDocument(textDocument, vscode.ViewColumn.One).then(function (textEditor) {
-                var lineNum = response.lineNum;
-                var resultObjects = annotations[nameSplit];
-                var startPos;
-                var endPos;
-                for (var i = 0; i < resultObjects.length; i++) {
-                    var object = resultObjects[i];
-                    if (object.lineNum === lineNum) {
-                        startPos = new vscode.Position(object.lineNum, response.startCol);
-                        endPos = new vscode.Position(object.lineNum, response.endCol);
-                        break;
-                    }
-                }
-                var newSelection = new vscode.Selection(startPos, endPos);
-                window.activeTextEditor.selection = newSelection;
-                window.activeTextEditor.revealRange(newSelection, vscode.TextEditorRevealType.Default);
-            }, function (err) {
-                errorHandler(err);
-            });
-        }, function (err) {
-            errorHandler(err);
-        });
-    }, function (err) {
-        errorHandler(err);
-    });
+    showOutputChannel(annotationList);
 
+    // window.showQuickPick(annotationList, {}).then(function (response) {
+    //     if (!response) return;
+    //     var nameSplit = String(response.fileName);
+    //     var file = 'file://' + nameSplit;
+    //     var fileUri = vscode.Uri.parse(file);
+    //     workspace.openTextDocument(fileUri).then(function (textDocument) {
+    //         window.showTextDocument(textDocument, vscode.ViewColumn.One).then(function (textEditor) {
+    //             var lineNum = response.lineNum;
+    //             var resultObjects = annotations[nameSplit];
+    //             var startPos;
+    //             var endPos;
+    //             for (var i = 0; i < resultObjects.length; i++) {
+    //                 var object = resultObjects[i];
+    //                 if (object.lineNum === lineNum) {
+    //                     startPos = new vscode.Position(object.lineNum, response.startCol);
+    //                     endPos = new vscode.Position(object.lineNum, response.endCol);
+    //                     break;
+    //                 }
+    //             }
+    //             var newSelection = new vscode.Selection(startPos, endPos);
+    //             window.activeTextEditor.selection = newSelection;
+    //             window.activeTextEditor.revealRange(newSelection, vscode.TextEditorRevealType.Default);
+    //         }, function (err) {
+    //             errorHandler(err);
+    //         });
+    //     }, function (err) {
+    //         errorHandler(err);
+    //     });
+    // }, function (err) {
+    //     errorHandler(err);
+    // });
+
+}
+
+function showOutputChannel(data) {
+    if (!window.outputChannel) return;
+
+    window.outputChannel.clear();
+    data.forEach(function (v, i, a) {
+        window.outputChannel.appendLine(v.fileName + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1));
+        window.outputChannel.appendLine(v.label + '\n');
+    });
+    window.outputChannel.show();
 }
 
 function initialSearchCallback(err, annotationType, annotations, annotationList) {
@@ -214,7 +229,7 @@ function createStatusBarItem() {
     var statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Left);
     statusBarItem.text = '$(checklist)' + '0';
     statusBarItem.tooltip = 'List annotations';
-    statusBarItem.command = 'todohighlight.listAnnotations';
+    statusBarItem.command = 'todohighlight.showOutputChannel';
     return statusBarItem;
 };
 
@@ -231,8 +246,6 @@ function setStatusMsg(msg, tooltip) {
     }
 }
 
-
-
 module.exports = {
     getAssembledData,
     chooseAnnotationType,
@@ -240,6 +253,7 @@ module.exports = {
     annotationsFound,
     createStatusBarItem,
     setStatusMsg,
-    initialSearchCallback
+    initialSearchCallback,
+    showOutputChannel
 };
 

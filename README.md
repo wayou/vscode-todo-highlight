@@ -69,7 +69,7 @@ This extension contributes the following commands to the Command palette.
 - `Toggle highlight` : turn on/off the highlight
 ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/toggle-highlight.gif)
 - `List hilighted annotations` : list annotations and reveal from corresponding file
-![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/list-annotations.gif)
+![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/results-in-ouputchannel.gif)
 
 
 
