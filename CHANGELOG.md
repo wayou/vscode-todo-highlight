@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.4.3 - 2017-03-02
+- just find that links in the outputchannel not clickable on Mac now, using hash and will work both on Windows and Mac now. 
+
 ## 0.4.2 - 2017-03-01
 - fix #15 links in outputh channel not clickable on windows
 
