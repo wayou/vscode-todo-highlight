@@ -75,5 +75,5 @@ This extension contributes the following commands to the Command palette.
 
 ### Known issue
 
-- links for file in the output channel differs from platform, on Mac it's <uri>:<line>:<col> while on Windows is <uri>#<line>. to ensure the links work on both platform, the two types of links are given in the ouput channel for now. for detail see the vscode issue https://github.com/Microsoft/vscode/issues/586
+- links for file in the output channel differs from platform, on Mac it's `<uri>:<line>:<col>` while on Windows is `<uri>#<line>`. to ensure the links work on both platform, the two types of links are given in the ouput channel for now. for detail see the vscode issue https://github.com/Microsoft/vscode/issues/586
 
