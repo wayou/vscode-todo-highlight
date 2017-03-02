@@ -69,7 +69,10 @@ This extension contributes the following commands to the Command palette.
 - `Toggle highlight` : turn on/off the highlight
 ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/toggle-highlight.gif)
 - `List hilighted annotations` : list annotations and reveal from corresponding file
-![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/results-in-ouputchannel.gif)
+![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/links.gif)
 
 
+### Known issue
+
+- links for file in the output channel differs from platform, on Mac it's <uri>:<line>:<col> while on Windows is <uri>#<line>. to ensure the links work on both platform, the two types of links are given in the ouput channel for now. for detail see the vscode issue https://github.com/Microsoft/vscode/issues/586
 

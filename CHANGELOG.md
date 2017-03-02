@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.4.4 - 2017-03-02
+- seems no workaround for the links within the outputpannel to work on both mac and windows, so display the two type of links
+
 ## 0.4.3 - 2017-03-02
 - just find that links in the outputchannel not clickable on Mac now, using hash and will work both on Windows and Mac now. 
 

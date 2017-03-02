@@ -82,7 +82,7 @@ function activate(context) {
 
     function updateDecorations() {
 
-        if (!activeEditor) {
+        if (!activeEditor || !activeEditor.document) {
             return;
         }
 
