@@ -9,7 +9,7 @@
         "keyword",
         "annotation"
     ],
-    "version": "0.4.4",
+    "version": "0.4.5",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -66,6 +66,11 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Specify whether the keywords are case sensitive or not"
+                },
+                "todohighlight.highlightWholeLine": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "highlight whole line instead of keyword only"
                 },
                 "todohighlight.keywords": {
                     "type": "array",

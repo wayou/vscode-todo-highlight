@@ -34,6 +34,7 @@ following is an example of configuration:
 {
     "todohighlight.isEnable": true, //toggle the highlight, default is true
     "todohighlight.isCaseSensitive": true, //whether the keywords are case sensitive or not
+    "todohighlight.highlightWholeLine": false, //highlight whole line instead of keyword only
     "todohighlight.keywords": [
         "BUG:", // adding custom keywords without specifying the look, default color will be applied
         "REVIEW:", //another custom keyword

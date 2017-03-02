@@ -86,9 +86,6 @@ function activate(context) {
             return;
         }
 
-        var zeroPos = activeEditor.document.positionAt(0);
-        var clearRange = [{ range: new vscode.Range(zeroPos, zeroPos) }];
-
         var text = activeEditor.document.getText();
         var mathes = {}, match;
         while (match = pattern.exec(text)) {
@@ -110,7 +107,7 @@ function activate(context) {
                 v = v.toUpperCase();
             }
 
-            let rangeOption = !(settings.get('isEnable') && mathes[v]) ? clearRange : mathes[v]; //NOTE: fix #5
+            let rangeOption = !(settings.get('isEnable') && mathes[v]) ? [] : mathes[v]; //NOTE: fix #5
 
             activeEditor.setDecorations(decorationTypes[v], rangeOption);
         })
@@ -118,6 +115,7 @@ function activate(context) {
 
     function init(settings) {
         isCaseSensitive = settings.get('isCaseSensitive', true);
+        highlightWholeLine = settings.get('highlightWholeLine', false);
         customDefaultStyle = settings.get('defaultStyle');
         assembledData = util.getAssembledData(settings.get('keywords'), customDefaultStyle, isCaseSensitive);
 
@@ -141,6 +139,9 @@ function activate(context) {
                 // using backgroundColor as the default overviewRulerColor if not specified by the user setting
                 mergedStyle.overviewRulerColor = mergedStyle.backgroundColor;
             }
+
+            mergedStyle.isWholeLine = highlightWholeLine;
+
             mergedStyle.overviewRulerLane = vscode.OverviewRulerLane.Right;
 
             decorationTypes[v] = window.createTextEditorDecorationType(mergedStyle);

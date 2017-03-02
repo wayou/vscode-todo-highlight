@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.4.5 - 2017-03-02
+- entire line highlighting support via configuration, resolve #16
+
 ## 0.4.4 - 2017-03-02
 - seems no workaround for the links within the outputpannel to work on both mac and windows, so display the two type of links
 
