@@ -47,6 +47,11 @@ following is an example of configuration:
         {
             "text": "HACK:",
             "color": "#000"
+        },
+        {//this block will override the built-in keyword `TODO:` and give it new style
+            "text": "TODO:",
+            "color": "red",
+            "backgroundColor": "rgba(0,0,0,.2)"    
         }
         ...
     ],
