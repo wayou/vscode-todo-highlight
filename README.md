@@ -1,11 +1,7 @@
 VSCODE-TODO-HIGHLIGHT
 ===
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master)](https://travis-ci.org/wayou/vscode-todo-highlight)
-[![Version](http://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
-[![Installs](http://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
-[![Ratings](http://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master)](https://travis-ci.org/wayou/vscode-todo-highlight) [![Version](http://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) [![Installs](http://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) [![Ratings](http://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
 
 Highlight `TODO`,`FIXME` or any other annotations within your code.
 
@@ -61,7 +57,7 @@ following is an example of configuration:
         "overviewRulerColor": "grey"
     },
     "todohighlight.include": "{**/*.js,**/*.html,**/*.php,**/*.css}", //A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason
-    "todohighlight.exclude": "{**∕node_modules∕**,**∕bower_components∕**,**∕dist∕**,**/_output/**,**/*.min.*,**/*.map}"//A glob pattern that defines files and folders to exclude while listing annotations
+    "todohighlight.exclude": "{**/node_modules/**,**/bower_components/**,**/dist/**,**/_output/**,**/*.min.*,**/*.map}"//A glob pattern that defines files and folders to exclude while listing annotations
 
 }
 ```
@@ -75,10 +71,4 @@ This extension contributes the following commands to the Command palette.
 - `Toggle highlight` : turn on/off the highlight
 ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/toggle-highlight.gif)
 - `List hilighted annotations` : list annotations and reveal from corresponding file
-![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/links.gif)
-
-
-### Known issue
-
-- links for file in the output channel differs from platform, on Mac it's `<uri>:<line>:<col>` while on Windows is `<uri>#<line>`. to ensure the links work on both platform, the two types of links are given in the ouput channel for now. for detail see the vscode issue https://github.com/Microsoft/vscode/issues/586
-
+![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/list-annotations.gif)

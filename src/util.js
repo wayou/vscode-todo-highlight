@@ -47,7 +47,7 @@ function searchAnnotations(workspaceState, annotationType, availableAnnotationTy
     var includePattern = settings.get('include');
     var excludePattern = settings.get('exclude');
 
-    var limitationForSearch = 5120;
+    var limitationForSearch = 999;
     var isCaseSensitive = settings.get('isCaseSensitive');
 
     var statusMsg = `searching ${annotationType}...`;
@@ -155,13 +155,12 @@ function showOutputChannel(data) {
 
     window.outputChannel.clear();
     data.forEach(function (v, i, a) {
-        // due to this bug https://github.com/Microsoft/vscode/issues/586, behavior of output pannel differs from mac and windows. on mac the link should be xxxx:row:col while on windows is xxx#row. 
         //for mac
-        window.outputChannel.appendLine('#' + (i + 1) + '\t' + '(Mac)' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1));
+        // window.outputChannel.appendLine('#' + (i + 1) + '\t' + '(Mac)' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1));
         //for windows, from latest test, only the hash # works on both platform.
-        window.outputChannel.appendLine('#' + (i + 1) + '\t' + '(Windows)' + v.uri + '#' + (v.lineNum + 1));
+        window.outputChannel.appendLine('#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1));
 
-        window.outputChannel.appendLine(v.label + '\n');
+        window.outputChannel.appendLine('\t' + v.label + '\n');
     });
     window.outputChannel.show();
 }

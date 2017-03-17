@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.4.6 - 2017-03-17
+- glob pattern copied from [vscode api doc](https://code.visualstudio.com/docs/extensionAPI/vscode-api) using the `∕`(divition slash, witch is different from `/`) for path portion, this makes the exclude pattern fail to work in code. fix #14
+- file pattern `<path>#<line>` seems clickable within the output channel on Mac now. remove the `<path>:<line>:<col>` form the output channel and resolve #19
+- reduce the max allowed size for `findFiles` from 5120 to 999 for performance consideration
+
 ## 0.4.5 - 2017-03-02
 - entire line highlighting support via configuration, resolve #16
 

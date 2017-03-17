@@ -9,7 +9,7 @@
         "keyword",
         "annotation"
     ],
-    "version": "0.4.5",
+    "version": "0.4.6",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -70,7 +70,7 @@
                 "todohighlight.highlightWholeLine": {
                     "type": "boolean",
                     "default": false,
-                    "description": "highlight whole line instead of keyword only"
+                    "description": "Highlight whole line instead of keyword only"
                 },
                 "todohighlight.keywords": {
                     "type": "array",
@@ -129,7 +129,7 @@
                 },
                 "todohighlight.exclude": {
                     "type": "string",
-                    "default": "{**∕node_modules∕**,**∕bower_components∕**,**∕dist∕**,**/_output/**,**/*.min.*,**/*.map}",
+                    "default": "{**/node_modules/**,**/bower_components/**,**/dist/**,**/_output/**,**/*.min.*,**/*.map}",
                     "description": "A glob pattern that defines files and folders to exclude while listing annotations"
                 }
             }
