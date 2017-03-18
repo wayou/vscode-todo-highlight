@@ -160,7 +160,6 @@ function showOutputChannel(data) {
     data.forEach(function (v, i, a) {
         // due to an issue of vscode(https://github.com/Microsoft/vscode/issues/586), in order to make file path clickable within the output channel,the file path differs from platform
         //for windows and mac
-        window.outputChannel.appendLine();
         var path = '#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1);
         if (changeFilePattern) {
             // for linux
