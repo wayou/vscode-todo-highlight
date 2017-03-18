@@ -72,6 +72,11 @@
                     "default": false,
                     "description": "Highlight whole line instead of keyword only"
                 },
+                "todohighlight.changeFilePattern": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "due to an issue of vscode, set this to true if the file path within the output channel not clickable. this will change the file path from `<path>#<line>` to `<path>:<line>:<column>`"
+                },
                 "todohighlight.keywords": {
                     "type": "array",
                     "description": "Customize keywords and colors. Any css color identifier is valid.",

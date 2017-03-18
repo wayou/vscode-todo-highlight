@@ -153,13 +153,20 @@ function annotationsFound(err, annotationType, annotations, annotationList) {
 function showOutputChannel(data) {
     if (!window.outputChannel) return;
 
+    var settings = workspace.getConfiguration('todohighlight');
+    var changeFilePattern = settings.get('changeFilePattern', false);
+
     window.outputChannel.clear();
     data.forEach(function (v, i, a) {
-        //for mac
-        // window.outputChannel.appendLine('#' + (i + 1) + '\t' + '(Mac)' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1));
-        //for windows, from latest test, only the hash # works on both platform.
-        window.outputChannel.appendLine('#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1));
-
+        // due to an issue of vscode(https://github.com/Microsoft/vscode/issues/586), in order to make file path clickable within the output channel,the file path differs from platform
+        //for windows and mac
+        window.outputChannel.appendLine();
+        var path = '#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1);
+        if (changeFilePattern) {
+            // for linux
+            path = '#' + (i + 1) + '\t' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1);
+        }
+        window.outputChannel.appendLine(path);
         window.outputChannel.appendLine('\t' + v.label + '\n');
     });
     window.outputChannel.show();
