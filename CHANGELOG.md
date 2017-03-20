@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.4.9 - 2017-03-20
+- add `**/build/**` and `**/.vscode/**` into default exclude directories
+
 ## 0.4.7 - 2017-03-18
 - fix #20, the file path that not clickable on Linux. provide a configuratoin to toggle the pattern of the file path, this way can ensure the file path clickable on both UNIX and Windows
 

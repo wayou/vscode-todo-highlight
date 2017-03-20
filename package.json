@@ -9,7 +9,7 @@
         "keyword",
         "annotation"
     ],
-    "version": "0.4.8",
+    "version": "0.4.9",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -134,7 +134,7 @@
                 },
                 "todohighlight.exclude": {
                     "type": "string",
-                    "default": "{**/node_modules/**,**/bower_components/**,**/dist/**,**/_output/**,**/*.min.*,**/*.map}",
+                    "default": "{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map}",
                     "description": "A glob pattern that defines files and folders to exclude while listing annotations"
                 }
             }
