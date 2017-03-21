@@ -58,6 +58,7 @@ following is an example of configuration:
     },
     "todohighlight.include": "{**/*.js,**/*.html,**/*.php,**/*.css}", //A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason
     "todohighlight.exclude": "{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map}",//A glob pattern that defines files and folders to exclude while listing annotations
+    "todohighlight.maxFilesForSearch": 5120,//max files for searching, mostly you don't need to configure this
     "todohighlight.changeFilePattern": false,//due to an issue of vscode, set this to true if the file path within the output channel not clickable. this will change the file path from `<path>#<line>` to `<path>:<line>:<column>`
 
 }

@@ -9,7 +9,7 @@
         "keyword",
         "annotation"
     ],
-    "version": "0.4.9",
+    "version": "0.4.10",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -40,6 +40,33 @@
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
     },
+    "badges": [
+        {
+            "url": "https://img.shields.io/badge/License-MIT-brightgreen.svg",
+            "href": "https://opensource.org/licenses/MIT",
+            "description": "License: MIT"
+        },
+        {
+            "url": "https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master",
+            "href": "https://travis-ci.org/wayou/vscode-todo-highlight",
+            "description": "Build Status"
+        },
+        {
+            "url": "http://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg",
+            "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
+            "description": "Version"
+        },
+        {
+            "url": "http://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg",
+            "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
+            "description": "Installs"
+        },
+        {
+            "url": "http://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg",
+            "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
+            "description": "Ratings"
+        }
+    ],
     "contributes": {
         "commands": [
             {
@@ -136,6 +163,11 @@
                     "type": "string",
                     "default": "{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map}",
                     "description": "A glob pattern that defines files and folders to exclude while listing annotations"
+                },
+                "todohighlight.maxFilesForSearch": {
+                    "type": "number",
+                    "default": 5120,
+                    "description": "max files for searching"
                 }
             }
         }

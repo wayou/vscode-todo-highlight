@@ -2,6 +2,10 @@ var vscode = require('vscode');
 var window = vscode.window;
 var workspace = vscode.workspace;
 
+var defaultIcon = '$(checklist)';
+var zapIcon = '$(zap)';
+var defaultMsg = '0';
+
 var DEFAULT_KEYWORDS = {
     "TODO:": {
         text: "TODO:",
@@ -41,28 +45,34 @@ function chooseAnnotationType(availableAnnotationTypes) {
     return window.showQuickPick(availableAnnotationTypes, {});
 }
 
-function searchAnnotations(workspaceState, annotationType, availableAnnotationTypes, callback, tokenSource) {
+function searchAnnotations(workspaceState, annotationType, availableAnnotationTypes, callback) {
 
     var settings = workspace.getConfiguration('todohighlight');
     var includePattern = settings.get('include');
     var excludePattern = settings.get('exclude');
-
-    var limitationForSearch = 999;
+    var limitationForSearch = settings.get('maxFilesForSearch', 5120);
     var isCaseSensitive = settings.get('isCaseSensitive');
 
-    var statusMsg = `searching ${annotationType}...`;
+    var statusMsg = ` searching ${annotationType}...`;
+    var tooltip = 'click to stop';
     if (annotationType == 'ALL') {
-        statusMsg = `searching all annotations...`;
+        statusMsg = ` searching all annotations...`;
     }
 
-    setStatusMsg(statusMsg);
+    window.processing = true;
 
-    workspace.findFiles(includePattern, excludePattern, limitationForSearch, tokenSource.token).then(function (files) {
+    setStatusMsg(zapIcon, statusMsg, tooltip);
+
+    workspace.findFiles(includePattern, excludePattern, limitationForSearch).then(function (files) {
 
         if (!files || files.length === 0) {
             callback({ message: 'no files' });
             return;
         }
+
+        var totalFiles = files.length;
+
+        var progress = 0;
 
         var annotations = {},
             annotationList = [];
@@ -78,17 +88,24 @@ function searchAnnotations(workspaceState, annotationType, availableAnnotationTy
         }
         var regexp = new RegExp(pattern, patternOption);
 
-        for (var i = 0; i < files.length; i++) {
+        for (var i = 0; i < totalFiles; i++) {
+
             workspace.openTextDocument(files[i]).then(function (file) {
                 searchAnnotationInFile(file, annotations, annotationList, regexp);
                 times++;
-                if (times === files.length) {
+                progress = Math.floor((times / totalFiles) * 100);
+
+                setStatusMsg(zapIcon, progress + '% ' + statusMsg);
+
+                if (times === totalFiles || window.manullyCancel) {
+                    window.processing = true;
                     workspaceState.update('annotationList', annotationList)
                     callback(null, annotationType, annotations, annotationList);
                 }
             }, function (err) {
                 errorHandler(err);
             });
+
         }
     }, function (err) {
         errorHandler(err);
@@ -130,7 +147,7 @@ function searchAnnotationInFile(file, annotations, annotationList, regexp) {
 function annotationsFound(err, annotationType, annotations, annotationList) {
     if (err) {
         console.log('todohighlight err:', err);
-        setStatusMsg('0');
+        setStatusMsg(defaultIcon, defaultMsg);
         return;
     }
 
@@ -139,7 +156,7 @@ function annotationsFound(err, annotationType, annotations, annotationList) {
     if (annotationType == 'ALL') {
         tooltip = resultNum + ' annotation(s) found';
     }
-    setStatusMsg(resultNum, tooltip);
+    setStatusMsg(defaultIcon, resultNum, tooltip);
 
     if (annotationList.length === 0) {
         window.showInformationMessage('No Results.');
@@ -163,7 +180,7 @@ function showOutputChannel(data) {
         var path = '#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1);
         if (changeFilePattern) {
             // for linux
-            path = '#' + (i + 1) + '\t' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1);
+            path = '#' + (i + 1) + '\t\t' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1);
         }
         window.outputChannel.appendLine(path);
         window.outputChannel.appendLine('\t' + v.label + '\n');
@@ -174,7 +191,7 @@ function showOutputChannel(data) {
 function initialSearchCallback(err, annotationType, annotations, annotationList) {
     if (err) {
         console.log(err);
-        setStatusMsg('');
+        setStatusMsg(defaultIcon, '');
         return;
     }
 
@@ -183,7 +200,7 @@ function initialSearchCallback(err, annotationType, annotations, annotationList)
     if (annotationType == 'ALL') {
         tooltip = resultNum + ' annotation(s) found';
     }
-    setStatusMsg(resultNum, tooltip);
+    setStatusMsg(defaultIcon, resultNum, tooltip);
 }
 
 
@@ -209,21 +226,24 @@ function getLocationInfo(fileInUri, pathWithoutFile, lineText, line, match) {
 
 function createStatusBarItem() {
     var statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Left);
-    statusBarItem.text = '$(checklist)' + '0';
+    statusBarItem.text = defaultIcon + defaultMsg;
     statusBarItem.tooltip = 'List annotations';
     statusBarItem.command = 'todohighlight.showOutputChannel';
     return statusBarItem;
 };
 
 function errorHandler(err) {
-    setStatusMsg('0');
+    window.processing = true;
+    setStatusMsg(defaultIcon, defaultMsg);
     console.log('todohighlight err:', err);
 }
 
-function setStatusMsg(msg, tooltip) {
+function setStatusMsg(icon, msg, tooltip) {
     if (window.statusBarItem) {
-        window.statusBarItem.text = '$(checklist)' + (msg || '');
-        tooltip && (window.statusBarItem.tooltip = tooltip);
+        window.statusBarItem.text = `${icon} ${msg}` || '';
+        if (tooltip) {
+            window.statusBarItem.tooltip = tooltip;
+        }
         window.statusBarItem.show();
     }
 }

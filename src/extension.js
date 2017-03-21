@@ -19,13 +19,10 @@ function activate(context) {
 
     var timeout = null;
     var activeEditor = window.activeTextEditor;
-    var isCaseSensitive, customDefaultStyle, assembledData, decorationTypes, pattern;
-    var outputChannel = window.createOutputChannel('TodohighLight: Annotations');
+    var isCaseSensitive, highlightWholeLine, customDefaultStyle, assembledData, decorationTypes, pattern;
     var workspaceState = context.workspaceState;
 
     var settings = workspace.getConfiguration('todohighlight');
-
-    var tokenSource = new vscode.CancellationTokenSource();
 
     init(settings);
 
@@ -41,9 +38,7 @@ function activate(context) {
         availableAnnotationTypes.unshift('ALL');
         util.chooseAnnotationType(availableAnnotationTypes).then(function (annotationType) {
             if (!annotationType) return;
-            //TODO: cancel previous searching if there's any
-            // tokenSource.cancel();
-            util.searchAnnotations(workspaceState, annotationType, availableAnnotationTypes, util.annotationsFound, tokenSource);
+            util.searchAnnotations(workspaceState, annotationType, availableAnnotationTypes, util.annotationsFound);
         });
     });
 
@@ -70,7 +65,7 @@ function activate(context) {
         }
     }, null, context.subscriptions);
 
-    workspace.onDidChangeConfiguration(function (event) {
+    workspace.onDidChangeConfiguration(function () {
         settings = workspace.getConfiguration('todohighlight');
 
         //NOTE: if disabled, do not re-initialize the data or we will not be able to clear the style immediatly via 'toggle highlight' command
