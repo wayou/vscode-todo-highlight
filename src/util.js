@@ -54,14 +54,13 @@ function searchAnnotations(workspaceState, annotationType, availableAnnotationTy
     var isCaseSensitive = settings.get('isCaseSensitive');
 
     var statusMsg = ` searching ${annotationType}...`;
-    var tooltip = 'click to stop';
     if (annotationType == 'ALL') {
         statusMsg = ` searching all annotations...`;
     }
 
     window.processing = true;
 
-    setStatusMsg(zapIcon, statusMsg, tooltip);
+    setStatusMsg(zapIcon, statusMsg);
 
     workspace.findFiles(includePattern, excludePattern, limitationForSearch).then(function (files) {
 
