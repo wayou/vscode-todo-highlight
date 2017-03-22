@@ -118,7 +118,7 @@ function activate(context) {
             window.statusBarItem = util.createStatusBarItem();
         }
         if (!window.outputChannel) {
-            window.outputChannel = window.createOutputChannel('TodoHighlight: Annotations');
+            window.outputChannel = window.createOutputChannel('TodoHighlight');
         }
 
         decorationTypes = {};
