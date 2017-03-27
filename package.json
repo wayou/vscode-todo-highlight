@@ -75,7 +75,7 @@
                 "command": "todohighlight.toggleHighlight"
             },
             {
-                "title": "List hilighted annotations",
+                "title": "List highlighted annotations",
                 "category": "TODO-Highlight",
                 "command": "todohighlight.listAnnotations"
             }
