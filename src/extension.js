@@ -148,16 +148,6 @@ function activate(context) {
             pattern = new RegExp(keywords, 'gi');
         }
 
-        //TODO: this feature's no full tested
-        // var searchingOnStartup = settings.get('searchingOnStartup');
-        // if (searchingOnStartup) {
-        //     setTimeout(function () {
-        //         var availableAnnotationTypes = Object.keys(assembledData);
-        //         availableAnnotationTypes.unshift('ALL');
-        //         util.searchAnnotations(searchAnnotations,'ALL', availableAnnotationTypes, util.initialSearchCallback);
-        //     });
-        // }
-
     }
 
     function triggerUpdateDecorations() {
