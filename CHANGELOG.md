@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.4.14 - 2017-04-02
+- clear output channel if no results, fix #24
+
 ## 0.4.10 - 2017-03-21
 - show progress indicator for file searching
 - add a configuration key `maxFilesForSearch` to set the max files that allowed to search, default is 5120

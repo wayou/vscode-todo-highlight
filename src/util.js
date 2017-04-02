@@ -156,23 +156,21 @@ function annotationsFound(err, annotationType, annotations, annotationList) {
         tooltip = resultNum + ' annotation(s) found';
     }
     setStatusMsg(defaultIcon, resultNum, tooltip);
-
-    if (annotationList.length === 0) {
-        window.showInformationMessage('No Results.');
-        return;
-    }
-
     showOutputChannel(annotationList);
-
 }
 
 function showOutputChannel(data) {
     if (!window.outputChannel) return;
+    window.outputChannel.clear();
+
+    if (data.length === 0) {
+        window.showInformationMessage('No Results.');
+        return;
+    }
 
     var settings = workspace.getConfiguration('todohighlight');
     var changeFilePattern = settings.get('changeFilePattern', false);
 
-    window.outputChannel.clear();
     data.forEach(function (v, i, a) {
         // due to an issue of vscode(https://github.com/Microsoft/vscode/issues/586), in order to make file path clickable within the output channel,the file path differs from platform
         //for windows and mac
