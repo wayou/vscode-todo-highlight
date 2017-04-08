@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.4.15 - 2017-04-08
+- auto detect platform using the `os` module, thx @anupam-git for PR#26
+
 ## 0.4.14 - 2017-04-02
 - clear output channel if no results, fix #24
 

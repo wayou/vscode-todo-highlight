@@ -59,8 +59,6 @@ following is an example of configuration:
     "todohighlight.include": "{**/*.js,**/*.jsx,**/*.ts,**/*.html,**/*.php,**/*.css,**/*.scss}", //A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason
     "todohighlight.exclude": "{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map}",//A glob pattern that defines files and folders to exclude while listing annotations
     "todohighlight.maxFilesForSearch": 5120,//max files for searching, mostly you don't need to configure this
-    "todohighlight.changeFilePattern": false,//due to an issue of vscode, set this to true if the file path within the output channel not clickable. this will change the file path from `<path>#<line>` to `<path>:<line>:<column>`
-
 }
 ```
 
@@ -74,9 +72,3 @@ This extension contributes the following commands to the Command palette.
 ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/toggle-highlight.gif)
 - `List hilighted annotations` : list annotations and reveal from corresponding file
 ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/list-annotations.gif)
-
-
-### Known issue
-
-If you find files witin the output channel not clickable, set `todohighlight.changeFilePattern` to `true`, this will toggle the file path from `<path>#<line>` to `<path>:<line>:<column>`. This is because the file path differs from platform for vscode to make it clickable (see this [issue](https://github.com/Microsoft/vscode/issues/586) ), but there's no corresponding api that extensions can tell what OS your are running.
-

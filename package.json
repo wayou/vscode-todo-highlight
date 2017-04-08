@@ -9,7 +9,7 @@
         "keyword",
         "annotation"
     ],
-    "version": "0.4.14",
+    "version": "0.4.15",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -98,11 +98,6 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Highlight whole line instead of keyword only"
-                },
-                "todohighlight.changeFilePattern": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "due to an issue of vscode, set this to true if the file path within the output channel not clickable. this will change the file path from `<path>#<line>` to `<path>:<line>:<column>`"
                 },
                 "todohighlight.keywords": {
                     "type": "array",

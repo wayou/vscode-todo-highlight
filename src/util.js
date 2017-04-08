@@ -169,8 +169,6 @@ function showOutputChannel(data) {
         return;
     }
 
-    var settings = workspace.getConfiguration('todohighlight');
-    var changeFilePattern = settings.get('changeFilePattern', false);
 
     data.forEach(function (v, i, a) {
         // due to an issue of vscode(https://github.com/Microsoft/vscode/issues/586), in order to make file path clickable within the output channel,the file path differs from platform
@@ -178,7 +176,7 @@ function showOutputChannel(data) {
         var path = '#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1);
         if (os.platform() == "linux") {
             // for linux
-            path = '#' + (i + 1) + '\t\t' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1);
+            path = '#' + (i + 1) + '\t' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1);
         }
         window.outputChannel.appendLine(path);
         window.outputChannel.appendLine('\t' + v.label + '\n');
