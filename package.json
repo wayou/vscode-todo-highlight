@@ -133,7 +133,7 @@
                 },
                 "todohighlight.defaultStyle": {
                     "type": "object",
-                    "description": "Default style for all customied keywords",
+                    "description": "Default style for all customized keywords",
                     "properties": {
                         "color": {
                             "type": "string",
