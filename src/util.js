@@ -1,5 +1,4 @@
 var vscode = require('vscode');
-var os = require("os");
 var window = vscode.window;
 var workspace = vscode.workspace;
 
@@ -171,13 +170,7 @@ function showOutputChannel(data) {
 
 
     data.forEach(function (v, i, a) {
-        // due to an issue of vscode(https://github.com/Microsoft/vscode/issues/586), in order to make file path clickable within the output channel,the file path differs from platform
-        //for windows and mac
         var path = '#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1);
-        if (os.platform() == "linux") {
-            // for linux
-            path = '#' + (i + 1) + '\t' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1);
-        }
         window.outputChannel.appendLine(path);
         window.outputChannel.appendLine('\t' + v.label + '\n');
     });
