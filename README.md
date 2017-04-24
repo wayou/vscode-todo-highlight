@@ -81,5 +81,5 @@ This extension contributes the following commands to the Command palette.
 
  Basically the extension auto detect OS platform.
 
- If you find file path not clickable, set `todohighlight.changeFilePattern` to `true` to toggle the file pattern.
+ If you find file path not clickable, set `todohighlight.toggleURI` to `true` to toggle the file pattern.
   
