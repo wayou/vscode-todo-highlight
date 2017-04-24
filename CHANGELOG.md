@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.4.16 - 2017-04-24
+- there always been users report that the file path not clickable in the output channel. provide an option `todoghighlight.togglePathPattern` to toggle the file pattern. resolve #31
+
 ## 0.4.15 - 2017-04-08
 - auto detect platform using the `os` module, thx @anupam-git for PR#26
 
