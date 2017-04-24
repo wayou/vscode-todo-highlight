@@ -170,7 +170,7 @@ function showOutputChannel(data) {
     }
 
     var settings = workspace.getConfiguration('todohighlight');
-    var changeFilePattern = settings.get('togglePathPattern', false);
+    var changeFilePattern = settings.get('toggleURI', false);
 
     data.forEach(function (v, i, a) {
         // due to an issue of vscode(https://github.com/Microsoft/vscode/issues/586), in order to make file path clickable within the output channel,the file path differs from platform

@@ -9,7 +9,7 @@
         "keyword",
         "annotation"
     ],
-    "version": "0.4.16",
+    "version": "0.4.17",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -99,7 +99,7 @@
                     "default": false,
                     "description": "Highlight whole line instead of keyword only"
                 },
-                "todohighlight.togglePathPattern": {
+                "todohighlight.toggleURI": {
                     "type": "boolean",
                     "default": false,
                     "description": "If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`"
