@@ -156,7 +156,7 @@
                 },
                 "todohighlight.include": {
                     "type": "string",
-                    "default": "{**/*.js,**/*.jsx,**/*.ts,**/*.html,**/*.php,**/*.css,**/*.scss}",
+                    "default": "{**/*.js,**/*.jsx,**/*.ts,**/*.tsx,**/*.html,**/*.php,**/*.css,**/*.scss}",
                     "description": "A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `**/*.*` for both permormance and avoiding binary files reason"
                 },
                 "todohighlight.exclude": {
