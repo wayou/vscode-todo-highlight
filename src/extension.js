@@ -21,6 +21,7 @@ function activate(context) {
     var activeEditor = window.activeTextEditor;
     var isCaseSensitive, highlightWholeLine, customDefaultStyle, assembledData, decorationTypes, pattern;
     var workspaceState = context.workspaceState;
+    var regArray = {};
 
     var settings = workspace.getConfiguration('todohighlight');
 
@@ -82,24 +83,21 @@ function activate(context) {
         }
 
         var text = activeEditor.document.getText();
-        var mathes = {}, match;
-        while (match = pattern.exec(text)) {
-            var startPos = activeEditor.document.positionAt(match.index);
-            var endPos = activeEditor.document.positionAt(match.index + match[0].length);
-            var decoration = {
-                range: new vscode.Range(startPos, endPos)
-            };
-
-            var matchedValue = match[0];
-            if (!isCaseSensitive) {
-                matchedValue = matchedValue.toUpperCase();
-            }
-            mathes[matchedValue] ? mathes[matchedValue].push(decoration) : (mathes[matchedValue] = [decoration]);
-        }
 
         Object.keys(decorationTypes).forEach((v) => {
-            if (!isCaseSensitive) {
-                v = v.toUpperCase();
+            var mathes = {}, match;
+            while (match = regArray[v].exec(text)) {
+                var startPos = activeEditor.document.positionAt(match.index);
+                var endPos = activeEditor.document.positionAt(match.index + match[0].length);
+                var decoration = {
+                    range: new vscode.Range(startPos, endPos)
+                };
+
+                var matchedValue = match[0];
+                if (!isCaseSensitive) {
+                    matchedValue = matchedValue.toUpperCase();
+                }
+                mathes[v] ? mathes[v].push(decoration) : (mathes[v] = [decoration]);
             }
 
             let rangeOption = !(settings.get('isEnable') && mathes[v]) ? [] : mathes[v]; //NOTE: fix #5
@@ -124,10 +122,6 @@ function activate(context) {
         decorationTypes = {};
 
         Object.keys(assembledData).forEach((v) => {
-            if (!isCaseSensitive) {
-                v = v.toUpperCase()
-            }
-
             var mergedStyle = Object.assign({}, assembledData[v]);
 
             if (!mergedStyle.overviewRulerColor) {
@@ -140,14 +134,12 @@ function activate(context) {
             mergedStyle.overviewRulerLane = vscode.OverviewRulerLane.Right;
 
             decorationTypes[v] = window.createTextEditorDecorationType(mergedStyle);
+
+            regArray[v] = new RegExp(v, 'gm');
+            if (!isCaseSensitive) {
+                regArray[v] = new RegExp(v, 'gmi');
+            }
         })
-
-        var keywords = Object.keys(assembledData).join('|');
-        pattern = new RegExp(keywords, 'g');
-        if (!isCaseSensitive) {
-            pattern = new RegExp(keywords, 'gi');
-        }
-
     }
 
     function triggerUpdateDecorations() {
