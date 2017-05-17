@@ -1,13 +1,7 @@
 /**
  * vscode plugin for highlighting TODOs and FIXMEs within your code
  * 
- * TODO:
- * - [x]highlight custom text
- * - [x]support custom colors
- * - [x]show corresponding message in status bar
- * - [x]list all todos in command pannel
- * - [x]add command to toggle the highlight
- * - [ ]cancellation support
+ * NOTE: each decoration type has a unique key, the highlight and clear highight functionality are based on it
  */
 
 var vscode = require('vscode');
@@ -19,7 +13,7 @@ function activate(context) {
 
     var timeout = null;
     var activeEditor = window.activeTextEditor;
-    var isCaseSensitive, highlightWholeLine, customDefaultStyle, assembledData, decorationTypes, pattern;
+    var isCaseSensitive, assembledData, decorationTypes, pattern, styleForRegExp, keywordsPattern;
     var workspaceState = context.workspaceState;
 
     var settings = workspace.getConfiguration('todohighlight');
@@ -33,20 +27,27 @@ function activate(context) {
     });
 
     vscode.commands.registerCommand('todohighlight.listAnnotations', function () {
-        if (!assembledData) return;
-        var availableAnnotationTypes = Object.keys(assembledData);
-        availableAnnotationTypes.unshift('ALL');
-        util.chooseAnnotationType(availableAnnotationTypes).then(function (annotationType) {
-            if (!annotationType) return;
-            util.searchAnnotations(workspaceState, annotationType, availableAnnotationTypes, util.annotationsFound);
-        });
+        if (keywordsPattern.trim()) {
+            util.searchAnnotations(workspaceState, pattern, util.annotationsFound);
+        } else {
+            if (!assembledData) return;
+            var availableAnnotationTypes = Object.keys(assembledData);
+            availableAnnotationTypes.unshift('ALL');
+            util.chooseAnnotationType(availableAnnotationTypes).then(function (annotationType) {
+                if (!annotationType) return;
+                var searchPattern = pattern;
+                if (annotationType != 'ALL') {
+                    searchPattern = new RegExp(annotationType, isCaseSensitive ? 'g' : 'gi');
+                }
+                util.searchAnnotations(workspaceState, searchPattern, util.annotationsFound);
+            });
+        }
     });
 
     vscode.commands.registerCommand('todohighlight.showOutputChannel', function () {
         var annotationList = workspaceState.get('annotationList', []);
         util.showOutputChannel(annotationList);
     });
-
 
     if (activeEditor) {
         triggerUpdateDecorations();
@@ -94,25 +95,34 @@ function activate(context) {
             if (!isCaseSensitive) {
                 matchedValue = matchedValue.toUpperCase();
             }
-            mathes[matchedValue] ? mathes[matchedValue].push(decoration) : (mathes[matchedValue] = [decoration]);
-        }
 
-        Object.keys(decorationTypes).forEach((v) => {
+            if (mathes[matchedValue]) {
+                mathes[matchedValue].push(decoration);
+            } else {
+                mathes[matchedValue] = [decoration];
+            }
+
+            if (keywordsPattern.trim() && !decorationTypes[matchedValue]) {
+                decorationTypes[matchedValue] = window.createTextEditorDecorationType(styleForRegExp);
+            }
+        }
+        Object.keys(mathes).forEach((v) => {
             if (!isCaseSensitive) {
                 v = v.toUpperCase();
             }
 
-            let rangeOption = !(settings.get('isEnable') && mathes[v]) ? [] : mathes[v]; //NOTE: fix #5
-
-            activeEditor.setDecorations(decorationTypes[v], rangeOption);
+            var rangeOption = settings.get('isEnable') ? mathes[v] : [];
+            var decorationType = decorationTypes[v];
+            activeEditor.setDecorations(decorationType, rangeOption);
         })
+
     }
 
     function init(settings) {
+        var customDefaultStyle = settings.get('defaultStyle'),
+            highlightWholeLine = settings.get('highlightWholeLine', false);
+        keywordsPattern = settings.get('keywordsPattern');
         isCaseSensitive = settings.get('isCaseSensitive', true);
-        highlightWholeLine = settings.get('highlightWholeLine', false);
-        customDefaultStyle = settings.get('defaultStyle');
-        assembledData = util.getAssembledData(settings.get('keywords'), customDefaultStyle, isCaseSensitive);
 
         if (!window.statusBarItem) {
             window.statusBarItem = util.createStatusBarItem();
@@ -123,29 +133,38 @@ function activate(context) {
 
         decorationTypes = {};
 
-        Object.keys(assembledData).forEach((v) => {
-            if (!isCaseSensitive) {
-                v = v.toUpperCase()
-            }
+        if (keywordsPattern.trim()) {
+            styleForRegExp = Object.assign({}, util.DEFAULT_STYLE, customDefaultStyle, {
+                isWholeLine: highlightWholeLine,
+                overviewRulerLane: vscode.OverviewRulerLane.Right
+            });
+            pattern = keywordsPattern;
+        } else {
+            assembledData = util.getAssembledData(settings.get('keywords'), customDefaultStyle, isCaseSensitive);
+            Object.keys(assembledData).forEach((v) => {
+                if (!isCaseSensitive) {
+                    v = v.toUpperCase()
+                }
 
-            var mergedStyle = Object.assign({}, assembledData[v]);
+                var mergedStyle = Object.assign({}, {
+                    isWholeLine: highlightWholeLine,
+                    overviewRulerLane: vscode.OverviewRulerLane.Right
+                }, assembledData[v]);
 
-            if (!mergedStyle.overviewRulerColor) {
-                // using backgroundColor as the default overviewRulerColor if not specified by the user setting
-                mergedStyle.overviewRulerColor = mergedStyle.backgroundColor;
-            }
+                if (!mergedStyle.overviewRulerColor) {
+                    // using backgroundColor as the default overviewRulerColor if not specified by the user setting
+                    mergedStyle.overviewRulerColor = mergedStyle.backgroundColor;
+                }
 
-            mergedStyle.isWholeLine = highlightWholeLine;
+                decorationTypes[v] = window.createTextEditorDecorationType(mergedStyle);
+            });
 
-            mergedStyle.overviewRulerLane = vscode.OverviewRulerLane.Right;
+            pattern = Object.keys(assembledData).join('|');
+        }
 
-            decorationTypes[v] = window.createTextEditorDecorationType(mergedStyle);
-        })
-
-        var keywords = Object.keys(assembledData).join('|');
-        pattern = new RegExp(keywords, 'g');
-        if (!isCaseSensitive) {
-            pattern = new RegExp(keywords, 'gi');
+        pattern = new RegExp(pattern, 'gi');
+        if (isCaseSensitive) {
+            pattern = new RegExp(pattern, 'g');
         }
 
     }

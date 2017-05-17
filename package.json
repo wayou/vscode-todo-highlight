@@ -9,7 +9,7 @@
         "keyword",
         "annotation"
     ],
-    "version": "0.4.18",
+    "version": "0.5.0",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -136,6 +136,11 @@
                         ]
                     }
                 },
+                "todohighlight.keywordsPattern": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\ insteadof signle back slash)"
+                },
                 "todohighlight.defaultStyle": {
                     "type": "object",
                     "description": "Default style for all customized keywords",
@@ -167,7 +172,7 @@
                 "todohighlight.maxFilesForSearch": {
                     "type": "number",
                     "default": 5120,
-                    "description": "max files for searching"
+                    "description": "Max files for searching"
                 }
             }
         }

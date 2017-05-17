@@ -3,10 +3,10 @@ VSCODE-TODO-HIGHLIGHT
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master)](https://travis-ci.org/wayou/vscode-todo-highlight) [![Version](http://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) [![Installs](http://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) [![Ratings](http://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
 
-Highlight `TODO`,`FIXME` or any other annotations within your code.
+Highlight `TODO`,`FIXME` or any annotations within your code.
 
 Sometimes you will forget to review the TODOs added while coding till publish the code to production.
-So I've been long for an extension to highlight them and remind me know there're notes or things not done.
+So I've been long for an extension to highlight them and remind me know there're notes or things not done yet.
 
 Hope this extension helps you as well.
 
@@ -51,6 +51,7 @@ following is an example of configuration:
         }
         ...
     ],
+    "todohighlight.keywordsPattern": "TODO:|FIXME:",// Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\ insteadof signle back slash). 
     "todohighlight.defaultStyle": { //specify the default style for custom keywords, if not specified, build in default style will be applied
         "color": "#0000ff",
         "backgroundColor": "yellow",

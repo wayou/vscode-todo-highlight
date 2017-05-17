@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.5.0 - 2017-05-17
+- support keywords configuration via RegExp by tuning the `todohighlight.keywordsPattern`. if the regexp is provided, the `todohighlight.keywords` will be ignored, resolve #28, resolve #33, resolve #36
+
 ## 0.4.16 - 2017-04-24
 - there always been users report that the file path not clickable in the output channel. provide an option `todoghighlight.toggleURI` to toggle the file pattern. resolve #31
 

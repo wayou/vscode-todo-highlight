@@ -27,11 +27,11 @@ var DEFAULT_STYLE = {
     backgroundColor: "yellow",
 };
 
-function getAssembledData(setting, customDefaultStyle, isCaseSensitive) {
-    let result = JSON.parse(JSON.stringify(DEFAULT_KEYWORDS));
-    setting.forEach((v) => {
+function getAssembledData(keywords, customDefaultStyle, isCaseSensitive) {
+    var result = JSON.parse(JSON.stringify(DEFAULT_KEYWORDS));
+    keywords.forEach((v) => {
         v = typeof v == 'string' ? { text: v } : v;
-        let text = v.text;
+        var text = v.text;
         if (!text) return;//NOTE: in case of the text is empty or note set in configuration file
         if (!isCaseSensitive) {
             text = text.toUpperCase();
@@ -46,18 +46,14 @@ function chooseAnnotationType(availableAnnotationTypes) {
     return window.showQuickPick(availableAnnotationTypes, {});
 }
 
-function searchAnnotations(workspaceState, annotationType, availableAnnotationTypes, callback) {
+function searchAnnotations(workspaceState, pattern, callback) {
 
     var settings = workspace.getConfiguration('todohighlight');
     var includePattern = settings.get('include');
     var excludePattern = settings.get('exclude');
     var limitationForSearch = settings.get('maxFilesForSearch', 5120);
-    var isCaseSensitive = settings.get('isCaseSensitive');
 
-    var statusMsg = ` searching ${annotationType}...`;
-    if (annotationType == 'ALL') {
-        statusMsg = ` searching all annotations...`;
-    }
+    var statusMsg = ` searching...`;
 
     window.processing = true;
 
@@ -70,28 +66,16 @@ function searchAnnotations(workspaceState, annotationType, availableAnnotationTy
             return;
         }
 
-        var totalFiles = files.length;
-
-        var progress = 0;
-
-        var annotations = {},
+        var totalFiles = files.length,
+            progress = 0,
+            times = 0,
+            annotations = {},
             annotationList = [];
-        var times = 0;
-        var patternOption = 'gi';
-        if (isCaseSensitive) {
-            patternOption = 'g';
-        }
-        var pattern = annotationType;
-        if (annotationType == 'ALL') {
-            availableAnnotationTypes.shift();//remove the very first `ALL` item
-            pattern = availableAnnotationTypes.join('|');
-        }
-        var regexp = new RegExp(pattern, patternOption);
 
         for (var i = 0; i < totalFiles; i++) {
 
             workspace.openTextDocument(files[i]).then(function (file) {
-                searchAnnotationInFile(file, annotations, annotationList, regexp);
+                searchAnnotationInFile(file, annotations, annotationList, pattern);
                 times++;
                 progress = Math.floor((times / totalFiles) * 100);
 
@@ -100,7 +84,7 @@ function searchAnnotations(workspaceState, annotationType, availableAnnotationTy
                 if (times === totalFiles || window.manullyCancel) {
                     window.processing = true;
                     workspaceState.update('annotationList', annotationList)
-                    callback(null, annotationType, annotations, annotationList);
+                    callback(null, annotations, annotationList);
                 }
             }, function (err) {
                 errorHandler(err);
@@ -144,7 +128,7 @@ function searchAnnotationInFile(file, annotations, annotationList, regexp) {
     }
 }
 
-function annotationsFound(err, annotationType, annotations, annotationList) {
+function annotationsFound(err, annotations, annotationList) {
     if (err) {
         console.log('todohighlight err:', err);
         setStatusMsg(defaultIcon, defaultMsg);
@@ -152,10 +136,7 @@ function annotationsFound(err, annotationType, annotations, annotationList) {
     }
 
     var resultNum = annotationList.length;
-    var tooltip = resultNum + ' ' + annotationType + '(s) found';
-    if (annotationType == 'ALL') {
-        tooltip = resultNum + ' annotation(s) found';
-    }
+    var tooltip = resultNum + ' resut(s) found';
     setStatusMsg(defaultIcon, resultNum, tooltip);
     showOutputChannel(annotationList);
 }
@@ -165,7 +146,7 @@ function showOutputChannel(data) {
     window.outputChannel.clear();
 
     if (data.length === 0) {
-        window.showInformationMessage('No Results.');
+        window.showInformationMessage('No Results');
         return;
     }
 
@@ -193,22 +174,6 @@ function showOutputChannel(data) {
     });
     window.outputChannel.show();
 }
-
-function initialSearchCallback(err, annotationType, annotations, annotationList) {
-    if (err) {
-        console.log(err);
-        setStatusMsg(defaultIcon, '');
-        return;
-    }
-
-    var resultNum = annotationList.length;
-    var tooltip = resultNum + ' ' + annotationType + '(s) found';
-    if (annotationType == 'ALL') {
-        tooltip = resultNum + ' annotation(s) found';
-    }
-    setStatusMsg(defaultIcon, resultNum, tooltip);
-}
-
 
 function getContent(lineText, match) {
     return lineText.substring(lineText.indexOf(match[0]), lineText.length);
@@ -255,13 +220,12 @@ function setStatusMsg(icon, msg, tooltip) {
 }
 
 module.exports = {
+    DEFAULT_STYLE,
     getAssembledData,
     chooseAnnotationType,
     searchAnnotations,
     annotationsFound,
     createStatusBarItem,
     setStatusMsg,
-    initialSearchCallback,
     showOutputChannel
 };
-
