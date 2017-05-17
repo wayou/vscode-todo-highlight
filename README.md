@@ -51,7 +51,7 @@ following is an example of configuration:
         }
         ...
     ],
-    "todohighlight.keywordsPattern": "TODO:|FIXME:",// Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\ insteadof signle back slash). 
+    "todohighlight.keywordsPattern": "TODO:|FIXME:",// Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\ instead of signle back slash). 
     "todohighlight.defaultStyle": { //specify the default style for custom keywords, if not specified, build in default style will be applied
         "color": "#0000ff",
         "backgroundColor": "yellow",
