@@ -159,7 +159,9 @@ function activate(context) {
                 decorationTypes[v] = window.createTextEditorDecorationType(mergedStyle);
             });
 
-            pattern = Object.keys(assembledData).join('|');
+            pattern = Object.keys(assembledData).map((v) => {
+                return util.escapeRegExp(v);
+            }).join('|');
         }
 
         pattern = new RegExp(pattern, 'gi');

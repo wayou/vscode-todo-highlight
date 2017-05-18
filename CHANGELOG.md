@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.5.1 - 2017-05-18
+- minor fix: escase regexp for the keywords text property so that we can highlght `.$|\`, etc. resolve #36, resolve #37
+
 ## 0.5.0 - 2017-05-17
 - support keywords configuration via RegExp by tuning the `todohighlight.keywordsPattern`. if the regexp is provided, the `todohighlight.keywords` will be ignored, resolve #28, resolve #33, resolve #36
 

@@ -219,6 +219,10 @@ function setStatusMsg(icon, msg, tooltip) {
     }
 }
 
+function escapeRegExp(s) {
+    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+
 module.exports = {
     DEFAULT_STYLE,
     getAssembledData,
@@ -227,5 +231,6 @@ module.exports = {
     annotationsFound,
     createStatusBarItem,
     setStatusMsg,
-    showOutputChannel
+    showOutputChannel,
+    escapeRegExp
 };
