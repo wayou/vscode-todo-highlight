@@ -19,4 +19,6 @@ script:
 after_success:
   - git add -A .
   - git commit -m "[skip ci]vsix generated via travis-ci at $(date -u +'%Y-%m-%d %H:%M:%S') $TRAVIS_COMMIT"
-  - git push $GH_TOKEN HEAD:master
+  - git branch -m master
+  - git push -q $GH_TOKEN HEAD:master
+
