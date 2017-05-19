@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.5.2 - 2017-05-19
+- minor fix: clear highlight when keywords are been edited and no longer exists
+
 ## 0.5.1 - 2017-05-18
 - minor fix: escase regexp for the keywords text property so that we can highlght `.$|\`, etc. resolve #36, resolve #37
 

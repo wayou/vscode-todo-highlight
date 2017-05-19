@@ -106,16 +106,15 @@ function activate(context) {
                 decorationTypes[matchedValue] = window.createTextEditorDecorationType(styleForRegExp);
             }
         }
-        Object.keys(mathes).forEach((v) => {
+
+        Object.keys(decorationTypes).forEach((v) => {
             if (!isCaseSensitive) {
                 v = v.toUpperCase();
             }
-
-            var rangeOption = settings.get('isEnable') ? mathes[v] : [];
+            var rangeOption = settings.get('isEnable') && mathes[v] ? mathes[v] : [];
             var decorationType = decorationTypes[v];
             activeEditor.setDecorations(decorationType, rangeOption);
         })
-
     }
 
     function init(settings) {
