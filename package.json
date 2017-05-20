@@ -9,7 +9,7 @@
         "keyword",
         "annotation"
     ],
-    "version": "0.5.2",
+    "version": "0.5.3",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -139,7 +139,7 @@
                 "todohighlight.keywordsPattern": {
                     "type": "string",
                     "default": "",
-                    "description": "Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\ instead of signle back slash)"
+                    "description": "Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\\\ instead of signle back slash)"
                 },
                 "todohighlight.defaultStyle": {
                     "type": "object",
