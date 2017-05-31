@@ -9,7 +9,7 @@
         "keyword",
         "annotation"
     ],
-    "version": "0.5.3",
+    "version": "0.5.4",
     "publisher": "wayou",
     "license": "MIT",
     "icon": "assets/icon.png",
@@ -94,11 +94,6 @@
                     "default": true,
                     "description": "Specify whether the keywords are case sensitive or not"
                 },
-                "todohighlight.highlightWholeLine": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Highlight whole line instead of keyword only"
-                },
                 "todohighlight.toggleURI": {
                     "type": "boolean",
                     "default": false,
@@ -121,15 +116,15 @@
                                     },
                                     "color": {
                                         "type": "string",
-                                        "description": "The text color"
+                                        "description": "The text color. Besides, you can play with all the string and boolean styling properties provied by VS Code API. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
                                     },
                                     "backgroundColor": {
                                         "type": "string",
-                                        "description": "The text background color"
+                                        "description": "The text background color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
                                     },
                                     "overviewRulerColor": {
                                         "type": "string",
-                                        "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations"
+                                        "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
                                     }
                                 }
                             }
@@ -147,15 +142,15 @@
                     "properties": {
                         "color": {
                             "type": "string",
-                            "description": "The text color"
+                            "description": "The text color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
                         },
                         "backgroundColor": {
                             "type": "string",
-                            "description": "The text background color"
+                            "description": "The text background color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
                         },
                         "overviewRulerColor": {
                             "type": "string",
-                            "description": "The color of the ruler mark on the scroll bar"
+                            "description": "The color of the ruler mark on the scroll bar. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
                         }
                     }
                 },

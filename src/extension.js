@@ -118,8 +118,7 @@ function activate(context) {
     }
 
     function init(settings) {
-        var customDefaultStyle = settings.get('defaultStyle'),
-            highlightWholeLine = settings.get('highlightWholeLine', false);
+        var customDefaultStyle = settings.get('defaultStyle');
         keywordsPattern = settings.get('keywordsPattern');
         isCaseSensitive = settings.get('isCaseSensitive', true);
 
@@ -134,7 +133,6 @@ function activate(context) {
 
         if (keywordsPattern.trim()) {
             styleForRegExp = Object.assign({}, util.DEFAULT_STYLE, customDefaultStyle, {
-                isWholeLine: highlightWholeLine,
                 overviewRulerLane: vscode.OverviewRulerLane.Right
             });
             pattern = keywordsPattern;
@@ -146,7 +144,6 @@ function activate(context) {
                 }
 
                 var mergedStyle = Object.assign({}, {
-                    isWholeLine: highlightWholeLine,
                     overviewRulerLane: vscode.OverviewRulerLane.Right
                 }, assembledData[v]);
 

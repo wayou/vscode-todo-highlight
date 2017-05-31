@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.5.3 - 2017-05-31
+- remove `todohighlight.highlightWholeLine` from configuration contributes, it's supported yet
+- update doc, add reference to the official API for a full list of available styling properties, resolve #40
+
 ## 0.5.2 - 2017-05-19
 - minor fix: clear highlight when keywords are been edited and no longer exists
 
