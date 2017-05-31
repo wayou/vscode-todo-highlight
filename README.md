@@ -55,7 +55,7 @@ an example of customizing configuration:
         {
             "text": "HACK:",
             "color": "#000",
-            "highlightWholeLine": false,
+            "isWholeLine": false,
         },
         {
             "text": "TODO:",
@@ -73,7 +73,7 @@ an example of customizing configuration:
         "borderRadius":"2px",
         "cursor":"pointer",
         "border":"1px solid #eee",
-        "todohighlight.highlightWholeLine": true,
+        "isWholeLine": true,
         other styling properties goes here ... 
     },
     "todohighlight.include": "{**/*.js,**/*.jsx,**/*.ts,**/*.tsx,**/*.html,**/*.php,**/*.css,**/*.scss}",
