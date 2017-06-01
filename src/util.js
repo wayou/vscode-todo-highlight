@@ -23,21 +23,32 @@ var DEFAULT_KEYWORDS = {
 };
 
 var DEFAULT_STYLE = {
-    color: "#0000ff",
-    backgroundColor: "yellow",
+    color: "#2196f3",
+    backgroundColor: "#ffeb3b",
 };
 
 function getAssembledData(keywords, customDefaultStyle, isCaseSensitive) {
-    var result = JSON.parse(JSON.stringify(DEFAULT_KEYWORDS));
+    var result = {}
     keywords.forEach((v) => {
         v = typeof v == 'string' ? { text: v } : v;
         var text = v.text;
-        if (!text) return;//NOTE: in case of the text is empty or note set in configuration file
+        if (!text) return;//NOTE: in case of the text is empty
+
         if (!isCaseSensitive) {
             text = text.toUpperCase();
         }
+
+        if (text == 'TODO:' || text == 'FIXME:') {
+            v = Object.assign({}, DEFAULT_KEYWORDS[text], v);
+        }
         result[text] = Object.assign({}, DEFAULT_STYLE, customDefaultStyle, v);
     })
+
+    Object.keys(DEFAULT_KEYWORDS).forEach((v)=>{
+        if (!result[v]){
+            result[v] = Object.assign({}, DEFAULT_STYLE, customDefaultStyle, DEFAULT_KEYWORDS[v]);
+        }
+    });
 
     return result;
 }

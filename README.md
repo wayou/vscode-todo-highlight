@@ -62,7 +62,7 @@ an example of customizing configuration:
             "color": "red",
             "borderRadius":"0px",
             "backgroundColor": "rgba(0,0,0,.2)",
-            other styling properties goes here ... 
+            //other styling properties goes here ... 
         }
     ],
     "todohighlight.keywordsPattern": "TODO:|FIXME:|\\(([^)]+)\\)",//highlight `TODO:`,`FIXME:` and content between parentheses
@@ -74,7 +74,7 @@ an example of customizing configuration:
         "cursor":"pointer",
         "border":"1px solid #eee",
         "isWholeLine": true,
-        other styling properties goes here ... 
+        //other styling properties goes here ... 
     },
     "todohighlight.include": "{**/*.js,**/*.jsx,**/*.ts,**/*.tsx,**/*.html,**/*.php,**/*.css,**/*.scss}",
     "todohighlight.exclude": "{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map}",

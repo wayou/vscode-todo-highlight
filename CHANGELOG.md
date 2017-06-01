@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.5.5 - 2017-06-01
+- update doc. fix typo of the example configuration within the README file.
+- fix a bug that the `defaultStyle` not applied to built in keywords `TODO:` and `FIXME:`
+
 ## 0.5.4 - 2017-05-31
 - remove `todohighlight.highlightWholeLine` from configuration contributes.
 - update doc, add reference to the official API for a full list of available styling properties, resolve #40
