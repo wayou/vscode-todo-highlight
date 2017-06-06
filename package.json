@@ -134,7 +134,7 @@
                 "todohighlight.keywordsPattern": {
                     "type": "string",
                     "default": "",
-                    "description": "Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\\\ instead of signle back slash)"
+                    "description": "Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\\\ instead of single back slash)"
                 },
                 "todohighlight.defaultStyle": {
                     "type": "object",
@@ -157,7 +157,7 @@
                 "todohighlight.include": {
                     "type": "string",
                     "default": "{**/*.js,**/*.jsx,**/*.ts,**/*.tsx,**/*.html,**/*.php,**/*.css,**/*.scss}",
-                    "description": "A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `**/*.*` for both permormance and avoiding binary files reason"
+                    "description": "A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `**/*.*` for both performance and avoiding binary files reason"
                 },
                 "todohighlight.exclude": {
                     "type": "string",
