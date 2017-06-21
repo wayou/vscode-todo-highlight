@@ -31,8 +31,8 @@ To custom the keywords and other stuff, <kbd>command</kbd> + <kbd>,</kbd> (Windo
 |todohighlight.keywords|array|N/A|An array of keywords that will be hilighted. You can also specify the style for each keywords here. See example below for more infomation.|
 |todohighlight.keywordsPattern|string|N/A|Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\ instead of signle back slash). |
 |todohighlight.defaultStyle|object|N/A|Specify the default style for custom keywords, if not specified, build in default style will be applied. [Checkout all the available styling properties](https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan).|
-|todohighlight.include|string|`{**/*.js,**/*.jsx,**/*.ts,**/*.tsx,**/*.html,`<br>`**/*.php,**/*.css,**/*.scss}`|A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason.|
-|todohighlight.exclude|string|`{**/node_modules/**,**/bower_components/**,`<br>`**/dist/**,**/build/**,**/.vscode/**,`<br>`**/_output/**,**/*.min.*,**/*.map}`|A glob pattern that defines files and folders to exclude while listing annotations.|
+|todohighlight.include|string|`{**/*.js,`<br>`**/*.jsx,`<br>`**/*.ts,`<br>`**/*.tsx,`<br>`**/*.html,`<br>`**/*.php,`<br>`**/*.css,`<br>`**/*.scss}`|A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason.|
+|todohighlight.exclude|string|`{**/node_modules/**,`<br>`**/dist/**,`<br>`**/bower_components/**,`<br>`**/build/**,`<br>`**/.vscode/**,`<br>`**/_output/**,`<br>`**/*.min.*,`<br>`**/*.map}`|A glob pattern that defines files and folders to exclude while listing annotations.|
 |todohighlight.maxFilesForSearch|number|5120|Max files for searching, mostly you don't need to configure this.|
 |todohighlight.toggleURI|boolean|false|If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`.|
 
@@ -60,7 +60,8 @@ an example of customizing configuration:
         {
             "text": "TODO:",
             "color": "red",
-            "borderRadius":"0px",
+            "border":"1px solid red",
+            "borderRadius":"2px", //NOTE: using borderRadius along with `border` or you will see nothing change
             "backgroundColor": "rgba(0,0,0,.2)",
             //other styling properties goes here ... 
         }
@@ -70,9 +71,9 @@ an example of customizing configuration:
         "color": "red",
         "backgroundColor": "#ffab00",
         "overviewRulerColor": "#ffab00",
-        "borderRadius":"2px",
         "cursor":"pointer",
         "border":"1px solid #eee",
+        "borderRadius":"2px",
         "isWholeLine": true,
         //other styling properties goes here ... 
     },

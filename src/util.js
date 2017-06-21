@@ -44,8 +44,8 @@ function getAssembledData(keywords, customDefaultStyle, isCaseSensitive) {
         result[text] = Object.assign({}, DEFAULT_STYLE, customDefaultStyle, v);
     })
 
-    Object.keys(DEFAULT_KEYWORDS).forEach((v)=>{
-        if (!result[v]){
+    Object.keys(DEFAULT_KEYWORDS).forEach((v) => {
+        if (!result[v]) {
             result[v] = Object.assign({}, DEFAULT_STYLE, customDefaultStyle, DEFAULT_KEYWORDS[v]);
         }
     });
