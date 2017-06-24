@@ -52,17 +52,17 @@
             "description": "Build Status"
         },
         {
-            "url": "http://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg",
+            "url": "https://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg",
             "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
             "description": "Version"
         },
         {
-            "url": "http://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg",
+            "url": "https://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg",
             "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
             "description": "Installs"
         },
         {
-            "url": "http://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg",
+            "url": "https://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg",
             "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
             "description": "Ratings"
         }
