@@ -142,15 +142,15 @@
                     "properties": {
                         "color": {
                             "type": "string",
-                            "description": "The text color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
+                            "description": "The text color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions ."
                         },
                         "backgroundColor": {
                             "type": "string",
-                            "description": "The text background color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
+                            "description": "The text background color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions ."
                         },
                         "overviewRulerColor": {
                             "type": "string",
-                            "description": "The color of the ruler mark on the scroll bar. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
+                            "description": "The color of the ruler mark on the scroll bar. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions ."
                         }
                     }
                 },
