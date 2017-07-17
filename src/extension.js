@@ -1,6 +1,6 @@
 /**
  * vscode plugin for highlighting TODOs and FIXMEs within your code
- * 
+ *
  * NOTE: each decoration type has a unique key, the highlight and clear highight functionality are based on it
  */
 
@@ -37,6 +37,7 @@ function activate(context) {
                 if (!annotationType) return;
                 var searchPattern = pattern;
                 if (annotationType != 'ALL') {
+                    annotationType = util.escapeRegExp(annotationType);
                     searchPattern = new RegExp(annotationType, isCaseSensitive ? 'g' : 'gi');
                 }
                 util.searchAnnotations(workspaceState, searchPattern, util.annotationsFound);
