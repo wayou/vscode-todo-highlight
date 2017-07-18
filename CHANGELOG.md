@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.5.7 - 2017-07-18
+- typo fix, resolve #47
+- fix #48, the unwanted partial highlight
+
+## 0.5.6 - 2017-07-17
+- fix typo within the doc and minor fix for a potential bug. see #46
+
 ## 0.5.5 - 2017-06-01
 - update doc. fix typo of the example configuration within the README file.
 - fix a bug that the `defaultStyle` not applied to built in keywords `TODO:` and `FIXME:`

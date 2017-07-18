@@ -38,7 +38,7 @@ function activate(context) {
                 var searchPattern = pattern;
                 if (annotationType != 'ALL') {
                     annotationType = util.escapeRegExp(annotationType);
-                    searchPattern = new RegExp(annotationType, isCaseSensitive ? 'g' : 'gi');
+                    searchPattern = new RegExp('\b' + annotationType, isCaseSensitive ? 'g' : 'gi');
                 }
                 util.searchAnnotations(workspaceState, searchPattern, util.annotationsFound);
             });
@@ -149,7 +149,7 @@ function activate(context) {
                 }, assembledData[v]);
 
                 if (!mergedStyle.overviewRulerColor) {
-                    // using backgroundColor as the default overviewRulerColor if not specified by the user setting
+                    // use backgroundColor as the default overviewRulerColor if not specified by the user setting
                     mergedStyle.overviewRulerColor = mergedStyle.backgroundColor;
                 }
 
@@ -157,7 +157,7 @@ function activate(context) {
             });
 
             pattern = Object.keys(assembledData).map((v) => {
-                return util.escapeRegExp(v);
+                return '\\b' + util.escapeRegExp(v);
             }).join('|');
         }
 

@@ -20,7 +20,7 @@ Hope this extension helps you as well.
 
 ### Config
 
-`TODO:`,`FIXME:` are built in keywords. You can override the look by customizing the setting.
+`TODO:`,`FIXME:` are built-in keywords. You can override the look by customizing the setting.
 
 To custom the keywords and other stuff, <kbd>command</kbd> + <kbd>,</kbd> (Windows / Linux: File -> Preferences -> User Settings) open vscode `settings.json` file.
 
