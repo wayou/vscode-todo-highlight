@@ -38,7 +38,7 @@ function activate(context) {
                 var searchPattern = pattern;
                 if (annotationType != 'ALL') {
                     annotationType = util.escapeRegExp(annotationType);
-                    searchPattern = new RegExp('\b' + annotationType, isCaseSensitive ? 'g' : 'gi');
+                    searchPattern = new RegExp('\\b' + annotationType, isCaseSensitive ? 'g' : 'gi');
                 }
                 util.searchAnnotations(workspaceState, searchPattern, util.annotationsFound);
             });
