@@ -64,7 +64,7 @@ function searchAnnotations(workspaceState, pattern, callback) {
     var excludePattern = settings.get('exclude');
     var limitationForSearch = settings.get('maxFilesForSearch', 5120);
 
-    var statusMsg = ` searching...`;
+    var statusMsg = ` Searching...`;
 
     window.processing = true;
 
@@ -73,7 +73,7 @@ function searchAnnotations(workspaceState, pattern, callback) {
     workspace.findFiles(includePattern, excludePattern, limitationForSearch).then(function (files) {
 
         if (!files || files.length === 0) {
-            callback({ message: 'no files' });
+            callback({ message: 'No files found' });
             return;
         }
 
@@ -147,7 +147,7 @@ function annotationsFound(err, annotations, annotationList) {
     }
 
     var resultNum = annotationList.length;
-    var tooltip = resultNum + ' resut(s) found';
+    var tooltip = resultNum + ' result(s) found';
     setStatusMsg(defaultIcon, resultNum, tooltip);
     showOutputChannel(annotationList);
 }
@@ -157,7 +157,7 @@ function showOutputChannel(data) {
     window.outputChannel.clear();
 
     if (data.length === 0) {
-        window.showInformationMessage('No Results');
+        window.showInformationMessage('No results');
         return;
     }
 
