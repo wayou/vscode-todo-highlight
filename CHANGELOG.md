@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.5.8 - 2017-07-19
+- revert the fix for #48, the `\b` pattern cause other issues #51,#52
+
 ## 0.5.7 - 2017-07-18
 - typo fix, resolve #47
 - fix #48, the unwanted partial highlight
@@ -87,7 +90,7 @@
 - add MIT license
 
 ## 0.0.5 - 2016-12-27
-- caseenable case-insensitive patterns , see [PR#1](https://github.com/wayou/vscode-todo-highlight/pull/1)
+- enable case-insensitive patterns , see #1
 
 ## 0.0.1 - 2016-12-22
 - initial release
