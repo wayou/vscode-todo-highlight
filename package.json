@@ -161,7 +161,7 @@
                 },
                 "todohighlight.exclude": {
                     "type": "string",
-                    "default": "{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map}",
+                    "default": "{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map,**/.next/**}",
                     "description": "A glob pattern that defines files and folders to exclude while listing annotations"
                 },
                 "todohighlight.maxFilesForSearch": {
