@@ -20,13 +20,13 @@ function activate(context) {
 
     init(settings);
 
-    vscode.commands.registerCommand('todohighlight.toggleHighlight', function () {
+    context.subscriptions.push(vscode.commands.registerCommand('todohighlight.toggleHighlight', function () {
         settings.update('isEnable', !settings.get('isEnable'), true).then(function () {
             triggerUpdateDecorations();
         });
-    });
+    }))
 
-    vscode.commands.registerCommand('todohighlight.listAnnotations', function () {
+    context.subscriptions.push(vscode.commands.registerCommand('todohighlight.listAnnotations', function () {
         if (keywordsPattern.trim()) {
             util.searchAnnotations(workspaceState, pattern, util.annotationsFound);
         } else {
@@ -43,12 +43,12 @@ function activate(context) {
                 util.searchAnnotations(workspaceState, searchPattern, util.annotationsFound);
             });
         }
-    });
+    }));
 
-    vscode.commands.registerCommand('todohighlight.showOutputChannel', function () {
+    context.subscriptions.push(vscode.commands.registerCommand('todohighlight.showOutputChannel', function () {
         var annotationList = workspaceState.get('annotationList', []);
         util.showOutputChannel(annotationList);
-    });
+    }));
 
     if (activeEditor) {
         triggerUpdateDecorations();

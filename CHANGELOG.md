@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.5.9 - 2017-08-30
+- using array for include/exclude configuration, resolve #56. for backward compatability, string is also valid
+- register disposable items to the context
+- merge PR #58 exclude `.next` directory while searching for annotations as default
+- exclude `.github` directory while searching for annotations as default
+
 ## 0.5.8 - 2017-07-19
 - revert the fix for #48, the `\b` pattern cause other issues #51,#52
 

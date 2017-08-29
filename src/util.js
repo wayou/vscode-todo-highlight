@@ -57,11 +57,18 @@ function chooseAnnotationType(availableAnnotationTypes) {
     return window.showQuickPick(availableAnnotationTypes, {});
 }
 
+//get the include/exclude config
+function getPathes(config) {
+    return Array.isArray(config) ?
+        '{' + config.join(',') + '}'
+        : (typeof config == 'string' ? config : '');
+}
+
 function searchAnnotations(workspaceState, pattern, callback) {
 
     var settings = workspace.getConfiguration('todohighlight');
-    var includePattern = settings.get('include');
-    var excludePattern = settings.get('exclude');
+    var includePattern = getPathes(settings.get('include')) || '{**/*}';
+    var excludePattern = getPathes(settings.get('exclude'));
     var limitationForSearch = settings.get('maxFilesForSearch', 5120);
 
     var statusMsg = ` Searching...`;
