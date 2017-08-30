@@ -166,6 +166,7 @@
                         "**/*.css",
                         "**/*.scss"
                     ],
+                    "description": "Glob patterns that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason.",
                     "items": {
                         "anyOf": [
                             {
@@ -189,6 +190,7 @@
                         "**/*.map",
                         "**/.next/**"
                     ],
+                    "description": "Glob pattern that defines files and folders to exclude while listing annotations.",
                     "items": {
                         "anyOf": [
                             {
