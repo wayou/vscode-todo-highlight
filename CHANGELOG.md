@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.5.10 - 2017-09-02
+## 0.5.11 - 2017-09-02
 - fix style for the doc on vscode market
 
 ## 0.5.9 - 2017-08-30
