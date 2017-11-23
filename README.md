@@ -10,6 +10,11 @@ So I've been long for an extension to highlight them and remind me know there're
 
 Hope this extension helps you as well.
 
+*NOTICE*
+
+Many report that the `List hilighted annotations` command not working, make sure you have the file types included via `todohighlight.include`.
+
+
 ### Preview
 
 - with `material night` color theme:
