@@ -116,15 +116,15 @@
                                     },
                                     "color": {
                                         "type": "string",
-                                        "description": "The text color. Besides, you can play with all the string and boolean styling properties provied by VS Code API. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
+                                        "description": "The text color. Besides, you can play with all the string and boolean styling properties provied by VS Code API. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id280decorationrenderoptionsspan ."
                                     },
                                     "backgroundColor": {
                                         "type": "string",
-                                        "description": "The text background color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
+                                        "description": "The text background color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id280decorationrenderoptionsspan ."
                                     },
                                     "overviewRulerColor": {
                                         "type": "string",
-                                        "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id269decorationrenderoptionsspan ."
+                                        "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id280decorationrenderoptionsspan ."
                                     }
                                 }
                             }
@@ -142,15 +142,15 @@
                     "properties": {
                         "color": {
                             "type": "string",
-                            "description": "The text color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions ."
+                            "description": "The text color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id280decorationrenderoptionsspan ."
                         },
                         "backgroundColor": {
                             "type": "string",
-                            "description": "The text background color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions ."
+                            "description": "The text background color. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id280decorationrenderoptionsspan ."
                         },
                         "overviewRulerColor": {
                             "type": "string",
-                            "description": "The color of the ruler mark on the scroll bar. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions ."
+                            "description": "The color of the ruler mark on the scroll bar. See all available properties: https://code.visualstudio.com/docs/extensionAPI/vscode-api#_a-namedecorationrenderoptionsaspan-classcodeitem-id280decorationrenderoptionsspan ."
                         }
                     }
                 },
