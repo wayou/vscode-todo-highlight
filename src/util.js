@@ -98,17 +98,14 @@ function searchAnnotations(workspaceState, pattern, callback) {
                 progress = Math.floor((times / totalFiles) * 100);
 
                 setStatusMsg(zapIcon, progress + '% ' + statusMsg);
-
-                if (times === totalFiles || window.manullyCancel) {
-                    window.processing = true;
-                    workspaceState.update('annotationList', annotationList)
-                    callback(null, annotations, annotationList);
-                }
             }, function (err) {
                 errorHandler(err);
             });
 
         }
+        workspaceState.update('annotationList', annotationList);
+        callback(null, annotations, annotationList);
+        
     }, function (err) {
         errorHandler(err);
     });
