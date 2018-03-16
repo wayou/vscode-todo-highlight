@@ -90,25 +90,31 @@ function searchAnnotations(workspaceState, pattern, callback) {
             annotations = {},
             annotationList = [];
 
+        function file_iterated() {
+            times++;
+            progress = Math.floor(times / totalFiles * 100);
+
+            setStatusMsg(zapIcon, progress + '% ' + statusMsg);
+
+            if (times === totalFiles || window.manullyCancel) {
+                window.processing = true;
+                workspaceState.update('annotationList', annotationList);
+                callback(null, annotations, annotationList);
+            }
+        }
+
         for (var i = 0; i < totalFiles; i++) {
 
             workspace.openTextDocument(files[i]).then(function (file) {
                 searchAnnotationInFile(file, annotations, annotationList, pattern);
-                times++;
-                progress = Math.floor((times / totalFiles) * 100);
-
-                setStatusMsg(zapIcon, progress + '% ' + statusMsg);
-
-                if (times === totalFiles || window.manullyCancel) {
-                    window.processing = true;
-                    workspaceState.update('annotationList', annotationList)
-                    callback(null, annotations, annotationList);
-                }
+                file_iterated();
             }, function (err) {
                 errorHandler(err);
+                file_iterated();
             });
 
         }
+        
     }, function (err) {
         errorHandler(err);
     });
