@@ -3,16 +3,16 @@ VSCODE-TODO-HIGHLIGHT
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master)](https://travis-ci.org/wayou/vscode-todo-highlight) [![Version](https://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) [![Installs](https://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) [![Ratings](https://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
 
-Highlight `TODO`,`FIXME` or any annotations within your code.
+Highlight `TODO`, `FIXME` and other annotations within your code.
 
-Sometimes you will forget to review the TODOs added while coding till publish the code to production.
-So I've been long for an extension to highlight them and remind me know there're notes or things not done yet.
+Sometimes you forget to review the TODOs you've added while coding before you publish the code to production.
+So I've been wanting an extension for a long time that highlights them and reminds me that there are notes or things not done yet.
 
 Hope this extension helps you as well.
 
 *NOTICE*
 
-Many report that the `List hilighted annotations` command not working, make sure you have the file types included via `todohighlight.include`.
+Many report that the `List hilighted annotations` command is not working, make sure you have the file types included via `todohighlight.include`.
 
 
 ### Preview
@@ -27,7 +27,7 @@ Many report that the `List hilighted annotations` command not working, make sure
 
 `TODO:`,`FIXME:` are built-in keywords. You can override the look by customizing the setting.
 
-To custom the keywords and other stuff, <kbd>command</kbd> + <kbd>,</kbd> (Windows / Linux: File -> Preferences -> User Settings) open vscode `settings.json` file.
+To customize the keywords and other stuff, <kbd>command</kbd> + <kbd>,</kbd> (Windows / Linux: File -> Preferences -> User Settings) open the vscode file `settings.json`.
 
 | | type | default | description |
 |---|---|---|---|
@@ -115,15 +115,15 @@ This extension contributes the following commands to the Command palette.
 
 - `Toggle highlight` : turn on/off the highlight
 ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/toggle-highlight.gif)
-- `List hilighted annotations` : list annotations and reveal from corresponding file
+- `List highlighted annotations` : list annotations and reveal from corresponding file
 ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/list-annotations.gif)
 
 
 ### Known issue
 
- The clickable file pattern within the output channel differs from OS platform(`<path>#<line>` for Mac/Windows and `<path>:<line>:<column>` for Linux, for detail see this [issue](https://github.com/Microsoft/vscode/issues/586) ). 
+ The clickable file pattern within the output channel differs from OS platform(`<path>#<line>` for Mac/Windows and `<path>:<line>:<column>` for Linux, for details see this [issue](https://github.com/Microsoft/vscode/issues/586) ). 
 
- Basically the extension auto detect OS platform.
+ Basically the extension auto detects the OS platform.
 
- If you find file path not clickable, set `todohighlight.toggleURI` to `true` to toggle the file pattern.
+ If you find that the file path is not clickable, set `todohighlight.toggleURI` to `true` to toggle the file pattern.
   
