@@ -12,7 +12,7 @@ Hope this extension helps you as well.
 
 *NOTICE*
 
-Many report that the `List hilighted annotations` command is not working, make sure you have the file types included via `todohighlight.include`.
+Many report that the `List highlighted annotations` command is not working, make sure you have the file types included via `todohighlight.include`.
 
 
 ### Preview
