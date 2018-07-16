@@ -1,219 +1,259 @@
 {
-    "name": "vscode-todo-highlight",
-    "displayName": "TODO Highlight",
-    "description": "highlight TODOs, FIXMEs, and any keywords, annotations...",
-    "keywords": [
-        "todo",
-        "fixme",
-        "highlight",
-        "keyword",
-        "annotation"
+  "name": "vscode-todo-highlight",
+  "displayName": "TODO Highlight",
+  "description": "Highlight TODO, FIXME, or whatever annotations.",
+  "keywords": [
+    "todo",
+    "fixme",
+    "highlight",
+    "keyword",
+    "annotation"
+  ],
+  "version": "1.0.0",
+  "publisher": "wayou",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "homepage": "https://github.com/wayou/vscode-todo-highlight",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wayou/vscode-todo-highlight.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wayou/vscode-todo-highlight/issues",
+    "email": "liuwayong@gmail.com"
+  },
+  "galleryBanner": {
+    "color": "#272729",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.24.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "badges": [
+    {
+      "url": "https://img.shields.io/badge/License-MIT-brightgreen.svg",
+      "href": "https://opensource.org/licenses/MIT",
+      "description": "License: MIT"
+    },
+    {
+      "url": "https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master",
+      "href": "https://travis-ci.org/wayou/vscode-todo-highlight",
+      "description": "Build Status"
+    },
+    {
+      "url": "https://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg",
+      "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
+      "description": "Version"
+    },
+    {
+      "url": "https://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg",
+      "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
+      "description": "Installs"
+    },
+    {
+      "url": "https://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg",
+      "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
+      "description": "Ratings"
+    }
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "commands": [
+      {
+        "title": "Toggle highlight",
+        "category": "TODO Highlight",
+        "command": "todohighlight.toggleHighlight"
+      },
+      {
+        "title": "List annotations in current file...",
+        "category": "TODO Highlight",
+        "command": "todohighlight.listAnnotations"
+      },
+      {
+        "title": "List all annotations...",
+        "category": "TODO Highlight",
+        "command": "todohighlight.listAllAnnotations"
+      },
+      {
+        "title": "Toggle URI pattern",
+        "category": "TODO Highlight",
+        "command": "todohighlight.toggleURI"
+      }
     ],
-    "version": "0.5.12",
-    "publisher": "wayou",
-    "license": "MIT",
-    "icon": "assets/icon.png",
-    "homepage": "https://github.com/wayou/vscode-todo-highlight",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/wayou/vscode-todo-highlight.git"
-    },
-    "bugs": {
-        "url": "https://github.com/wayou/vscode-todo-highlight/issues",
-        "email": "liuwayong@gmail.com"
-    },
-    "galleryBanner": {
-        "color": "#272729",
-        "theme": "dark"
-    },
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "main": "./src/extension",
-    "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "badges": [
-        {
-            "url": "https://img.shields.io/badge/License-MIT-brightgreen.svg",
-            "href": "https://opensource.org/licenses/MIT",
-            "description": "License: MIT"
+    "configuration": {
+      "type": "object",
+      "title": "TODO Highlight",
+      "properties": {
+        "todohighlight.isEnable": {
+          "type": "boolean",
+          "default": true,
+          "description": "enable/disable this extension."
         },
-        {
-            "url": "https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master",
-            "href": "https://travis-ci.org/wayou/vscode-todo-highlight",
-            "description": "Build Status"
+        "todohighlight.isCaseSensitive": {
+          "type": "boolean",
+          "default": true,
+          "description": "whether the keywords are case sensitive or not."
         },
-        {
-            "url": "https://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg",
-            "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
-            "description": "Version"
+        "todohighlight.toggleURI": {
+          "type": "boolean",
+          "default": false,
+          "description": "if the file uri within the output channel is not clickable, set this to true to toggle the uri patten between `<path>#<line>` and `<path>:<line>:<column>`"
         },
-        {
-            "url": "https://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg",
-            "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
-            "description": "Installs"
-        },
-        {
-            "url": "https://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg",
-            "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
-            "description": "Ratings"
-        }
-    ],
-    "contributes": {
-        "commands": [
+        "todohighlight.keywords": {
+          "type": "array",
+          "default": [
             {
-                "title": "Toggle highlight",
-                "category": "TODO-Highlight",
-                "command": "todohighlight.toggleHighlight"
+              "pattern": "TODO:",
+              "style": {
+                "dark": {
+                  "color": "#757575"
+                },
+                "light": {
+                  "color": "#fff"
+                },
+                "backgroundColor": "#ffbd2a",
+                "borderRadius": "2px",
+                "border": "1px solid red"
+              },
+              "description": "Things need to be done later."
             },
             {
-                "title": "List highlighted annotations",
-                "category": "TODO-Highlight",
-                "command": "todohighlight.listAnnotations"
-            }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "TODO Highlight",
-            "properties": {
-                "todohighlight.isEnable": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Enable or disable the highlight"
+              "pattern": "FIXME:",
+              "style": {
+                "dark": {
+                  "color": "#eee"
                 },
-                "todohighlight.isCaseSensitive": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Specify whether the keywords are case sensitive or not"
+                "light": {
+                  "color": "#fff"
                 },
-                "todohighlight.toggleURI": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`"
-                },
-                "todohighlight.keywords": {
-                    "type": "array",
-                    "description": "Customize keywords and colors. Any css color identifier is valid.",
-                    "items": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "text": {
-                                        "type": "string",
-                                        "description": "Custom text to be highlighted"
-                                    },
-                                    "color": {
-                                        "type": "string",
-                                        "description": "The text color. Besides, you can play with all the string and boolean styling properties provied by VS Code API. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                                    },
-                                    "backgroundColor": {
-                                        "type": "string",
-                                        "description": "The text background color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                                    },
-                                    "overviewRulerColor": {
-                                        "type": "string",
-                                        "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                },
-                "todohighlight.keywordsPattern": {
+                "backgroundColor": "#f06292",
+                "borderRadius": "2px",
+                "border": "1px solid red"
+              },
+              "description": "Things need to be fixed."
+            },
+            "AVOID:",
+            "BUG:",
+            "CAUTION:",
+            "CONFIGURATION:",
+            "DEBUG:",
+            "DEPRECATED:",
+            "DO_NOT_REMOVE:",
+            "HACK:",
+            "IMPORTANT:",
+            "IMPROVE:",
+            "INFO:",
+            "ISSUE:",
+            "KEEP:",
+            "LEGACY:",
+            "NOTE:",
+            "OPTIMIZE:",
+            "PERFORMANCE:",
+            "PLACEHOLDER:",
+            "PREFER:",
+            "REFACTOR:",
+            "REMOVE:",
+            "REVIEW:",
+            "RFC:",
+            "TEMP:",
+            "WARNING:"
+          ],
+          "description": "annotations that will be highlighted.",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "plain string or escaped RegExp string. e.g. `TODO:`, `\\\\bTODO\\\\b`"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "pattern": {
                     "type": "string",
-                    "default": "",
-                    "description": "Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\\\ instead of single back slash)"
-                },
-                "todohighlight.defaultStyle": {
+                    "description": "plain string or escaped RegExp string. e.g. `TODO:`, `\\\\bTODO\\\\b`"
+                  },
+                  "style": {
                     "type": "object",
-                    "description": "Default style for all customized keywords",
-                    "properties": {
-                        "color": {
-                            "type": "string",
-                            "description": "The text color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                        },
-                        "backgroundColor": {
-                            "type": "string",
-                            "description": "The text background color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                        },
-                        "overviewRulerColor": {
-                            "type": "string",
-                            "description": "The color of the ruler mark on the scroll bar. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                        }
-                    }
-                },
-                "todohighlight.include": {
-                    "type": "array",
-                    "default": [
-                        "**/*.js",
-                        "**/*.jsx",
-                        "**/*.ts",
-                        "**/*.tsx",
-                        "**/*.html",
-                        "**/*.php",
-                        "**/*.css",
-                        "**/*.scss"
-                    ],
-                    "description": "Glob patterns that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason.",
-                    "items": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "description": "A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `**/*.*` for both performance and avoiding binary files reason"
-                            }
-                        ]
-                    }
-                },
-                "todohighlight.exclude": {
-                    "type": "array",
-                    "default": [
-                        "**/node_modules/**",
-                        "**/bower_components/**",
-                        "**/dist/**",
-                        "**/build/**",
-                        "**/.vscode/**",
-                        "**/.github/**",
-                        "**/_output/**",
-                        "**/*.min.*",
-                        "**/*.map",
-                        "**/.next/**"
-                    ],
-                    "description": "Glob pattern that defines files and folders to exclude while listing annotations.",
-                    "items": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "description": "A glob pattern that defines files and folders to exclude while listing annotations"
-                            }
-                        ]
-                    }
-                },
-                "todohighlight.maxFilesForSearch": {
-                    "type": "number",
-                    "default": 5120,
-                    "description": "Max files for searching"
+                    "description": "style applied to the annotations. Reference the VS Code extension API to see all available properties https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions ."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Descripe the annotation."
+                  }
                 }
-            }
+              }
+            ]
+          }
+        },
+        "todohighlight.defaultStyle": {
+          "type": "object",
+          "borderRadius": "2px",
+          "border": "1px solid red",
+          "default": {
+            "color": "#2196f3",
+            "backgroundColor": "#fffd38"
+          },
+          "description": "default style applied to the annotations. Reference the VS Code extension API to see all available properties https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions ."
+        },
+        "todohighlight.include": {
+          "type": "array",
+          "default": [
+            "**/*"
+          ],
+          "description": "a set of glob patterns that defines the files to search for. Each of the item is a glob pattern to include the files while searching for annotations. e.g. `**/*.jsx`.",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "a glob pattern to include the files while searching for annotations. e.g. `**/*.jsx`."
+              }
+            ]
+          }
+        },
+        "todohighlight.exclude": {
+          "type": "array",
+          "default": [
+            "**/.next/**",
+            "**/.vscode/**",
+            "**/*.map",
+            "**/*.min.*",
+            "**/bower_components/**",
+            "**/dist/**",
+            "**/node_modules/**"
+          ],
+          "description": "glob pattern that exclude files or directories while searching annotations.",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "A glob pattern to exclude the files while searching for annotations. e.g. `**/*.jsx`."
+              }
+            ]
+          }
         }
-    },
-    "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "eslint": "^3.6.0",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
+      }
     }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^7.0.43",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6"
+  },
+  "dependencies": {
+    "ts-debounce": "^0.3.2"
+  }
 }

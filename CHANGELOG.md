@@ -1,5 +1,19 @@
 # Change Log
 
+## 1.0.0 - 2018-07-21
+- [new] ability to theme every single regexp match, resolve #42, resolve #88
+- [new] `list annotations` now support multiple select
+- [new] autocompletion for annotations based on the config
+- [new] tons of predefined annotations: "AVOID:", "BUG:", "CAUTION:", "CONFIGURATION:", "DEBUG:", "DEPRECATED:", "DO_NOT_REMOVE:", "HACK:", "IMPORTANT:", "IMPROVE:", "INFO:", "ISSUE:", "KEEP:", "LEGACY:", "NOTE:", "OPTIMIZE:", "PERFORMANCE:", "PLACEHOLDER:", "PREFER:", "REFACTOR:", "REMOVE:", "REVIEW:", "RFC:", "TEMP:", "WARNING:", resolve #74
+- [new] include all file types by default, the extension will catch the exception when working with binary file. no manual configuration needed.
+- [new] list annotations for current file only, fix #74
+- [new] predefined annotations `TODO:` and `FIXME:` now can be override, resolve #87
+- [fix] fix partial match problem. now the end user need to define what should be matched exactlly by custom every annotation with RegExp. resolve #48, resolve #63, resolve #102, resolve #106
+- [fix] by using the built-in `Uri` to get the path of a file, fix #81
+- [fix] update the doc and the reference link for styling the annotations, resolve #97
+- [improve] cancelation support is added as well some improvements for the file searching. possiblely resolve #55, resolve #59. for reason of vscode it's self, `workspace.openTextDocument` will trigger `onDidOpen` events and then other extensions may react with it. this is main reason for the high cpu. see vscode issues for more info: [#15723](https://github.com/Microsoft/vscode/issues/15723), [#33046](https://github.com/Microsoft/vscode/issues/33046)
+- [chore] rewrite with TypeScript
+
 ## 0.5.12 - 2018-03-16
 - merge #77
 - update doc for the refer for DecorationRenderOptions

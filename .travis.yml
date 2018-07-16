@@ -11,6 +11,7 @@ install:
 before_script:
   - git config --global user.name 'wayou'
   - git config --global user.email 'liuwayong@gmail.com'
+  - git checkout next
   - rm -f *.vsix
 
 script:
@@ -19,5 +20,5 @@ script:
 after_success:
   - git add -A .
   - git commit -m "[skip ci]vsix generated via travis-ci at $(date -u +'%Y-%m-%d %H:%M:%S') $TRAVIS_COMMIT"
-  - git push -q $GH_TOKEN HEAD:master
+  - git push origin next -q $GH_TOKEN HEAD:master
 
