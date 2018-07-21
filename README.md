@@ -52,21 +52,21 @@ Following annotations are out of the box:
 
 Code completion for the annotations.
 
-[Code completion for the annotations](./assets/code_completion.gif)
+![Code completion for the annotations](./assets/code_completion.gif)
 
 
 ### Toggle highlight
 
 Enable/disable the highlight.
 
-[toggle highlight](./assets/toggle_highlight.gif)
+![toggle highlight](./assets/toggle_highlight.gif)
 
 
 ### List annotations
 
 Supports both for current file and the whole project.
 
-[list annotations](./assets/list_annotations.gif)
+![list annotations](./assets/list_annotations.gif)
 
 
 ## Extension Settings
