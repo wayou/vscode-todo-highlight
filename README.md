@@ -1,4 +1,4 @@
-vscode-todo-highlight README
+vscode-todo-highlight
 ---
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master)](https://travis-ci.org/wayou/vscode-todo-highlight) [![Version](https://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) [![Installs](https://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) [![Ratings](https://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
 
@@ -153,7 +153,7 @@ This extension contributes the following settings:
 "WARNING:"
 ]
 ```
-- `todohighlight.defaultStyle`: default style applied to the annotations. Reference the VS Code extension API to see all available properties https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions .
+- `todohighlight.defaultStyle`: default style applied to the annotations. Reference the [VS Code extension API](https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions) to see all available properties.
     - type: [DecorationRenderOptions](https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions)
     - default: 
 ```js
@@ -167,7 +167,7 @@ This extension contributes the following settings:
     - default: `["**/*"]`
 - `myExtension.exclude`: a set of glob patterns that exclude files or directories while searching annotations. Each of the item is a glob pattern to include the files while searching for annotations. e.g. `**/*.jsx`
     - type: string[]
-    - default: `["**/*"]`
+    - default:
 ```js
 [
     "**/.next/**",
@@ -193,7 +193,7 @@ This extension contributes the following settings:
 
 ### Avoid unwanted partial highlight
 
-Word boundary detect. The hard part is `\b` only work with a [predefined chracter collection](http://www.ecma-international.org/ecma-262/5.1/#sec-15.10.2.6). That means, `\\bTODO:\\b` just won't work as ecpected.As for at present I can not do the boundray detect within the extension internal for the annotaions from user config. The good news is that with todohighlight v1 all patterns are defined with RegExp, so you can decide what is your doundary to match and meet your own requirments. For example, `\\bBUG:` match exactlly `BUG:` and skip `DEBUG:`. Related issues #48.
+Word boundary detect. The hard part is `\b` only work with a [predefined chracter collection](http://www.ecma-international.org/ecma-262/5.1/#sec-15.10.2.6). That means, `\bTODO:\b` just won't work as ecpected. As for at present I can not do the boundray detect within the extension internal for the annotaions from user config. The good news is that with todohighlight v1 all patterns are defined with RegExp, so you can decide what is your doundary to match and meet your own requirments. For example, `\\bBUG:` match exactlly `BUG:` and skip `DEBUG:`. Related issues #48.
 
 
 ### Code completion not working in comment

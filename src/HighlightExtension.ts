@@ -117,6 +117,9 @@ export default class HighlightExtension {
       });
 
       try {
+        // TODO: consider using https://github.com/BurntSushi/ripgrep to replace this
+        // cause the openTextDocument triggers the onDidOpen event
+        // as a result the editor checkes problems for each file and leads high cpu consume
         const textDocument = await vscode.workspace.openTextDocument(file);
         // ---- annotation parse start ----
         const fileContent = textDocument.getText();

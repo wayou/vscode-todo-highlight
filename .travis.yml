@@ -15,8 +15,7 @@ before_script:
   - rm -f *.vsix
 
 script:
-  - npm run compile
-  - npm run generate
+  - vsce package
 
 after_success:
   - git add -A .
