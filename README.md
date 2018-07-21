@@ -45,7 +45,7 @@ Following annotations are out of the box:
 `REVIEW:`,
 `RFC:`,
 `TEMP:`,
-"WARNING:`
+`WARNING:`
 
 
 ### Code completion
@@ -67,6 +67,16 @@ Enable/disable the highlight.
 Supports both for current file and the whole project.
 
 ![list annotations](./assets/list_annotations.gif)
+
+
+## Extension Commands
+
+This extension contributes the following commands:
+
+- `todohighlight.toggleHighlight`: Toggle highlight
+- `todohighlight.listAnnotations`: List annotations in current file...
+- `todohighlight.listAllAnnotations`: List all annotations...
+- `todohighlight.toggleURI`: Toggle URI pattern
 
 
 ## Extension Settings
