@@ -15,7 +15,7 @@ Highlight TODO, FIXME, or whatever annotations.
 
 ## Features
 
-### Predefined Annotations
+### Predefined annotations
 
 Following annotations are out of the box:
 
@@ -92,7 +92,7 @@ This extension contributes the following settings:
 - `todohighlight.toggleURI`: if the file uri within the output channel is not clickable, set this to true to toggle the uri patten between `<path>#<line>` and `<path>:<line>:<column>`
     - type: boolean
     - default: `false`
-- `todohighlight.keywords`: annotations that will be highlighted. The pattern is plain string or escaped RegExp string. e.g. `TODO:`, `\\\\bTODO\\\\b`.
+- `todohighlight.keywords`: annotations that will be highlighted. The pattern is plain string or escaped RegExp string. e.g. `TODO:`, `\\bTODO\\b`.
     - type: Array<string|[DecorationRenderOptions](https://code.visualstudio.com/docs/extensionAPI/vscode-api#DecorationRenderOptions)>
     - default: 
 ```js

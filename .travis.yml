@@ -7,6 +7,7 @@ node_js:
 
 install:
   - npm install -g vsce
+  - npm i 
 
 before_script:
   - git config --global user.name 'wayou'
@@ -14,7 +15,8 @@ before_script:
   - rm -f *.vsix
 
 script:
-  - vsce package
+  - npm run compile
+  - npm run generate
 
 after_success:
   - git add -A .
