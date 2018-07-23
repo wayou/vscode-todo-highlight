@@ -40,6 +40,7 @@ To customize the keywords and other stuff, <kbd>command</kbd> + <kbd>,</kbd> (Wi
 | todohighlight.exclude | array | [<br>`"**/node_modules/**"`,<br>`"**/dist/**",`<br>`"**/bower_components/**"`,<br>`"**/build/**",`<br>`"**/.vscode/**"`,<br>`"**/.github/**"`,<br>`"**/_output/**"`,<br>`"**/*.min.*"`,<br>`"**/*.map"`<br>] | Glob pattern that defines files and folders to exclude while listing annotations. <br> For backwards compatability, a string combine all the patterns is also valid `"{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map}"` |
 | todohighlight.maxFilesForSearch | number | 5120 | Max files for searching, mostly you don't need to configure this. |
 | todohighlight.toggleURI | boolean | false | If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`. |
+| todohighlight.fullLine | boolean | false | If set to true, not only the label but any text following it will be highlighted. |
 
 
 an example of customizing configuration:
