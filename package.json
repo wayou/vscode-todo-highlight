@@ -204,6 +204,11 @@
                     "type": "number",
                     "default": 5120,
                     "description": "Max files for searching"
+                },
+                "todohighlight.fullLine": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If set to true, not only the label but any text following it will be highlighted."
                 }
             }
         }

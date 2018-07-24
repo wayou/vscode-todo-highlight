@@ -84,10 +84,21 @@ function activate(context) {
         }
 
         var text = activeEditor.document.getText();
-        var mathes = {}, match;
+        var mathes = {}, match, prevEndPos;
         while (match = pattern.exec(text)) {
             var startPos = activeEditor.document.positionAt(match.index);
-            var endPos = activeEditor.document.positionAt(match.index + match[0].length);
+            var endPos;
+            if (settings.get('fullLine', false)) {
+                endPos = activeEditor.document.lineAt(startPos).range.end;
+            } else {
+                endPos = activeEditor.document.positionAt(match.index + match[0].length);
+            }
+
+            if (prevEndPos && prevEndPos.compareTo(startPos) >= 0) {
+                continue;
+            }
+            prevEndPos = endPos;
+
             var decoration = {
                 range: new vscode.Range(startPos, endPos)
             };
