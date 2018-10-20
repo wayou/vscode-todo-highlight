@@ -198,7 +198,7 @@ function showOutputChannel(data) {
             //toggle the pattern
             patternType = +!patternType;
         }
-	window.outputChannel.appendLine(patterns[patternType]);
+	    window.outputChannel.appendLine(patterns[patternType]);
         window.outputChannel.appendLine('\t' + v.label + '\n');
     });
     window.outputChannel.show();
