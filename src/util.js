@@ -114,7 +114,7 @@ function searchAnnotations(workspaceState, pattern, callback) {
             });
 
         }
-        
+
     }, function (err) {
         errorHandler(err);
     });
@@ -179,21 +179,27 @@ function showOutputChannel(data) {
 
     data.forEach(function (v, i, a) {
         // due to an issue of vscode(https://github.com/Microsoft/vscode/issues/586), in order to make file path clickable within the output channel,the file path differs from platform
-        var patternA = '#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1);
-        var patternB = '#' + (i + 1) + '\t' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1);
-        var patterns = [patternA, patternB];
+        var patternWindows = '#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1);
+        var patternLinux = '#' + (i + 1) + '\t' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1);
+        var patternMac = "#" + (i + 1) + "\t" + v.uri + ":" + (v.lineNum + 1);
+        var patterns = [patternWindows, patternLinux, patternMac];
 
-        //for windows and mac
+        //for windows
         var patternType = 0;
         if (os.platform() == "linux") {
             // for linux
             patternType = 1;
         }
+        if (os.platform() == "darwin") {
+            // for mac
+            patternType = 2;
+        }
         if (toggleURI) {
             //toggle the pattern
             patternType = +!patternType;
         }
-        window.outputChannel.appendLine(patterns[patternType]);
+        window.outputChannel.appendLine(os.platform());
+	    window.outputChannel.appendLine(patterns[patternType]);
         window.outputChannel.appendLine('\t' + v.label + '\n');
     });
     window.outputChannel.show();
