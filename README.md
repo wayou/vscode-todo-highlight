@@ -14,7 +14,6 @@ Hope this extension helps you as well.
 
 Many report that the `List Highlighted Annotations` command is not working, make sure you have the file types included via `todohighlight.include`.
 
-
 ### Preview
 
 - with `material night` color theme:
@@ -40,7 +39,6 @@ To customize the keywords and other stuff, <kbd>command</kbd> + <kbd>,</kbd> (Wi
 | todohighlight.exclude | array | [<br>`"**/node_modules/**"`,<br>`"**/dist/**",`<br>`"**/bower_components/**"`,<br>`"**/build/**",`<br>`"**/.vscode/**"`,<br>`"**/.github/**"`,<br>`"**/_output/**"`,<br>`"**/*.min.*"`,<br>`"**/*.map"`<br>] | Glob pattern that defines files and folders to exclude while listing annotations. <br> For backwards compatability, a string combine all the patterns is also valid `"{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map}"` |
 | todohighlight.maxFilesForSearch | number | 5120 | Max files for searching, mostly you don't need to configure this. |
 | todohighlight.toggleURI | boolean | false | If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`. |
-
 
 an example of customizing configuration:
 
@@ -118,12 +116,10 @@ This extension contributes the following commands to the Command palette.
 - `List Highlighted Annotations` : list annotations and reveal from corresponding file
 ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/list-annotations.gif)
 
+### Known Issue
 
-### Known issue
+The clickable file pattern within the output channel differs from OS platform(`<path>#<line>` for Mac/Windows and `<path>:<line>:<column>` for Linux, for details see this [issue](https://github.com/Microsoft/vscode/issues/586) ).
 
- The clickable file pattern within the output channel differs from OS platform(`<path>#<line>` for Mac/Windows and `<path>:<line>:<column>` for Linux, for details see this [issue](https://github.com/Microsoft/vscode/issues/586) ). 
+Basically the extension auto detects the OS platform.
 
- Basically the extension auto detects the OS platform.
-
- If you find that the file path is not clickable, set `todohighlight.toggleURI` to `true` to toggle the file pattern.
-  
+If you find that the file path is not clickable, set `todohighlight.toggleURI` to `true` to toggle the file pattern.
