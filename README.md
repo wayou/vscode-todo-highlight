@@ -12,7 +12,7 @@ Hope this extension helps you as well.
 
 *NOTICE*
 
-Many report that the `List highlighted annotations` command is not working, make sure you have the file types included via `todohighlight.include`.
+Many report that the `List Highlighted Annotations` command is not working, make sure you have the file types included via `todohighlight.include`.
 
 
 ### Preview
@@ -113,9 +113,9 @@ an example of customizing configuration:
 
 This extension contributes the following commands to the Command palette.
 
-- `Toggle highlight` : turn on/off the highlight
+- `Toggle Highlight` : turn on/off the highlight
 ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/toggle-highlight.gif)
-- `List highlighted annotations` : list annotations and reveal from corresponding file
+- `List Highlighted Annotations` : list annotations and reveal from corresponding file
 ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/list-annotations.gif)
 
 

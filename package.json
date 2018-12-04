@@ -70,12 +70,12 @@
     "contributes": {
         "commands": [
             {
-                "title": "Toggle highlight",
+                "title": "Toggle Highlight",
                 "category": "TODO-Highlight",
                 "command": "todohighlight.toggleHighlight"
             },
             {
-                "title": "List highlighted annotations",
+                "title": "List Highlighted Annotations",
                 "category": "TODO-Highlight",
                 "command": "todohighlight.listAnnotations"
             }
