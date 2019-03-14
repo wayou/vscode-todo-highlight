@@ -33,14 +33,13 @@ To customize the keywords and other stuff, <kbd>command</kbd> + <kbd>,</kbd> (Wi
 |---|---|---|---|
 | todohighlight.isEnable | boolean | true | Toggle the highlight, default is true. |
 | todohighlight.isCaseSensitive  | boolean | true | Whether the keywords are case sensitive or not. |
-| todohighlight.keywords | array | N/A | An array of keywords that will be hilighted. You can also specify the style for each keywords here. See example below for more infomation. |
+| todohighlight.keywords | array | N/A | An array of keywords that will be highlighted. You can also specify the style for each keywords here. See example below for more infomation. |
 | todohighlight.keywordsPattern  | string | N/A | Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\ instead of signle back slash). |
 | todohighlight.defaultStyle | object | N/A | Specify the default style for custom keywords, if not specified, build in default style will be applied. [See all available properties on VSCode doc DecorationRenderOptions section](https://code.visualstudio.com/docs/extensionAPI/vscode-api) |
-| todohighlight.include | array | [<br>`"**/*.js"`,<br>`"**/*.jsx"`,<br>`"**/*.ts"`,<br>`"**/*.tsx",`<br>`"**/*.html"`,<br>`"**/*.php"`,<br>`"**/*.css",`<br>`"**/*.scss"`<br>] | Glob patterns that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason. <br> For backwards compatability, a string combine all the patterns is also valid `"{**/*.js,**/*.jsx,**/*.ts,**/*.tsx,**/*.html,**/*.php,**/*.css,**/*.scss}"` |
-| todohighlight.exclude | array | [<br>`"**/node_modules/**"`,<br>`"**/dist/**",`<br>`"**/bower_components/**"`,<br>`"**/build/**",`<br>`"**/.vscode/**"`,<br>`"**/.github/**"`,<br>`"**/_output/**"`,<br>`"**/*.min.*"`,<br>`"**/*.map"`<br>] | Glob pattern that defines files and folders to exclude while listing annotations. <br> For backwards compatability, a string combine all the patterns is also valid `"{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map}"` |
+| todohighlight.include | array | [<br>`"**/*.js"`,<br>`"**/*.jsx"`,<br>`"**/*.ts"`,<br>`"**/*.tsx",`<br>`"**/*.html"`,<br>`"**/*.php"`,<br>`"**/*.css"`,<br>`"**/*.scss"`,<br>`"**/*.go"`<br>] | Glob patterns that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason. <br> For backwards compatibility, a string combine all the patterns is also valid `"{**/*.js,**/*.jsx,**/*.ts,**/*.tsx,**/*.html,**/*.php,**/*.css,**/*.scss,**/*.go}"` |
+| todohighlight.exclude | array | [<br>`"**/node_modules/**"`,<br>`"**/dist/**"`,<br>`"**/bower_components/**"`,<br>`"**/build/**"`,<br>`"**/.vscode/**"`,<br>`"**/.github/**"`,<br>`"**/_output/**"`,<br>`"**/*.min.*"`,<br>`"**/*.map"`,<br>`"**/.next/**"`,<br>`"**/vendor/**"`<br>] | Glob pattern that defines files and folders to exclude while listing annotations. <br> For backwards compatibility, a string combine all the patterns is also valid `"{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map,**/.next/**,**/vendor/**}"` |
 | todohighlight.maxFilesForSearch | number | 5120 | Max files for searching, mostly you don't need to configure this. |
 | todohighlight.toggleURI | boolean | false | If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`. |
-
 
 an example of customizing configuration:
 
@@ -68,7 +67,7 @@ an example of customizing configuration:
             "border": "1px solid red",
             "borderRadius": "2px", //NOTE: using borderRadius along with `border` or you will see nothing change
             "backgroundColor": "rgba(0,0,0,.2)",
-            //other styling properties goes here ... 
+            //other styling properties goes here ...
         }
     ],
     "todohighlight.keywordsPattern": "TODO:|FIXME:|\\(([^)]+)\\)", //highlight `TODO:`,`FIXME:` or content between parentheses
@@ -80,7 +79,7 @@ an example of customizing configuration:
         "border": "1px solid #eee",
         "borderRadius": "2px",
         "isWholeLine": true,
-        //other styling properties goes here ... 
+        //other styling properties goes here ...
     },
     "todohighlight.include": [
         "**/*.js",
@@ -90,7 +89,8 @@ an example of customizing configuration:
         "**/*.html",
         "**/*.php",
         "**/*.css",
-        "**/*.scss"
+        "**/*.scss",
+        "**/*.go",
     ],
     "todohighlight.exclude": [
         "**/node_modules/**",
@@ -102,7 +102,8 @@ an example of customizing configuration:
         "**/_output/**",
         "**/*.min.*",
         "**/*.map",
-        "**/.next/**"
+        "**/.next/**",
+        "**/vendor/**",
     ],
     "todohighlight.maxFilesForSearch": 5120,
     "todohighlight.toggleURI": false
@@ -121,9 +122,8 @@ This extension contributes the following commands to the Command palette.
 
 ### Known issue
 
- The clickable file pattern within the output channel differs from OS platform(`<path>#<line>` for Mac/Windows and `<path>:<line>:<column>` for Linux, for details see this [issue](https://github.com/Microsoft/vscode/issues/586) ). 
+The clickable file pattern within the output channel differs from OS platform (`<path>#<line>` for Mac/Windows and `<path>:<line>:<column>` for Linux, for details see this [issue](https://github.com/Microsoft/vscode/issues/586)).
 
- Basically the extension auto detects the OS platform.
+Basically the extension auto detects the OS platform.
 
- If you find that the file path is not clickable, set `todohighlight.toggleURI` to `true` to toggle the file pattern.
-  
+If you find that the file path is not clickable, set `todohighlight.toggleURI` to `true` to toggle the file pattern.
