@@ -8,17 +8,29 @@ var zapIcon = '$(zap)';
 var defaultMsg = '0';
 
 var DEFAULT_KEYWORDS = {
-    "TODO:": {
-        text: "TODO:",
+    'TODO:': {
+        text: 'TODO:',
         color: '#fff',
         backgroundColor: '#ffbd2a',
         overviewRulerColor: 'rgba(255,189,42,0.8)'
     },
-    "FIXME:": {
-        text: "FIXME:",
+    'FIXME:': {
+        text: 'FIXME:',
         color: '#fff',
         backgroundColor: '#f06292',
         overviewRulerColor: 'rgba(240,98,146,0.8)'
+    },
+    'INFO:': {
+        text: 'INFO:',
+        color: '#fff',
+        backgroundColor: '#4dabf7',
+        overviewRulerColor: 'rgba(77,171,247,0.8)'
+    },
+    'NOTE:': {
+        text: 'NOTE:',
+        color: '#fff',
+        backgroundColor: '#69db7c',
+        overviewRulerColor: 'rgba(105,219,124,0.8)'
     }
 };
 
@@ -38,7 +50,7 @@ function getAssembledData(keywords, customDefaultStyle, isCaseSensitive) {
             text = text.toUpperCase();
         }
 
-        if (text == 'TODO:' || text == 'FIXME:') {
+        if (text == 'TODO:' || text == 'FIXME:' || text == 'INFO:' || text == 'NOTE:') {
             v = Object.assign({}, DEFAULT_KEYWORDS[text], v);
         }
         result[text] = Object.assign({}, DEFAULT_STYLE, customDefaultStyle, v);
