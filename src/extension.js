@@ -108,11 +108,28 @@ function activate(context) {
             }
         }
 
+        var typedMatches = {};
         Object.keys(decorationTypes).forEach((v) => {
             if (!isCaseSensitive) {
                 v = v.toUpperCase();
             }
-            var rangeOption = settings.get('isEnable') && mathes[v] ? mathes[v] : [];
+
+            // FIXME: Can this be solved better than with a double for loop?
+
+            Object.keys(mathes).map(m => {
+                let reg = isCaseSensitive ? new RegExp(v, 'g') : new RegExp(v, 'gi');
+                if (m.match(reg) !== null) {
+                    if (!typedMatches[v]) {
+                        typedMatches[v] = mathes[m];
+                    } else {
+                        typedMatches[v] = typedMatches[v].concat(mathes[m]);
+                    }
+                }
+            })
+        });
+
+        Object.keys(typedMatches).forEach(v => {
+            var rangeOption = settings.get('isEnable') && typedMatches[v] ? typedMatches[v] : [];
             var decorationType = decorationTypes[v];
             activeEditor.setDecorations(decorationType, rangeOption);
         })
@@ -157,7 +174,11 @@ function activate(context) {
             });
 
             pattern = Object.keys(assembledData).map((v) => {
-                return util.escapeRegExp(v);
+                if (!assembledData[v].useRegexp) {
+                    return util.escapeRegExp(v);
+                }
+
+                return v
             }).join('|');
         }
 
