@@ -84,7 +84,8 @@ function activate(context) {
         }
 
         var text = activeEditor.document.getText();
-        var mathes = {}, match;
+        var matches = {}, match;
+        var typedMatches = {};
         while (match = pattern.exec(text)) {
             var startPos = activeEditor.document.positionAt(match.index);
             var endPos = activeEditor.document.positionAt(match.index + match[0].length);
@@ -97,36 +98,26 @@ function activate(context) {
                 matchedValue = matchedValue.toUpperCase();
             }
 
-            if (mathes[matchedValue]) {
-                mathes[matchedValue].push(decoration);
+            if (matches[matchedValue]) {
+                matches[matchedValue].push(decoration);
             } else {
-                mathes[matchedValue] = [decoration];
+                matches[matchedValue] = [decoration];
             }
 
             if (keywordsPattern.trim() && !decorationTypes[matchedValue]) {
                 decorationTypes[matchedValue] = window.createTextEditorDecorationType(styleForRegExp);
             }
-        }
 
-        var typedMatches = {};
-        Object.keys(decorationTypes).forEach((v) => {
-            if (!isCaseSensitive) {
-                v = v.toUpperCase();
-            }
-
-            // FIXME: Can this be solved better than with a double for loop?
-
-            Object.keys(mathes).map(m => {
-                let reg = isCaseSensitive ? new RegExp(v, 'g') : new RegExp(v, 'gi');
-                if (m.match(reg) !== null) {
-                    if (!typedMatches[v]) {
-                        typedMatches[v] = mathes[m];
-                    } else {
-                        typedMatches[v] = typedMatches[v].concat(mathes[m]);
-                    }
+            let patternIndex = match.slice(1).indexOf(matchedValue);
+            let typeName = Object.keys(decorationTypes)[patternIndex];
+            if (typeName) {
+                if (!typedMatches[typeName]) {
+                    typedMatches[typeName] = [decoration];
+                } else {
+                    typedMatches[typeName].push(decoration);
                 }
-            })
-        });
+            }
+        }
 
         Object.keys(typedMatches).forEach(v => {
             var rangeOption = settings.get('isEnable') && typedMatches[v] ? typedMatches[v] : [];
@@ -173,12 +164,13 @@ function activate(context) {
                 decorationTypes[v] = window.createTextEditorDecorationType(mergedStyle);
             });
 
+            // Give each keyword a group in the pattern
             pattern = Object.keys(assembledData).map((v) => {
-                if (!assembledData[v].useRegexp) {
-                    return util.escapeRegExp(v);
+                if (!assembledData[v].useRegex) {
+                    return `(${util.escapeRegExp(v)})`;
                 }
-
-                return v
+                // Ignore unescaped parantheses to avoid messing with our groups
+                return `(${util.escapeRegExpGroups(v)})`
             }).join('|');
         }
 

@@ -28,7 +28,7 @@ var DEFAULT_STYLE = {
 };
 
 function getAssembledData(keywords, customDefaultStyle, isCaseSensitive) {
-    var result = {}
+    var result = {}, regex = [], reg;
     keywords.forEach((v) => {
         v = typeof v == 'string' ? { text: v } : v;
         var text = v.text;
@@ -42,9 +42,26 @@ function getAssembledData(keywords, customDefaultStyle, isCaseSensitive) {
             v = Object.assign({}, DEFAULT_KEYWORDS[text], v);
         }
         result[text] = Object.assign({}, DEFAULT_STYLE, customDefaultStyle, v);
+
+        if (v.useRegex) {
+            regex.push(text);
+        }
     })
 
-    Object.keys(DEFAULT_KEYWORDS).forEach((v) => {
+    if (regex) {
+        reg = regex.join('|');
+    }
+
+    // Don't override existing regex keywords with matching defaults
+    Object.keys(DEFAULT_KEYWORDS).filter(v => {
+        if (reg) {
+            if (v.match(new RegExp(reg))) {
+                return false;
+            }
+        }
+
+        return true;
+    }).forEach(v => {
         if (!result[v]) {
             result[v] = Object.assign({}, DEFAULT_STYLE, customDefaultStyle, DEFAULT_KEYWORDS[v]);
         }
@@ -177,7 +194,7 @@ function showOutputChannel(data) {
     var settings = workspace.getConfiguration('todohighlight');
     var toggleURI = settings.get('toggleURI', false);
 
-    data.forEach(function (v, i, a) {
+    data.forEach(function (v, i) {
         // due to an issue of vscode(https://github.com/Microsoft/vscode/issues/586), in order to make file path clickable within the output channel,the file path differs from platform
         var patternA = '#' + (i + 1) + '\t' + v.uri + '#' + (v.lineNum + 1);
         var patternB = '#' + (i + 1) + '\t' + v.uri + ':' + (v.lineNum + 1) + ':' + (v.startCol + 1);
@@ -247,6 +264,17 @@ function escapeRegExp(s) {
     return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
+function escapeRegExpGroups(s) {
+    // Lookbehind assertions ("(?<!abc) & (?<=abc)") supported from ECMAScript 2018 and onwards. Native in node.js 9 and up.
+    if (parseFloat(process.version.replace('v', '')) > 9.0) {
+        let grpPattern = /(?<!\\)(\()([^?]\w*(?:\\+\w)*)(\))?/g;
+        // Make group non-capturing
+        return s.replace(grpPattern, '$1?:$2$3');
+    } else {
+        return s.replace(/[()]/g, '\\$&').replace(/[\\]{2}(\(|\))/g, '\\$1');
+    }
+}
+
 module.exports = {
     DEFAULT_STYLE,
     getAssembledData,
@@ -256,5 +284,6 @@ module.exports = {
     createStatusBarItem,
     setStatusMsg,
     showOutputChannel,
-    escapeRegExp
+    escapeRegExp,
+    escapeRegExpGroups
 };
