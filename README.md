@@ -41,8 +41,7 @@ To customize the keywords and other stuff, <kbd>command</kbd> + <kbd>,</kbd> (Wi
 | todohighlight.maxFilesForSearch | number | 5120 | Max files for searching, mostly you don't need to configure this. |
 | todohighlight.toggleURI | boolean | false | If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`. |
 
-
-an example of customizing configuration:
+An example of customizing configuration:
 
 ```js
 {
@@ -56,6 +55,15 @@ an example of customizing configuration:
             "color": "#ff0000",
             "backgroundColor": "yellow",
             "overviewRulerColor": "grey"
+            "regex": { // Override the text search pattern with your custom RegEx pattern
+                "pattern": "(?<=^|\s|\/)NOTE[:]?" // highlight `NOTE:` with or without the `:` and that's not part of another word.
+                // (I.e.: The above will highlight 'NOTE' but not the "note" in 'SIDENOTE').
+                /**
+                 * NOTE:
+                 * Positive lookbehind (`(?<=...)`) is only supported in Node.js v9 and up.
+                 * If your VSCode version is built on a later version the example above may not work.
+                 **/
+            }
         },
         {
             "text": "HACK:",

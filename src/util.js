@@ -271,8 +271,13 @@ function escapeRegExpGroups(s) {
         // Make group non-capturing
         return s.replace(grpPattern, '$1?:$2$3');
     } else {
-        return s.replace(/[()]/g, '\\$&').replace(/[\\]{2}(\(|\))/g, '\\$1');
+        return escapeRegExpGroupsLegacy(s);
     }
+}
+
+function escapeRegExpGroupsLegacy(s) {
+    return s.replace(/\(\?<[=|!][^)]*\)/g, '') // Remove any unsupported lookbehinds
+        .replace(/(\((?!\?[:|=|!]))([^)]*)(\))/g, '$1?:$2$3'); // Make all groups non-capturing
 }
 
 module.exports = {
@@ -285,5 +290,6 @@ module.exports = {
     setStatusMsg,
     showOutputChannel,
     escapeRegExp,
-    escapeRegExpGroups
+    escapeRegExpGroups,
+    escapeRegExpGroupsLegacy
 };
