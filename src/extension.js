@@ -85,15 +85,18 @@ function activate(context) {
 
         var text = activeEditor.document.getText();
         var matches = {}, match;
-        var typedMatches = {};
         while (match = pattern.exec(text)) {
             var startPos = activeEditor.document.positionAt(match.index);
             var endPos = activeEditor.document.positionAt(match.index + match[0].length);
+
             var decoration = {
                 range: new vscode.Range(startPos, endPos)
             };
 
             var matchedValue = match[0];
+            let patternIndex = match.slice(1).indexOf(matchedValue);
+            matchedValue = Object.keys(decorationTypes)[patternIndex] || matchedValue;
+
             if (!isCaseSensitive) {
                 matchedValue = matchedValue.toUpperCase();
             }
@@ -107,20 +110,10 @@ function activate(context) {
             if (keywordsPattern.trim() && !decorationTypes[matchedValue]) {
                 decorationTypes[matchedValue] = window.createTextEditorDecorationType(styleForRegExp);
             }
-
-            let patternIndex = match.slice(1).indexOf(matchedValue);
-            let typeName = Object.keys(decorationTypes)[patternIndex];
-            if (typeName) {
-                if (!typedMatches[typeName]) {
-                    typedMatches[typeName] = [decoration];
-                } else {
-                    typedMatches[typeName].push(decoration);
-                }
-            }
         }
 
-        Object.keys(typedMatches).forEach(v => {
-            var rangeOption = settings.get('isEnable') && typedMatches[v] ? typedMatches[v] : [];
+        Object.keys(decorationTypes).forEach(v => {
+            var rangeOption = settings.get('isEnable') && matches[v] ? matches[v] : [];
             var decorationType = decorationTypes[v];
             activeEditor.setDecorations(decorationType, rangeOption);
         })
@@ -144,6 +137,7 @@ function activate(context) {
             styleForRegExp = Object.assign({}, util.DEFAULT_STYLE, customDefaultStyle, {
                 overviewRulerLane: vscode.OverviewRulerLane.Right
             });
+
             pattern = keywordsPattern;
         } else {
             assembledData = util.getAssembledData(settings.get('keywords'), customDefaultStyle, isCaseSensitive);
@@ -166,11 +160,13 @@ function activate(context) {
 
             // Give each keyword a group in the pattern
             pattern = Object.keys(assembledData).map((v) => {
-                if (!assembledData[v].useRegex) {
+                if (!assembledData[v].regex) {
                     return `(${util.escapeRegExp(v)})`;
                 }
+
+                let p = assembledData[v].regex.pattern || v;
                 // Ignore unescaped parantheses to avoid messing with our groups
-                return `(${util.escapeRegExpGroups(v)})`
+                return `(${util.escapeRegExpGroups(p)})`
             }).join('|');
         }
 

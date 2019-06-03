@@ -43,8 +43,8 @@ function getAssembledData(keywords, customDefaultStyle, isCaseSensitive) {
         }
         result[text] = Object.assign({}, DEFAULT_STYLE, customDefaultStyle, v);
 
-        if (v.useRegex) {
-            regex.push(text);
+        if (v.regex) {
+            regex.push(regex.pattern||text);
         }
     })
 
