@@ -277,7 +277,7 @@ function escapeRegExpGroups(s) {
 
 function escapeRegExpGroupsLegacy(s) {
     return s.replace(/\(\?<[=|!][^)]*\)/g, '') // Remove any unsupported lookbehinds
-        .replace(/(\((?!\?[:|=|!]))([^)]*)(\))/g, '$1?:$2$3'); // Make all groups non-capturing
+        .replace(/((?:[^\\]{1}|^)(?:(?:[\\]{2})+)?)(\((?!\?[:|=|!]))([^)]*)(\))/g, '$1$2?:$3$4'); // Make all groups non-capturing
 }
 
 module.exports = {
