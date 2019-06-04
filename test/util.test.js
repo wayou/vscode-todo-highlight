@@ -7,9 +7,9 @@ suite('Util Tests', () => {
 	// Test util.escapeRegExp
 	suite('Escape RegEx', () => {
 
-		test ("RegEx characters should be properly escaped", () => {
-			let res = util.escapeRegExp('^(Hello)|Wonderf[u]l(?:Regex){2}\A/B[c]+[0-9]*.$');
-			assert.equal('\\^\\(Hello\\)\\|Wonderf\\[u\\]l\\(\\?:Regex\\)\\{2\\}A\\/B\\[c\\]\\+\\[0\\-9\\]\\*\\.\\$', res);
+		test("All RegEx characters should be properly escaped", () => {
+			let res = util.escapeRegExp('^(Hello) (?!World)|(?<=Hello)\\s(?:Reg[eE]x){1}\\w+\\/[0-9]*.$');
+			assert.equal(res, '\\^\\(Hello\\) \\(\\?!World\\)\\|\\(\\?<=Hello\\)\\\\s\\(\\?:Reg\\[eE\\]x\\)\\{1\\}\\\\w\\+\\\\\\/\\[0\\-9\\]\\*\\.\\$');
 		});
 
 	});
@@ -33,9 +33,14 @@ suite('Util Tests', () => {
 				assert.equal(res, '(?:Hello) (?:World)');
 			});
 
-			test('Lookbehind and lookaheads should be ignored', () => {
-				let res = util.escapeRegExpGroups('(?=Hello) (?<!World)');
-				assert.equal(res, '(?=Hello) (?<!World)');
+			test('Lookaheads should be ignored', () => {
+				let res = util.escapeRegExpGroups('(?=Hello) (?!World)');
+				assert.equal(res, '(?=Hello) (?!World)');
+			});
+
+			test('Lookbehind should be ignored', () => {
+				let res = util.escapeRegExpGroups('(?<=Hello) (?<!World)');
+				assert.equal(res, '(?<=Hello) (?<!World)');
 			});
 
 			test('Groups preceded by one or multiple escaped backslashes (\\) should not be ignored', () => {
@@ -44,8 +49,8 @@ suite('Util Tests', () => {
 			});
 
 			test('Mixing lookaheads, lookbehind and groups should still behave as expected', () => {
-				let res = util.escapeRegExpGroups('^(Hello) (?!World)|(?<=Won)derf[u]l(?:Regex){2}\A/B[c]+[0-9]*.$');
-				assert.equal('^(?:Hello) (?!World)|(?<=Won)derf[u]l(?:Regex){2}\A/B[c]+[0-9]*.$', res);
+				let res = util.escapeRegExpGroups('^(Hello) (?!World)|(?<=Hello)\\s(?:Reg[eE]x){1}\\w+\\/[0-9]*.$');
+				assert.equal(res, '^(?:Hello) (?!World)|(?<=Hello)\\s(?:Reg[eE]x){1}\\w+\\/[0-9]*.$');
 			});
 			
 		});
@@ -85,8 +90,8 @@ suite('Util Tests', () => {
 		});
 
 		test('Mixing lookaheads, lookbehind and groups should still behave as expected', () => {
-			let res = util.escapeRegExpGroupsLegacy('^(Hello) (?!World)|(?<=Won)derf[u]l(?:Regex){2}\A/B[c]+[0-9]*.$');
-			assert.equal('^(?:Hello) (?!World)|derf[u]l(?:Regex){2}\A/B[c]+[0-9]*.$', res);
+			let res = util.escapeRegExpGroupsLegacy('^(Hello) (?!World)|(?<=Hello)\\s(?:Reg[eE]x){1}\\w+\\/[0-9]*.$');
+			assert.equal(res, '^(?:Hello) (?!World)|\\s(?:Reg[eE]x){1}\\w+\\/[0-9]*.$');
 		});
 
 	});
