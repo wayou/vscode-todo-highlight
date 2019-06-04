@@ -84,23 +84,27 @@ function activate(context) {
         }
 
         var text = activeEditor.document.getText();
-        var mathes = {}, match;
+        var matches = {}, match;
         while (match = pattern.exec(text)) {
             var startPos = activeEditor.document.positionAt(match.index);
             var endPos = activeEditor.document.positionAt(match.index + match[0].length);
+
             var decoration = {
                 range: new vscode.Range(startPos, endPos)
             };
 
             var matchedValue = match[0];
+            let patternIndex = match.slice(1).indexOf(matchedValue);
+            matchedValue = Object.keys(decorationTypes)[patternIndex] || matchedValue;
+
             if (!isCaseSensitive) {
                 matchedValue = matchedValue.toUpperCase();
             }
 
-            if (mathes[matchedValue]) {
-                mathes[matchedValue].push(decoration);
+            if (matches[matchedValue]) {
+                matches[matchedValue].push(decoration);
             } else {
-                mathes[matchedValue] = [decoration];
+                matches[matchedValue] = [decoration];
             }
 
             if (keywordsPattern.trim() && !decorationTypes[matchedValue]) {
@@ -108,11 +112,8 @@ function activate(context) {
             }
         }
 
-        Object.keys(decorationTypes).forEach((v) => {
-            if (!isCaseSensitive) {
-                v = v.toUpperCase();
-            }
-            var rangeOption = settings.get('isEnable') && mathes[v] ? mathes[v] : [];
+        Object.keys(decorationTypes).forEach(v => {
+            var rangeOption = settings.get('isEnable') && matches[v] ? matches[v] : [];
             var decorationType = decorationTypes[v];
             activeEditor.setDecorations(decorationType, rangeOption);
         })
@@ -136,6 +137,7 @@ function activate(context) {
             styleForRegExp = Object.assign({}, util.DEFAULT_STYLE, customDefaultStyle, {
                 overviewRulerLane: vscode.OverviewRulerLane.Right
             });
+
             pattern = keywordsPattern;
         } else {
             assembledData = util.getAssembledData(settings.get('keywords'), customDefaultStyle, isCaseSensitive);
@@ -156,8 +158,15 @@ function activate(context) {
                 decorationTypes[v] = window.createTextEditorDecorationType(mergedStyle);
             });
 
+            // Give each keyword a group in the pattern
             pattern = Object.keys(assembledData).map((v) => {
-                return util.escapeRegExp(v);
+                if (!assembledData[v].regex) {
+                    return `(${util.escapeRegExp(v)})`;
+                }
+
+                let p = assembledData[v].regex.pattern || v;
+                // Ignore unescaped parantheses to avoid messing with our groups
+                return `(${util.escapeRegExpGroups(p)})`
             }).join('|');
         }
 

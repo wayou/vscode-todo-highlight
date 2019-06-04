@@ -125,6 +125,12 @@
                                     "overviewRulerColor": {
                                         "type": "string",
                                         "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+                                    },
+                                    "regex": {
+                                        "pattern": {
+                                            "type": "string",
+                                            "description": "The RegEx pattern to use for matching instead of the text value"
+                                        }
                                     }
                                 }
                             }
