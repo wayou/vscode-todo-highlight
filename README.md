@@ -61,6 +61,7 @@ an example of customizing configuration:
             "text": "HACK:",
             "color": "#000",
             "isWholeLine": false,
+            "backgroundColor": "rbga(0,0,0,0)", // set rgba's 4th parameter to 0 to disable background color
         },
         {
             "text": "TODO:",
@@ -68,7 +69,7 @@ an example of customizing configuration:
             "border": "1px solid red",
             "borderRadius": "2px", //NOTE: using borderRadius along with `border` or you will see nothing change
             "backgroundColor": "rgba(0,0,0,.2)",
-            //other styling properties goes here ... 
+            //other styling properties go here ... 
         }
     ],
     "todohighlight.keywordsPattern": "TODO:|FIXME:|\\(([^)]+)\\)", //highlight `TODO:`,`FIXME:` or content between parentheses
@@ -80,7 +81,7 @@ an example of customizing configuration:
         "border": "1px solid #eee",
         "borderRadius": "2px",
         "isWholeLine": true,
-        //other styling properties goes here ... 
+        //other styling properties go here ... 
     },
     "todohighlight.include": [
         "**/*.js",
