@@ -1,5 +1,5 @@
 var vscode = require('vscode');
-var os = require("os");
+// var os = require("os");
 var window = vscode.window;
 var workspace = vscode.workspace;
 
@@ -185,10 +185,10 @@ function showOutputChannel(data) {
 
         //for windows and mac
         var patternType = 0;
-        if (os.platform() == "linux") {
-            // for linux
-            patternType = 1;
-        }
+        // if (os.platform() == "linux") {
+        //     // for linux
+        //     patternType = 1;
+        // }
         if (toggleURI) {
             //toggle the pattern
             patternType = +!patternType;
