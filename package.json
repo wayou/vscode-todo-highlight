@@ -219,6 +219,7 @@
         "mocha": "^2.3.3",
         "typescript": "^2.0.3",
         "vscode": "^1.0.0",
+        "vscode-test-web": "^0.0.4",
         "webpack": "^5.44.0",
         "webpack-cli": "^4.7.2"
     }
