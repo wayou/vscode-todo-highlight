@@ -10,8 +10,6 @@
 /** @typedef {import('webpack').Configuration} WebpackConfig **/
 
 const path = require('path');
-const { DefinePlugin } = require('webpack');
-const webpack = require('webpack');
 
 module.exports = /** @type WebpackConfig */ {
 	context: path.dirname(__dirname),
