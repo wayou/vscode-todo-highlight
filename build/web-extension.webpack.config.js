@@ -10,6 +10,7 @@
 /** @typedef {import('webpack').Configuration} WebpackConfig **/
 
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const webpack = require('webpack');
 
 module.exports = /** @type WebpackConfig */ {
@@ -23,6 +24,7 @@ module.exports = /** @type WebpackConfig */ {
 		mainFields: ['module', 'main'],
 		extensions: ['.ts', '.js'], // support ts-files and js-files
 		alias: {
+			'os': false
 		},
 		fallback: {
 			'assert': require.resolve('assert')
@@ -39,11 +41,6 @@ module.exports = /** @type WebpackConfig */ {
 			]
 		}]
 	},
-	plugins: [
-		new webpack.ProvidePlugin({
-			process: 'process/browser',
-		}),
-	],
 	externals: {
 		'vscode': 'commonjs vscode', // ignored because it doesn't exist
 	},
