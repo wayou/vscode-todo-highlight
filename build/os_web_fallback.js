@@ -1,0 +1,3 @@
+function platform() {
+    return 'browser';
+}
