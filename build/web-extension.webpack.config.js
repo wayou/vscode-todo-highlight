@@ -21,11 +21,9 @@ module.exports = /** @type WebpackConfig */ {
 	resolve: {
 		mainFields: ['module', 'main'],
 		extensions: ['.ts', '.js'], // support ts-files and js-files
-		alias: {
-			'os': path.join(__dirname, './os_web_fallback.js')
-		},
 		fallback: {
-			'assert': require.resolve('assert')
+			'assert': require.resolve('assert'),
+			'os': require.resolve('os-browserify')
 		}
 	},
 	module: {

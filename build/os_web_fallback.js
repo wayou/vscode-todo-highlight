@@ -1,3 +1,0 @@
-function platform() {
-    return 'browser';
-}

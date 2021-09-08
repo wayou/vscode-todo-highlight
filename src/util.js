@@ -185,7 +185,7 @@ function showOutputChannel(data) {
 
         //for windows and mac
         var patternType = 0;
-        if (os.platform() == "linux") {
+        if (os.platform && os.platform() === "linux") {
             // for linux
             patternType = 1;
         }
