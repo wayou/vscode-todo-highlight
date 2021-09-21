@@ -181,6 +181,7 @@
                     "default": [
                         "**/node_modules/**",
                         "**/bower_components/**",
+                        "**/vendor/**",
                         "**/dist/**",
                         "**/build/**",
                         "**/.vscode/**",
