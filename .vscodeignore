@@ -5,3 +5,5 @@ test/**
 jsconfig.json
 vsc-extension-quickstart.md
 .eslintrc.json
+.vscode-test-web/**
+dist/web/**.js.map

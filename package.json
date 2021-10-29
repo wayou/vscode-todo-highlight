@@ -36,9 +36,14 @@
         "*"
     ],
     "main": "./src/extension",
+    "browser": "./dist/web/extension.js",
     "scripts": {
+        "chrome": "npx vscode-test-web --browserType=chromium --extensionDevelopmentPath=.",
         "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
+        "vscode:prepublish": "npm run package-web",
+        "compile-web": "webpack --config ./build/web-extension.webpack.config.js",
+        "watch-web": "webpack --watch --config ./build/web-extension.webpack.config.js",
+        "package-web": "webpack --mode production --devtool hidden-source-map --config ./build/web-extension.webpack.config.js"
     },
     "badges": [
         {
@@ -209,11 +214,15 @@
         }
     },
     "devDependencies": {
+        "@types/mocha": "^2.2.32",
+        "@types/node": "^6.0.40",
+        "eslint": "^3.6.0",
+        "mocha": "^2.3.3",
+        "os-browserify": "^0.3.0",
         "typescript": "^2.0.3",
         "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "eslint": "^3.6.0",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
+        "vscode-test-web": "^0.0.4",
+        "webpack": "^5.44.0",
+        "webpack-cli": "^4.7.2"
     }
 }
