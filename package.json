@@ -1,228 +1,228 @@
 {
-    "name": "vscode-todo-highlight",
-    "displayName": "TODO Highlight",
-    "description": "highlight TODOs, FIXMEs, and any keywords, annotations...",
-    "keywords": [
-        "todo",
-        "fixme",
-        "highlight",
-        "keyword",
-        "annotation"
-    ],
-    "version": "1.0.4",
-    "publisher": "wayou",
-    "license": "MIT",
-    "icon": "assets/icon.png",
-    "homepage": "https://github.com/wayou/vscode-todo-highlight",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/wayou/vscode-todo-highlight.git"
+  "name": "vscode-todo-highlight",
+  "displayName": "TODO Highlight",
+  "description": "highlight TODOs, FIXMEs, and any keywords, annotations...",
+  "keywords": [
+    "todo",
+    "fixme",
+    "highlight",
+    "keyword",
+    "annotation"
+  ],
+  "version": "1.0.5",
+  "publisher": "wayou",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "homepage": "https://github.com/wayou/vscode-todo-highlight",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wayou/vscode-todo-highlight.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wayou/vscode-todo-highlight/issues",
+    "email": "liuwayong@gmail.com"
+  },
+  "galleryBanner": {
+    "color": "#272729",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./src/extension",
+  "browser": "./dist/web/extension.js",
+  "scripts": {
+    "chrome": "npx vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ../yarn2/reaterial",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "vscode:prepublish": "npm run package-web",
+    "compile-web": "webpack --config ./build/web-extension.webpack.config.js",
+    "watch-web": "webpack --watch --config ./build/web-extension.webpack.config.js",
+    "package-web": "webpack --mode production --devtool hidden-source-map --config ./build/web-extension.webpack.config.js"
+  },
+  "badges": [
+    {
+      "url": "https://img.shields.io/badge/License-MIT-brightgreen.svg",
+      "href": "https://opensource.org/licenses/MIT",
+      "description": "License: MIT"
     },
-    "bugs": {
-        "url": "https://github.com/wayou/vscode-todo-highlight/issues",
-        "email": "liuwayong@gmail.com"
+    {
+      "url": "https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master",
+      "href": "https://travis-ci.org/wayou/vscode-todo-highlight",
+      "description": "Build Status"
     },
-    "galleryBanner": {
-        "color": "#272729",
-        "theme": "dark"
+    {
+      "url": "https://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg",
+      "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
+      "description": "Version"
     },
-    "engines": {
-        "vscode": "^1.5.0"
+    {
+      "url": "https://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg",
+      "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
+      "description": "Installs"
     },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "main": "./src/extension",
-    "browser": "./dist/web/extension.js",
-    "scripts": {
-        "chrome": "npx vscode-test-web --browserType=chromium --extensionDevelopmentPath=.",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "vscode:prepublish": "npm run package-web",
-        "compile-web": "webpack --config ./build/web-extension.webpack.config.js",
-        "watch-web": "webpack --watch --config ./build/web-extension.webpack.config.js",
-        "package-web": "webpack --mode production --devtool hidden-source-map --config ./build/web-extension.webpack.config.js"
-    },
-    "badges": [
-        {
-            "url": "https://img.shields.io/badge/License-MIT-brightgreen.svg",
-            "href": "https://opensource.org/licenses/MIT",
-            "description": "License: MIT"
-        },
-        {
-            "url": "https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master",
-            "href": "https://travis-ci.org/wayou/vscode-todo-highlight",
-            "description": "Build Status"
-        },
-        {
-            "url": "https://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg",
-            "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
-            "description": "Version"
-        },
-        {
-            "url": "https://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg",
-            "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
-            "description": "Installs"
-        },
-        {
-            "url": "https://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg",
-            "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
-            "description": "Ratings"
-        }
-    ],
-    "contributes": {
-        "commands": [
-            {
-                "title": "Toggle highlight",
-                "category": "TODO-Highlight",
-                "command": "todohighlight.toggleHighlight"
-            },
-            {
-                "title": "List highlighted annotations",
-                "category": "TODO-Highlight",
-                "command": "todohighlight.listAnnotations"
-            }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "TODO Highlight",
-            "properties": {
-                "todohighlight.isEnable": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Enable or disable the highlight"
-                },
-                "todohighlight.isCaseSensitive": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Specify whether the keywords are case sensitive or not"
-                },
-                "todohighlight.toggleURI": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`"
-                },
-                "todohighlight.keywords": {
-                    "type": "array",
-                    "description": "Customize keywords and colors. Any css color identifier is valid.",
-                    "items": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "text": {
-                                        "type": "string",
-                                        "description": "Custom text to be highlighted"
-                                    },
-                                    "color": {
-                                        "type": "string",
-                                        "description": "The text color. Besides, you can play with all the string and boolean styling properties provied by VS Code API. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                                    },
-                                    "backgroundColor": {
-                                        "type": "string",
-                                        "description": "The text background color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                                    },
-                                    "overviewRulerColor": {
-                                        "type": "string",
-                                        "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                },
-                "todohighlight.keywordsPattern": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\\\ instead of single back slash)"
-                },
-                "todohighlight.defaultStyle": {
-                    "type": "object",
-                    "description": "Default style for all customized keywords",
-                    "properties": {
-                        "color": {
-                            "type": "string",
-                            "description": "The text color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                        },
-                        "backgroundColor": {
-                            "type": "string",
-                            "description": "The text background color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                        },
-                        "overviewRulerColor": {
-                            "type": "string",
-                            "description": "The color of the ruler mark on the scroll bar. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
-                        }
-                    }
-                },
-                "todohighlight.include": {
-                    "type": "array",
-                    "default": [
-                        "**/*.js",
-                        "**/*.jsx",
-                        "**/*.ts",
-                        "**/*.tsx",
-                        "**/*.html",
-                        "**/*.php",
-                        "**/*.css",
-                        "**/*.scss"
-                    ],
-                    "description": "Glob patterns that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason.",
-                    "items": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "description": "A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `**/*.*` for both performance and avoiding binary files reason"
-                            }
-                        ]
-                    }
-                },
-                "todohighlight.exclude": {
-                    "type": "array",
-                    "default": [
-                        "**/node_modules/**",
-                        "**/bower_components/**",
-                        "**/dist/**",
-                        "**/build/**",
-                        "**/.vscode/**",
-                        "**/.github/**",
-                        "**/_output/**",
-                        "**/*.min.*",
-                        "**/*.map",
-                        "**/.next/**"
-                    ],
-                    "description": "Glob pattern that defines files and folders to exclude while listing annotations.",
-                    "items": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "description": "A glob pattern that defines files and folders to exclude while listing annotations"
-                            }
-                        ]
-                    }
-                },
-                "todohighlight.maxFilesForSearch": {
-                    "type": "number",
-                    "default": 5120,
-                    "description": "Max files for searching"
-                }
-            }
-        }
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.32",
-        "@types/node": "^6.0.40",
-        "eslint": "^3.6.0",
-        "mocha": "^2.3.3",
-        "os-browserify": "^0.3.0",
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "vscode-test-web": "^0.0.4",
-        "webpack": "^5.44.0",
-        "webpack-cli": "^4.7.2"
+    {
+      "url": "https://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg",
+      "href": "https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight",
+      "description": "Ratings"
     }
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "title": "Toggle highlight",
+        "category": "TODO-Highlight",
+        "command": "todohighlight.toggleHighlight"
+      },
+      {
+        "title": "List highlighted annotations",
+        "category": "TODO-Highlight",
+        "command": "todohighlight.listAnnotations"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "TODO Highlight",
+      "properties": {
+        "todohighlight.isEnable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the highlight"
+        },
+        "todohighlight.isCaseSensitive": {
+          "type": "boolean",
+          "default": true,
+          "description": "Specify whether the keywords are case sensitive or not"
+        },
+        "todohighlight.toggleURI": {
+          "type": "boolean",
+          "default": false,
+          "description": "If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`"
+        },
+        "todohighlight.keywords": {
+          "type": "array",
+          "description": "Customize keywords and colors. Any css color identifier is valid.",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Custom text to be highlighted"
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "The text color. Besides, you can play with all the string and boolean styling properties provied by VS Code API. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+                  },
+                  "backgroundColor": {
+                    "type": "string",
+                    "description": "The text background color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+                  },
+                  "overviewRulerColor": {
+                    "type": "string",
+                    "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "todohighlight.keywordsPattern": {
+          "type": "string",
+          "default": "",
+          "description": "Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\\\ instead of single back slash)"
+        },
+        "todohighlight.defaultStyle": {
+          "type": "object",
+          "description": "Default style for all customized keywords",
+          "properties": {
+            "color": {
+              "type": "string",
+              "description": "The text color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+            },
+            "backgroundColor": {
+              "type": "string",
+              "description": "The text background color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+            },
+            "overviewRulerColor": {
+              "type": "string",
+              "description": "The color of the ruler mark on the scroll bar. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+            }
+          }
+        },
+        "todohighlight.include": {
+          "type": "array",
+          "default": [
+            "**/*.js",
+            "**/*.jsx",
+            "**/*.ts",
+            "**/*.tsx",
+            "**/*.html",
+            "**/*.php",
+            "**/*.css",
+            "**/*.scss"
+          ],
+          "description": "Glob patterns that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason.",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `**/*.*` for both performance and avoiding binary files reason"
+              }
+            ]
+          }
+        },
+        "todohighlight.exclude": {
+          "type": "array",
+          "default": [
+            "**/node_modules/**",
+            "**/bower_components/**",
+            "**/dist/**",
+            "**/build/**",
+            "**/.vscode/**",
+            "**/.github/**",
+            "**/_output/**",
+            "**/*.min.*",
+            "**/*.map",
+            "**/.next/**"
+          ],
+          "description": "Glob pattern that defines files and folders to exclude while listing annotations.",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "A glob pattern that defines files and folders to exclude while listing annotations"
+              }
+            ]
+          }
+        },
+        "todohighlight.maxFilesForSearch": {
+          "type": "number",
+          "default": 5120,
+          "description": "Max files for searching"
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.32",
+    "@types/node": "^6.0.40",
+    "@vscode/test-web": "0.0.15",
+    "eslint": "^3.6.0",
+    "mocha": "^2.3.3",
+    "os-browserify": "^0.3.0",
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.0",
+    "webpack": "^5.44.0",
+    "webpack-cli": "^4.7.2"
+  }
 }
