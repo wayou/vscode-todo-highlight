@@ -102,7 +102,7 @@
         "todohighlight.toggleURI": {
           "type": "boolean",
           "default": false,
-          "description": "If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`"
+          "description": "If the file path within the output channel not clickable, set this to true to toggle the path pattern between `<path>#<line>` and `<path>:<line>:<column>`"
         },
         "todohighlight.keywords": {
           "type": "array",
