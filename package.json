@@ -127,6 +127,10 @@
                     "type": "string",
                     "description": "The text background color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
                   },
+                  "isWholeLine": {
+                    "type": "boolean",
+                    "description": "Wether to highlight the entire line instead of only the matching text"
+                  },
                   "overviewRulerColor": {
                     "type": "string",
                     "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
