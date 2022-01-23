@@ -1,7 +1,7 @@
 {
   "name": "vscode-todo-highlight",
   "displayName": "TODO Highlight",
-  "description": "highlight TODOs, FIXMEs, and any keywords, annotations...",
+  "description": "Highlight TODOs, FIXMEs, and any keywords, annotations...",
   "keywords": [
     "todo",
     "fixme",
@@ -10,7 +10,7 @@
     "annotation"
   ],
   "version": "1.0.5",
-  "publisher": "wayou",
+  "publisher": "Wayou",
   "license": "MIT",
   "icon": "assets/icon.png",
   "homepage": "https://github.com/wayou/vscode-todo-highlight",
@@ -75,7 +75,7 @@
   "contributes": {
     "commands": [
       {
-        "title": "Toggle highlight",
+        "title": "Toggle highlighting",
         "category": "TODO-Highlight",
         "command": "todohighlight.toggleHighlight"
       },
@@ -89,15 +89,15 @@
       "type": "object",
       "title": "TODO Highlight",
       "properties": {
-        "todohighlight.isEnable": {
+        "todohighlight.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Enable or disable the highlight"
+          "description": "Enable or disable todo highlighting"
         },
-        "todohighlight.isCaseSensitive": {
+        "todohighlight.caseSensitive": {
           "type": "boolean",
           "default": true,
-          "description": "Specify whether the keywords are case sensitive or not"
+          "description": "Specify whether keyword highlighting is case sensitive or not"
         },
         "todohighlight.toggleURI": {
           "type": "boolean",
@@ -106,7 +106,7 @@
         },
         "todohighlight.keywords": {
           "type": "array",
-          "description": "Customize keywords and colors. Any css color identifier is valid.",
+          "description": "Customize keywords and colors. Any CSS color identifier is valid.",
           "items": {
             "anyOf": [
               {
@@ -121,15 +121,15 @@
                   },
                   "color": {
                     "type": "string",
-                    "description": "The text color. Besides, you can play with all the string and boolean styling properties provied by VS Code API. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+                    "description": "The text color of text highlighted. Besides, you can play with all the string and boolean styling properties provied by VS Code API. See all available properties on VS Code doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
                   },
                   "backgroundColor": {
                     "type": "string",
-                    "description": "The text background color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+                    "description": "The background color of text highlighted. See all available properties on VS Code doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
                   },
                   "overviewRulerColor": {
                     "type": "string",
-                    "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+                    "description": "The color of the ruler mark on the scroll bar. Use rgba() and define transparent colors to play well with other decorations. See all available properties on VS Code doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
                   }
                 }
               }
@@ -139,7 +139,7 @@
         "todohighlight.keywordsPattern": {
           "type": "string",
           "default": "",
-          "description": "Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\\\ instead of single back slash)"
+          "description": "Specify keywords via regular expression instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to excape the back slash if there's any in your expression (using \\\\ instead of a single back slash)"
         },
         "todohighlight.defaultStyle": {
           "type": "object",
@@ -147,15 +147,15 @@
           "properties": {
             "color": {
               "type": "string",
-              "description": "The text color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+              "description": "The text color of text highlighted by this extentsion. See all available properties on VS Code doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
             },
             "backgroundColor": {
               "type": "string",
-              "description": "The text background color. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+              "description": "The text background color of text highlighted by this extentsion. See all available properties on VS Code doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
             },
             "overviewRulerColor": {
               "type": "string",
-              "description": "The color of the ruler mark on the scroll bar. See all available properties on VSCode doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+              "description": "The color of the ruler marks on the editor scroll bar. See all available properties on VS Code doc DecorationRenderOptions section: https://code.visualstudio.com/docs/extensionAPI/vscode-api"
             }
           }
         },
@@ -176,7 +176,7 @@
             "anyOf": [
               {
                 "type": "string",
-                "description": "A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `**/*.*` for both performance and avoiding binary files reason"
+                "description": "A glob pattern that defines the files to search for. Only include files you need, DO NOT USE `**/*.*` because it will adversely effect performance and will index binary files."
               }
             ]
           }
@@ -200,7 +200,7 @@
             "anyOf": [
               {
                 "type": "string",
-                "description": "A glob pattern that defines files and folders to exclude while listing annotations"
+                "description": "A glob pattern that determines the files and folders to exclude while indexing annotations"
               }
             ]
           }
@@ -208,7 +208,7 @@
         "todohighlight.maxFilesForSearch": {
           "type": "number",
           "default": 5120,
-          "description": "Max files for searching"
+          "description": "The maximum ammount of files TODO Highlight should index."
         }
       }
     }
