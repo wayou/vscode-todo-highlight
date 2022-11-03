@@ -218,7 +218,7 @@
     "@types/node": "^6.0.40",
     "@vscode/test-web": "0.0.15",
     "eslint": "^3.6.0",
-    "mocha": "^2.3.3",
+    "mocha": "^10.1.0",
     "os-browserify": "^0.3.0",
     "typescript": "^2.0.3",
     "vscode": "^1.0.0",
