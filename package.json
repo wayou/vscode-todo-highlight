@@ -7,8 +7,17 @@
     "fixme",
     "highlight",
     "keyword",
-    "annotation"
+    "annotation",
+    "review"
   ],
+  "scripts": {
+    "chrome": "npx vscode-test-web --browserType=chromium --extensionDevelopmentPath=. <path_to_open>",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "vscode:prepublish": "npm run package-web",
+    "compile-web": "webpack --config ./build/web-extension.webpack.config.js",
+    "watch-web": "webpack --watch --config ./build/web-extension.webpack.config.js",
+    "package-web": "webpack --mode production --devtool hidden-source-map --config ./build/web-extension.webpack.config.js"
+  },
   "version": "1.0.5",
   "publisher": "wayou",
   "license": "MIT",
@@ -37,14 +46,6 @@
   ],
   "main": "./src/extension",
   "browser": "./dist/web/extension.js",
-  "scripts": {
-    "chrome": "npx vscode-test-web --browserType=chromium --extensionDevelopmentPath=. <path_to_open>",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "vscode:prepublish": "npm run package-web",
-    "compile-web": "webpack --config ./build/web-extension.webpack.config.js",
-    "watch-web": "webpack --watch --config ./build/web-extension.webpack.config.js",
-    "package-web": "webpack --mode production --devtool hidden-source-map --config ./build/web-extension.webpack.config.js"
-  },
   "badges": [
     {
       "url": "https://img.shields.io/badge/License-MIT-brightgreen.svg",
@@ -218,7 +219,7 @@
     "@types/node": "^6.0.40",
     "@vscode/test-web": "0.0.15",
     "eslint": "^3.6.0",
-    "mocha": "^2.3.3",
+    "mocha": "^2.5.3",
     "os-browserify": "^0.3.0",
     "typescript": "^2.0.3",
     "vscode": "^1.0.0",

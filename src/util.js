@@ -7,19 +7,29 @@ var defaultIcon = '$(checklist)';
 var zapIcon = '$(zap)';
 var defaultMsg = '0';
 
+//REVIEW:
+//TODO:
+
 var DEFAULT_KEYWORDS = {
-    "TODO:": {
-        text: "TODO:",
-        color: '#fff',
-        backgroundColor: '#ffbd2a',
-        overviewRulerColor: 'rgba(255,189,42,0.8)'
-    },
-    "FIXME:": {
-        text: "FIXME:",
-        color: '#fff',
-        backgroundColor: '#f06292',
-        overviewRulerColor: 'rgba(240,98,146,0.8)'
-    }
+  "TODO:": {
+    text: "TODO:",
+    color: "#fff",
+    backgroundColor: "#ffbd2a",
+    overviewRulerColor: "rgba(255,189,42,0.8)",
+  },
+  "FIXME:": {
+    text: "FIXME:",
+    color: "#fff",
+    backgroundColor: "#f06292",
+    overviewRulerColor: "rgba(240,98,146,0.8)",
+  },
+  "REVIEW:": {
+    // New keyword added
+    text: "REVIEW:",
+    color: "#fff",
+    backgroundColor: "#8a2be2", // Purple color for background
+    overviewRulerColor: "rgba(138,43,226,0.8)", // Slightly transparent purple for the overview ruler
+  }
 };
 
 var DEFAULT_STYLE = {
@@ -38,8 +48,8 @@ function getAssembledData(keywords, customDefaultStyle, isCaseSensitive) {
             text = text.toUpperCase();
         }
 
-        if (text == 'TODO:' || text == 'FIXME:') {
-            v = Object.assign({}, DEFAULT_KEYWORDS[text], v);
+        if (text == "TODO:" || text == "FIXME:" || text == "REVIEW:") {
+          v = Object.assign({}, DEFAULT_KEYWORDS[text], v);
         }
         result[text] = Object.assign({}, DEFAULT_STYLE, customDefaultStyle, v);
     })
