@@ -1,11 +1,11 @@
-var vscode = require("vscode");
+var vscode = require('vscode');
 var os = require("os");
 var window = vscode.window;
 var workspace = vscode.workspace;
 
-var defaultIcon = "$(checklist)";
-var zapIcon = "$(zap)";
-var defaultMsg = "0";
+var defaultIcon = '$(checklist)';
+var zapIcon = '$(zap)';
+var defaultMsg = '0';
 
 //REVIEW:
 //TODO:
@@ -32,10 +32,10 @@ var defaultMsg = "0";
     },
     };
 
-var DEFAULT_STYLE = {
-  color: "#2196f3",
-  backgroundColor: "#ffeb3b",
-};
+    var DEFAULT_STYLE = {
+         color: "#2196f3",
+         backgroundColor: "#ffeb3b",
+    };
 
 function getAssembledData(keywords, customDefaultStyle, isCaseSensitive) {
   var result = {};
@@ -237,35 +237,33 @@ function getContent(lineText, match) {
 }
 
 function getLocationInfo(fileInUri, pathWithoutFile, lineText, line, match) {
-  var rootPath = workspace.rootPath + "/";
-  var outputFile = pathWithoutFile.replace(rootPath, "");
-  var startCol = lineText.indexOf(match[0]);
-  var endCol = lineText.length;
-  var location = outputFile + " " + (line + 1) + ":" + (startCol + 1);
+     var rootPath = workspace.rootPath + '/';
+    var outputFile = pathWithoutFile.replace(rootPath, '');
+    var startCol = lineText.indexOf(match[0]);
+    var endCol = lineText.length;
+    var location = outputFile + ' ' + (line + 1) + ':' + (startCol + 1);
 
-  return {
-    uri: fileInUri,
-    absPath: pathWithoutFile,
-    relativePath: location,
-    startCol: startCol,
-    endCol: endCol,
-  };
-}
+    return {
+        uri: fileInUri,
+        absPath: pathWithoutFile,
+        relativePath: location,
+        startCol: startCol,
+        endCol: endCol
+    };
+};
 
 function createStatusBarItem() {
-  var statusBarItem = window.createStatusBarItem(
-    vscode.StatusBarAlignment.Left
-  );
-  statusBarItem.text = defaultIcon + defaultMsg;
-  statusBarItem.tooltip = "List annotations";
-  statusBarItem.command = "todohighlight.showOutputChannel";
-  return statusBarItem;
-}
+     var statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Left);
+    statusBarItem.text = defaultIcon + defaultMsg;
+    statusBarItem.tooltip = 'List annotations';
+    statusBarItem.command = 'todohighlight.showOutputChannel';
+    return statusBarItem;
+};
 
 function errorHandler(err) {
-  window.processing = true;
-  setStatusMsg(defaultIcon, defaultMsg);
-  console.log("todohighlight err:", err);
+      window.processing = true;
+    setStatusMsg(defaultIcon, defaultMsg);
+    console.log('todohighlight err:', err);
 }
 
 function setStatusMsg(icon, msg, tooltip) {
@@ -283,13 +281,13 @@ function escapeRegExp(s) {
 }
 
 module.exports = {
-  DEFAULT_STYLE,
-  getAssembledData,
-  chooseAnnotationType,
-  searchAnnotations,
-  annotationsFound,
-  createStatusBarItem,
-  setStatusMsg,
-  showOutputChannel,
-  escapeRegExp,
+   DEFAULT_STYLE,
+   getAssembledData,
+   chooseAnnotationType,
+   searchAnnotations,
+   annotationsFound,
+   createStatusBarItem,
+   setStatusMsg,
+   showOutputChannel,
+   escapeRegExp
 };
